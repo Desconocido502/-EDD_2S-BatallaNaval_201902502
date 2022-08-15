@@ -1,0 +1,16 @@
+digraph G {
+rankdir=LR;
+node [shape=box, color=black , style=filled, fillcolor=gray93];
+Node0[label="Nick: Folagor, \nPassword: fb4c64eb8e1b23619a033100ca6388b3e93afbc2dbd32f5cbd48a99ee9a86e4c, \nMoney: 35, \nAge: 24"];
+Node1[label="Nick: Planton, \nPassword: 80b594700cd5ca389641550a05b5a88365550ea9996ee54aa608af2a19c75a75, \nMoney: 15, \nAge: 15"];
+Node2[label="Nick: Pikachu, \nPassword: e7b220d6c74502d90f8c2e2278fcb2e10678550ff4913dcfd8d296736d684809, \nMoney: 40, \nAge: 19"];
+Node3[label="Nick: Homero, \nPassword: d6b538094d72dd93e982ad2a67c0e361de986778317c8456f25aaa9e0ac28aea, \nMoney: 10, \nAge: 16"];
+Node0->Node1;
+Node1->Node0;
+Node1->Node2;
+Node2->Node1;
+Node2->Node3;
+Node3->Node2;
+Node3:s->Node0:se;
+Node0:s->Node3:sw;
+}
