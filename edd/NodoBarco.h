@@ -15,6 +15,22 @@ public:
     NodoBarco();
     NodoBarco(int, int, string, string);
     void mostrarDatos();
+
+    int getId(){
+        return this->barco->getId();
+    }
+
+    int getPrecio(){
+        return this->barco->getPrecio();
+    }
+
+    string getNombre(){
+        return this->barco->getNombre();
+    }
+
+    string getSrc(){
+        return this->barco->getSrc();
+    }
 };
 
 NodoBarco::NodoBarco(){

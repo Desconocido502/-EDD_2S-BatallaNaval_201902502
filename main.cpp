@@ -17,7 +17,9 @@ int main(int argc, char const *argv[]){
     ltsCategoria->insert(50,"epico",570,"La grajilla","sprites/barcos");
     ltsCategoria->insert(55,"normal",160,"La morsa","sprites/barcos");
     ltsCategoria->insert(80,"raro",450,"La delicada dama","sprites/barcos");
+    ltsCategoria->insert(65,"epico",845,"La carabana","sprites/barcos");
     ltsCategoria->printL();
+    ltsCategoria->drawList();
     //menu();
     return 0;
 }

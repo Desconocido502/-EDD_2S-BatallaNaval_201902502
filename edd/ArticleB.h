@@ -2,6 +2,9 @@
 
 using namespace std;
 
+#ifndef ARTICLEB_H
+#define ARTICLEB_H
+
 class ArticleB{
 private:
     int id;
@@ -47,3 +50,6 @@ public:
         return this->src;
     }
 };
+
+
+#endif

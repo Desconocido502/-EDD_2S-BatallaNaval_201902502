@@ -1,0 +1,16 @@
+digraph G { 
+"0epico"[shape=box, rankdir=UD, style=filled, label="epico", pos="0,-0!"];
+"0Node47_0"[shape=box, rankdir=LR, style=filled, label="Id:47\n, Precio:750\n, Nombre:La perla negra\n, Src:sprites/barcos", pos="0,-0!"];
+"0Node50_1"[shape=box, rankdir=LR, style=filled, label="Id:50\n, Precio:570\n, Nombre:La grajilla\n, Src:sprites/barcos", pos="1,-0!"];
+"0Node65_2"[shape=box, rankdir=LR, style=filled, label="Id:65\n, Precio:845\n, Nombre:La carabana\n, Src:sprites/barcos", pos="2,-0!"];
+"0normal"[shape=box, rankdir=UD, style=filled, label="normal", pos="0,-1!"];
+"1Node55_0"[shape=box, rankdir=LR, style=filled, label="Id:55\n, Precio:160\n, Nombre:La morsa\n, Src:sprites/barcos", pos="0,-1!"];
+"0raro"[shape=box, rankdir=UD, style=filled, label="raro", pos="0,-2!"];
+"2Node80_0"[shape=box, rankdir=LR, style=filled, label="Id:80\n, Precio:450\n, Nombre:La delicada dama\n, Src:sprites/barcos", pos="0,-2!"];
+"0epico"->"0normal"->"0raro"
+"0epico"->"0Node47_0"->"0Node50_1"->"0Node65_2"
+"0normal"->"1Node55_0"
+"0raro"->"2Node80_0"
+
+{rank=same;"0epico","0normal","0raro"};
+}
