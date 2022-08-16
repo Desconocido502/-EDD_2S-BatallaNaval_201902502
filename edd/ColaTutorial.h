@@ -2,6 +2,7 @@
 #include <string>
 
 #include "NodoCola.h"
+#include "generacionImg.h"
 using namespace std;
 
 #ifndef COLATUTORIAL_H
@@ -109,6 +110,7 @@ void ColaTutorial::drawQueue(){
     }
     cadena += "}";
     cout<<cadena<<endl;
+    generacionImg("ColaTutorial", cadena);
 }
 
 
