@@ -7,7 +7,7 @@
 #include "lib/sha256.h"
 #include "edd/DoublyLinkedListCircularUser.h"
 #include "edd/LinkedListCategoria.h"
-//#include "edd/ColaTutorial.h"
+#include "edd/ColaTutorial.h"
 
 using namespace std;
 using std::stoi;
@@ -20,7 +20,7 @@ void cargaMasiva();
 int opcion = 0;
 DoublyLinkedListCircularUser* DoublyLinkedListU = new DoublyLinkedListCircularUser();
 LinkedListCategoria* articulos = new LinkedListCategoria();
-//ColaTutorial* cola_tutorial = new ColaTutorial();
+ColaTutorial* cola_tutorial = new ColaTutorial();
 
 void menu(){
     
@@ -90,14 +90,14 @@ void cargaMasiva(){
     articulos->drawList();
 
     cout<< "Tutorial:" << endl;
-    // cola_tutorial->enqueue(stoi(data.at("tutorial").at("ancho").get<string>()), stoi(data.at("tutorial").at("alto").get<string>()));
+    cola_tutorial->enqueue(stoi(data.at("tutorial").at("ancho").get<string>()), stoi(data.at("tutorial").at("alto").get<string>()));
 
-    // for(auto movimiento: data.at("tutorial").at("movimientos")){
-    //     cola_tutorial->enqueue(stoi(movimiento.at("x").get<string>()), stoi(movimiento.at("y").get<string>())); //Tremenda conversion //error 302 revisar docu  https://json.nlohmann.me/home/exceptions/#jsonexceptiontype_error301
-    // }
+    for(auto movimiento: data.at("tutorial").at("movimientos")){
+        cola_tutorial->enqueue(stoi(movimiento.at("x").get<string>()), stoi(movimiento.at("y").get<string>())); //Tremenda conversion //error 302 revisar docu  https://json.nlohmann.me/home/exceptions/#jsonexceptiontype_error301
+    }
 
-    // cola_tutorial->displayQueue();
-    // cola_tutorial->drawQueue();
+    cola_tutorial->displayQueue();
+    cola_tutorial->drawQueue();
 }
 
 /*
