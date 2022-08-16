@@ -24,6 +24,7 @@ public:
     void insertAtEnd(string, string, int, int);
     void deleteAtStart();
     void deleteAtEnd();
+    void deleteNode(string);
     void displayListSE();
     void displayListES();
     NodoUsuario* searchUser();
@@ -205,5 +206,27 @@ void DoublyLinkedListCircularUser::drawList(){
     }
     //delete aux;
 }
+
+void DoublyLinkedListCircularUser::deleteNode(string nick){
+    NodoUsuario* actual = new NodoUsuario();
+    actual = this->primero;
+    bool check = false;
+    if(this->primero != NULL && check != true){
+        do{
+            if(actual->user->getNick() == nick){
+                check = true;
+                (actual->ant)->sig = actual->sig;
+            }
+            actual = actual->sig;
+        } while (actual != this->primero && check == false); //*mientras el nodo actual sea diferente de primero, entre al ciclo.
+        if(!check){
+            cout<<"Nodo no encontrado"<<endl;
+        }
+    }else{
+        cout<<"La lista no posee ningun nodo"<<endl;
+    }
+
+}
+
 
 #endif

@@ -1,10 +1,16 @@
 #include <iostream>
 #include <fstream>
-#include "edd/DoublyLinkedListCircularUser.h"
+#include <string>
+#include <sstream>
+
 #include "lib/nlohmann/json.hpp"
 #include "lib/sha256.h"
+#include "edd/DoublyLinkedListCircularUser.h"
+#include "edd/LinkedListCategoria.h"
+//#include "edd/ColaTutorial.h"
 
 using namespace std;
+using std::stoi;
 using json = nlohmann::json;
 
 //*Prototipos de funciones
@@ -13,6 +19,8 @@ void cargaMasiva();
 
 int opcion = 0;
 DoublyLinkedListCircularUser* DoublyLinkedListU = new DoublyLinkedListCircularUser();
+LinkedListCategoria* articulos = new LinkedListCategoria();
+//ColaTutorial* cola_tutorial = new ColaTutorial();
 
 void menu(){
     
@@ -70,18 +78,34 @@ void cargaMasiva(){
         DoublyLinkedListU->insertAtEnd(usuario.at("nick"), SHA256::cifrar(usuario.at("password")), usuario.at("monedas") , usuario.at("edad"));
     }
     DoublyLinkedListU->displayListSE();
-    DoublyLinkedListU->drawList();
+    
+    //DoublyLinkedListU->drawList();
 
-    //cout<< "articulos:" << endl;
+    cout<< "articulos:" << endl;
+    
+    for(auto articulo: data.at("articulos")){
+        articulos->insert(articulo.at("id"), articulo.at("categoria"), articulo.at("precio"), articulo.at("nombre"), articulo.at("src"));
+    }
+    articulos->printL();
+    articulos->drawList();
 
-    // VariadicTable<int, std::string, int, std::string, std::string> articulos({"id","categoria","precio","nombre","src"});
-    // for(auto articulo: data.at("articulos")){
-    //     articulos.addRow(articulo.at("id"), articulo.at("categoria"), articulo.at("precio"), articulo.at("nombre"), articulo.at("src"));
-    //     // cout<<"id: "<<articulo.at("id")<<", ";
-    //     // cout<<"categoria: "<<articulo.at("categoria")<<", ";
-    //     // cout<<"precio: "<<articulo.at("precio")<<", ";
-    //     // cout<<"nombre: "<<articulo.at("nombre")<<", ";
-    //     // cout<<"src: "<<articulo.at("src")<<endl;
+    cout<< "Tutorial:" << endl;
+    // cola_tutorial->enqueue(stoi(data.at("tutorial").at("ancho").get<string>()), stoi(data.at("tutorial").at("alto").get<string>()));
+
+    // for(auto movimiento: data.at("tutorial").at("movimientos")){
+    //     cola_tutorial->enqueue(stoi(movimiento.at("x").get<string>()), stoi(movimiento.at("y").get<string>())); //Tremenda conversion //error 302 revisar docu  https://json.nlohmann.me/home/exceptions/#jsonexceptiontype_error301
     // }
-    // articulos.print(cout);
+
+    // cola_tutorial->displayQueue();
+    // cola_tutorial->drawQueue();
 }
+
+/*
+    (actual->anterior)->siguiente = actual->siguiente;
+    []<->[e]<->[]<->[]
+
+    []->[]<->[]
+
+
+    (actual->siguiente)->anterior = actual->anterior;
+*/
