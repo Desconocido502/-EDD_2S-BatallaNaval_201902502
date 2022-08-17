@@ -70,14 +70,14 @@ void ColaTutorial::displayQueue(){
         return;
     }
     NodoCola* actual = this->frente;
-    cout<<"(Ancho:" + to_string(this->frente->getAnchoX()) + ", Alto:" + to_string(this->frente->getAltoY()) +")->";
+    cout<<"Ancho:" + to_string(this->frente->getAnchoX()) + ",\nAlto:" + to_string(this->frente->getAltoY()) +"\n";
     if(actual->getSiguiente() == NULL){
         cout<<"Sin coordenadas de movimientos"<<endl;
         return;
     }
     actual = actual->getSiguiente(); //*Se obtiene el primer nodo de coordenadas
     while(actual != NULL){
-        cout<<"(X:" + to_string(this->frente->getAnchoX()) + ", Y:" + to_string(this->frente->getAltoY()) +")->";
+        cout<<"(X:" + to_string(actual->getAnchoX()) + ", Y:" + to_string(actual->getAltoY()) +")->";
         actual = actual->getSiguiente();
     }
     cout<<"Fin coordenadas"<<endl;
@@ -109,7 +109,7 @@ void ColaTutorial::drawQueue(){
         cont += 1;
     }
     cadena += "}";
-    cout<<cadena<<endl;
+    //cout<<cadena<<endl;
     generacionImg("ColaTutorial", cadena);
 }
 

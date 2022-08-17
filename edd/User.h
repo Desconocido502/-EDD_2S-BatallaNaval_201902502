@@ -31,12 +31,20 @@ public:
         cout<<"Nick: "<<this->nick<<", password: "<<this->password<<", money: "<<this->money<<", age: "<<this->age<<endl;
     }
 
+    void setNick(string nick){
+        this->nick = nick;
+    }
+
     string getNick(){
         return this->nick;
     }
 
     string getPassword(){
         return this->password;
+    }
+
+    void setPassword(string password){
+        this->password = password;
     }
 
     int getMoney(){

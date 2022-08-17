@@ -24,10 +24,10 @@ public:
     void insertAtEnd(string, string, int, int);
     void deleteAtStart();
     void deleteAtEnd();
-    void deleteNode(string);
+    bool deleteNode(string);
     void displayListSE();
     void displayListES();
-    NodoUsuario* searchUser();
+    NodoUsuario* searchUser(string, string);
     bool updateUser();
     void sort();
     void drawList();
@@ -207,7 +207,7 @@ void DoublyLinkedListCircularUser::drawList(){
     //delete aux;
 }
 
-void DoublyLinkedListCircularUser::deleteNode(string nick){
+bool DoublyLinkedListCircularUser::deleteNode(string nick){
     NodoUsuario* actual = new NodoUsuario();
     actual = this->primero;
     bool check = false;
@@ -219,13 +219,21 @@ void DoublyLinkedListCircularUser::deleteNode(string nick){
             }
             actual = actual->sig;
         } while (actual != this->primero && check == false); //*mientras el nodo actual sea diferente de primero, entre al ciclo.
-        if(!check){
-            cout<<"Nodo no encontrado"<<endl;
-        }
+        if(!check) return false;
+        return true;
     }else{
-        cout<<"La lista no posee ningun nodo"<<endl;
+        return false;
     }
+}
 
+NodoUsuario* DoublyLinkedListCircularUser::searchUser(string nick, string password){
+    if(this->isEmpty()) return NULL; //*Retorna nulo en caso de que la lista este no contenga usuarios
+    NodoUsuario* actual = this->primero;
+    while (actual != NULL){
+        if( (actual->user->getNick().compare(nick) == 0) && (actual->user->getPassword().compare(password) == 0)) return actual; //*retorna el nodo del usuario en caso de encontrarlo
+        actual = actual->sig;
+        if(actual == this->primero) return NULL; //*Retorna nulo en caso de no encontrar al usuario
+    }
 }
 
 
