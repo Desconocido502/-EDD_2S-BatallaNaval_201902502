@@ -88,6 +88,7 @@ void cargaMasiva(){
     for(auto usuario: data.at("usuarios")){
         DoublyLinkedListU->insertAtEnd(usuario.at("nick"), SHA256::cifrar(usuario.at("password")), stoi(usuario.at("monedas").get<string>()) , stoi(usuario.at("edad").get<string>()));
     }
+    DoublyLinkedListU->sort();
     DoublyLinkedListU->displayListSE();
     
     //DoublyLinkedListU->drawList();

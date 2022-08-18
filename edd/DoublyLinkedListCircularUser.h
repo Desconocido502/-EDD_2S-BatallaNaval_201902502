@@ -237,4 +237,27 @@ NodoUsuario* DoublyLinkedListCircularUser::searchUser(string nick, string passwo
 }
 
 
+void DoublyLinkedListCircularUser::sort(){
+    NodoUsuario* aux = new NodoUsuario();
+    NodoUsuario* actual = new NodoUsuario();
+    NodoUsuario* temp = new NodoUsuario();
+
+    if(!this->isEmpty()){
+        actual = this->primero;
+        while(actual->sig != this->primero){
+            aux = actual->sig;
+            while(aux != this->primero){
+                if(aux->user->getAge() < actual->user->getAge()){
+                    temp->user = actual->user;
+                    actual->user = aux->user;
+                    aux->user = temp->user;
+                }
+                aux = aux->sig;
+            }
+            actual = actual->sig;
+        }
+    }
+    return; //*Llegados aqui se ordeno todo
+}
+
 #endif
