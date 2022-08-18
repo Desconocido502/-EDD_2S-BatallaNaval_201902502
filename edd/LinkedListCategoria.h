@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include "NodoCategoria.h"
+#include "LinkedListBarco.h"
 #include "NodoBarco.h"
 
 using namespace std;
@@ -21,6 +22,7 @@ public:
     NodoCategoria* get(string);
     bool search(string);
     void printL();
+    void printLTienda();
     void drawList();
     LinkedListCategoria();
     ~LinkedListCategoria();
@@ -97,6 +99,25 @@ void LinkedListCategoria::printL(){
     }
 }
 
+void LinkedListCategoria::printLTienda(){
+    //*Tendremos que usar una lista de tipo barco, para mostrar la informacion ordenada por precios
+    LinkedListBarco* auxBarcos = new LinkedListBarco();
+    NodoBarco* aux_barco;
+    NodoCategoria* aux = this->primero;
+    while (aux != nullptr){
+        //printf("Categoria:%s \n",aux->categoria.c_str());
+        aux_barco = aux->barcos->returnHead();
+        while(aux_barco != NULL){ //*Se insertan todos los barcos de cualquier tipo de barco en una sola lista de tipo barcos
+            auxBarcos->insertAtEnd(aux_barco->getId(), aux_barco->getPrecio(), aux_barco->getNombre(), aux_barco->getSrc(), aux_barco->categoria);
+            aux_barco = aux_barco->sig;
+        }
+        aux_barco = nullptr;
+        aux = aux->sig;
+    }
+    //*Falta ordenarlo ascendente o descendente por el precio
+    auxBarcos->sort();
+    auxBarcos->displayList();
+}
 void LinkedListCategoria::drawList(){
     string cadena = "";
     int cont = 0, cont2 = 0;

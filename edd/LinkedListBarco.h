@@ -75,6 +75,7 @@ void LinkedListBarco::insertAtEnd(int id,  int precio, string nombre, string src
 void LinkedListBarco::displayList(){
     if(this->isEmpty()){
         cout<<"La lista se encuentra vacia"<<endl;
+        return;
     }
     VariadicTable<int, std::string, std::string, int > ut({"ID", "Nombre", "Categoria", "Precio"});
     NodoBarco* aux = new NodoBarco();
@@ -86,6 +87,28 @@ void LinkedListBarco::displayList(){
     }
     ut.print(cout);
     cout<<"\n"<<endl;
+}
+
+void LinkedListBarco::sort(){
+    NodoBarco* aux = new NodoBarco();
+    NodoBarco* actual = new NodoBarco();
+    NodoBarco* temp = new NodoBarco();
+    if(!this->isEmpty()){
+        actual = this->primero;
+        while(actual->sig != NULL){
+            aux = actual->sig;
+            while (aux != NULL){
+                if(aux->getPrecio() < actual->getPrecio()){
+                    temp->setArticle(actual->getArticle());
+                    actual->setArticle(aux->getArticle());
+                    aux->setArticle(temp->getArticle());
+                }
+                aux = aux->sig;
+            }
+            actual = actual->sig;
+        }
+    }
+    return; //*llegados aqui lo tendria que haber ordenado bien
 }
 
 

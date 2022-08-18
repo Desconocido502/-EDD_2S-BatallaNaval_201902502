@@ -34,16 +34,32 @@ public:
         cout<<"Id: "<<this->id<<", precio: "<<this->precio<<", nombre: "<<this->nombre<<", src: "<<this->src<<endl;
     }
 
+    void setId(int id){
+        this->id = id;
+    }
+
     int getId(){
         return this->id;
+    }
+
+    void setPrecio(int precio){
+        this->precio = precio;
     }
 
     int getPrecio(){
         return this->precio;
     }
 
+    void setNombre(string nombre){
+        this->nombre = nombre;
+    }
+
     string getNombre(){
         return this->nombre;
+    }
+
+    void setSrc(string src){
+        this->src = src;
     }
 
     string getSrc(){

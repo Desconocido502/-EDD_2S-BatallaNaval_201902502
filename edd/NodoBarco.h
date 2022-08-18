@@ -17,16 +17,40 @@ public:
     NodoBarco(int, int, string, string, string);
     void mostrarDatos();
 
+    void setArticle(ArticleB* barco){
+        this->barco = barco;
+    }
+
+    ArticleB* getArticle(){
+        return this->barco;
+    }
+
+    void setId(int id){
+        this->barco->setId(id);
+    }
+
     int getId(){
         return this->barco->getId();
+    }
+
+    void setPrecio(int precio){
+        this->barco->setPrecio(precio);
     }
 
     int getPrecio(){
         return this->barco->getPrecio();
     }
 
+    void setNombre(string nombre){
+        this->barco->setNombre(nombre);
+    }
+
     string getNombre(){
         return this->barco->getNombre();
+    }
+
+    void setSrc(string src){
+        this->barco->setSrc(src);
     }
 
     string getSrc(){

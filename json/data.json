@@ -1,18 +1,18 @@
 {
   "usuarios": [
-    { "nick": "Folagor", "password": "alfal475", "monedas": 35, "edad": 24 },
-    { "nick": "Planton", "password": "cam78dad", "monedas": 15, "edad": 15 },
-    { "nick": "Pikachu", "password": "beliz5a4", "monedas": 40, "edad": 19 },
-    { "nick": "Naruto", "password": "jfagaga16a", "monedas": 150, "edad": 32 },
-    { "nick": "Goku", "password": "agga516r", "monedas": 700, "edad": 170 },
-    { "nick": "Homero", "password": "agfa84aafg8", "monedas": 10, "edad": 16 }
+    { "nick": "Folagor", "password": "alfal475", "monedas": "35", "edad": "24" },
+    { "nick": "Planton", "password": "cam78dad", "monedas": "15", "edad": "15" },
+    { "nick": "Pikachu", "password": "beliz5a4", "monedas": "40", "edad": "19" },
+    { "nick": "Naruto", "password": "jfagaga16a", "monedas": "150", "edad": "32" },
+    { "nick": "Goku", "password": "agga516r", "monedas": "700", "edad": "170" },
+    { "nick": "Homero", "password": "agfa84aafg8", "monedas": "10", "edad": "16" }
   ],
   "articulos": [
-    {"id": 47, "categoria": "epico", "precio": 75, "nombre": "La Perla Negra", "src":"gagafrafgafba"},
-    {"id": 48, "categoria": "legendario", "precio": 100, "nombre": "El Holandes Errante", "src":"afofnaokndo"},
-    {"id": 47, "categoria": "raro", "precio": 50, "nombre": "La grajilla", "src":"fbsbaaklljka"},
-    {"id": 12, "categoria": "atipico", "precio": 60, "nombre": "La delicada dama", "src":"mlflkanklalkgba"},
-    {"id": 14, "categoria": "tipico", "precio": 35, "nombre": "La morsa", "src":"mvklfnkoanfkonva"}
+    {"id": "47", "categoria": "epico", "precio": "75", "nombre": "La Perla Negra", "src":"gagafrafgafba"},
+    {"id": "48", "categoria": "legendario", "precio": "100", "nombre": "El Holandes Errante", "src":"afofnaokndo"},
+    {"id": "47", "categoria": "raro", "precio": "50", "nombre": "La grajilla", "src":"fbsbaaklljka"},
+    {"id": "12", "categoria": "atipico", "precio": "60", "nombre": "La delicada dama", "src":"mlflkanklalkgba"},
+    {"id": "14", "categoria": "tipico", "precio": "35", "nombre": "La morsa", "src":"mvklfnkoanfkonva"}
   ],
   "tutorial": {
     "ancho":"7",

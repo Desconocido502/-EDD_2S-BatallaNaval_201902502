@@ -9,6 +9,8 @@
 #include "edd/DoublyLinkedListCircularUser.h"
 #include "edd/LinkedListCategoria.h"
 #include "edd/ColaTutorial.h"
+#include "edd/PilaMov.h"
+#include "edd/ListaPilaMov.h"
 
 using namespace std;
 using std::stoi;
@@ -65,7 +67,6 @@ void menu(){
             cout<<"La opcion elegida no exista, digite correctamente!!"<<endl;
             break;
         }
-
     }while(opcion != 5);
 
 }
@@ -85,7 +86,7 @@ void cargaMasiva(){
     cout<< "Usuarios:" << endl;
 
     for(auto usuario: data.at("usuarios")){
-        DoublyLinkedListU->insertAtEnd(usuario.at("nick"), SHA256::cifrar(usuario.at("password")), usuario.at("monedas") , usuario.at("edad"));
+        DoublyLinkedListU->insertAtEnd(usuario.at("nick"), SHA256::cifrar(usuario.at("password")), stoi(usuario.at("monedas").get<string>()) , stoi(usuario.at("edad").get<string>()));
     }
     DoublyLinkedListU->displayListSE();
     
@@ -94,7 +95,7 @@ void cargaMasiva(){
     cout<< "articulos:" << endl;
     
     for(auto articulo: data.at("articulos")){
-        articulos->insert(articulo.at("id"), articulo.at("categoria"), articulo.at("precio"), articulo.at("nombre"), articulo.at("src"));
+        articulos->insert(stoi(articulo.at("id").get<string>()), articulo.at("categoria"), stoi(articulo.at("precio").get<string>()), articulo.at("nombre"), articulo.at("src"));
     }
     articulos->printL();
     articulos->drawList();
@@ -188,9 +189,8 @@ void subMenuUser(NodoUsuario* nodoUser){
             case 4:
                 cout<<"Se veran los articulos de la tienda"<<endl;
                 if(articulos != NULL){
-                    cout<<"\t\t\tTotal: Tokens: "<<nodoUser->user->getMoney()<<endl;
-                    cout<<"Tienda"<<endl;
-                    articulos->printL();
+                    cout<<"Tienda\t\t\t\tTotal: Tokens: "<<nodoUser->user->getMoney()<<endl;
+                    articulos->printLTienda();
                     cout<<"Elija la opcion a comprar:"<<endl;
                 }else{
                     cout<<"No hay articulos que mostrar"<<endl;

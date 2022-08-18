@@ -1,0 +1,15 @@
+digraph G { 
+rankdir=LR; 
+node [shape=box, color=black , style=filled, fillcolor=gray93];
+Node0[label="Ancho: 7,\nAlto: 7"];
+Node1[label="X: 4,\nY: 1"];
+Node1->Node0;
+Node2[label="X: 1,\nY: 5"];
+Node2->Node1;
+Node3[label="X: 4,\nY: 3"];
+Node3->Node2;
+Node4[label="X: 2,\nY: 1"];
+Node4->Node3;
+Node5[label="X: 5,\nY: 1"];
+Node5->Node4;
+}
