@@ -69,20 +69,20 @@ NodoCategoria* LinkedListCategoria::get(string categoria){
 void LinkedListCategoria::insert(int id, string categoria, int precio, string nombre, string src){
     if(this->isEmpty()){
         this->primero = this->ultimo = new NodoCategoria(categoria);
-        this->primero->barcos->insertAtEnd(id, precio, nombre, src);
+        this->primero->barcos->insertAtEnd(id, precio, nombre, src, categoria);
         return;
     }else{
         //*Comparamos el valor para saber si existe la categoria en la lista
         if(this->search(categoria) == false){
             NodoCategoria* nuevo = new NodoCategoria(categoria);
-            nuevo->barcos->insertAtEnd(id, precio, nombre, src);
+            nuevo->barcos->insertAtEnd(id, precio, nombre, src, categoria);
             this->ultimo->sig = nuevo;
             nuevo->ant = this->ultimo;
             this->ultimo = nuevo;
             return;
         }else{
             NodoCategoria* temp = this->get(categoria);
-            temp->barcos->insertAtEnd(id,precio, nombre,src);
+            temp->barcos->insertAtEnd(id,precio, nombre,src, categoria);
             return;
         }
     }

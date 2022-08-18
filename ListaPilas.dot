@@ -1,0 +1,103 @@
+digraph G { 
+pila1_0[shape=box, rankdir=UD, style=filled, label="pila1",pos="0,-0!"];
+pila2_1[shape=box, rankdir=UD, style=filled, label="pila2",pos="0,-1!"];
+pila3_2[shape=box, rankdir=UD, style=filled, label="pila3",pos="0,-2!"];
+pila4_3[shape=box, rankdir=UD, style=filled, label="pila4",pos="0,-3!"];
+pila5_4[shape=box, rankdir=UD, style=filled, label="pila5",pos="0,-4!"];
+pila6_5[shape=box, rankdir=UD, style=filled, label="pila6",pos="0,-5!"];
+pila7_6[shape=box, rankdir=UD, style=filled, label="pila7",pos="0,-6!"];
+pila1_0->pila2_1->pila3_2->pila4_3->pila5_4->pila6_5->pila7_6;
+
+{rank=same;pila1_0,pila2_1,pila3_2,pila4_3,pila5_4,pila6_5,pila7_6};
+Nodo_pila1_0[
+	label=<
+	<table border="1" cellborder="1" cellspacing="0">
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 8, Y: 6</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 5</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 7, Y: 5</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 1, Y: 5</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 9, Y: 5</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 5, Y: 5</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 5</font></td></tr>
+	</table>>
+ ,shape=plaintext];
+pila1_0->Nodo_pila1_0;
+Nodo_pila2_1[
+	label=<
+	<table border="1" cellborder="1" cellspacing="0">
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 4</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 7</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 7, Y: 7</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 5</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 8, Y: 5</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 5, Y: 6</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 5</font></td></tr>
+	</table>>
+ ,shape=plaintext];
+pila2_1->Nodo_pila2_1;
+Nodo_pila3_2[
+	label=<
+	<table border="1" cellborder="1" cellspacing="0">
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 5</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 7, Y: 7</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 4</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 5</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 5, Y: 6</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 8, Y: 5</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 7</font></td></tr>
+	</table>>
+ ,shape=plaintext];
+pila3_2->Nodo_pila3_2;
+Nodo_pila4_3[
+	label=<
+	<table border="1" cellborder="1" cellspacing="0">
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 7</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 4</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 7, Y: 7</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 8, Y: 5</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 6</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 5, Y: 6</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 5</font></td></tr>
+	</table>>
+ ,shape=plaintext];
+pila4_3->Nodo_pila4_3;
+Nodo_pila5_4[
+	label=<
+	<table border="1" cellborder="1" cellspacing="0">
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 7, Y: 8</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 4</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 6, Y: 7</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 8, Y: 5</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 3, Y: 6</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 7</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 5</font></td></tr>
+	</table>>
+ ,shape=plaintext];
+pila5_4->Nodo_pila5_4;
+Nodo_pila6_5[
+	label=<
+	<table border="1" cellborder="1" cellspacing="0">
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 7</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 7, Y: 8</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 7, Y: 7</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 8, Y: 6</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 9, Y: 6</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 6</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 5</font></td></tr>
+	</table>>
+ ,shape=plaintext];
+pila6_5->Nodo_pila6_5;
+Nodo_pila7_6[
+	label=<
+	<table border="1" cellborder="1" cellspacing="0">
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 4</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 2</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 3</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 7, Y: 6</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 5, Y: 8</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 8, Y: 5</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 4, Y: 5</font></td></tr>
+	</table>>
+ ,shape=plaintext];
+pila7_6->Nodo_pila7_6;
+}

@@ -187,6 +187,14 @@ void subMenuUser(NodoUsuario* nodoUser){
                 break;
             case 4:
                 cout<<"Se veran los articulos de la tienda"<<endl;
+                if(articulos != NULL){
+                    cout<<"\t\t\tTotal: Tokens: "<<nodoUser->user->getMoney()<<endl;
+                    cout<<"Tienda"<<endl;
+                    articulos->printL();
+                    cout<<"Elija la opcion a comprar:"<<endl;
+                }else{
+                    cout<<"No hay articulos que mostrar"<<endl;
+                }
                 break;
             case 5:
                 cout<<"Se realizan los movimientos del jugador"<<endl;

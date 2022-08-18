@@ -15,8 +15,8 @@ public:
     bool isEmpty();
     int length();
     NodoBarco* returnHead();
-    void insertAtStart(int, int, string, string);
-    void insertAtEnd(int, int, string, string);
+    void insertAtStart(int, int, string, string, string);
+    void insertAtEnd(int, int, string, string, string);
     NodoBarco* searchBoat();
     void displayList();
     bool updateBoat();
@@ -43,8 +43,8 @@ NodoBarco* LinkedListBarco::returnHead(){
     return this->primero;
 }
 
-void LinkedListBarco::insertAtStart(int id,  int precio, string nombre, string src){
-    NodoBarco* nuevo = new NodoBarco(id, precio, nombre, src);
+void LinkedListBarco::insertAtStart(int id,  int precio, string nombre, string src, string categoria){
+    NodoBarco* nuevo = new NodoBarco(id, precio, nombre, src, categoria);
     NodoBarco* aux = new NodoBarco();
 
     if(this->isEmpty()){
@@ -58,8 +58,8 @@ void LinkedListBarco::insertAtStart(int id,  int precio, string nombre, string s
     this->tam += 1;
 }
 
-void LinkedListBarco::insertAtEnd(int id,  int precio, string nombre, string src){
-    NodoBarco* nuevo = new NodoBarco(id, precio, nombre, src);
+void LinkedListBarco::insertAtEnd(int id,  int precio, string nombre, string src, string categoria){
+    NodoBarco* nuevo = new NodoBarco(id, precio, nombre, src, categoria);
     NodoBarco* aux = new NodoBarco();
 
     if(this->isEmpty()){
@@ -76,11 +76,11 @@ void LinkedListBarco::displayList(){
     if(this->isEmpty()){
         cout<<"La lista se encuentra vacia"<<endl;
     }
-    VariadicTable<int, int, std::string, std::string> ut({"ID", "Precio", "nombre", "src"});
+    VariadicTable<int, std::string, std::string, int > ut({"ID", "Nombre", "Categoria", "Precio"});
     NodoBarco* aux = new NodoBarco();
     aux = this->primero;
     while(aux != nullptr){
-        ut.addRow(aux->barco->getId(), aux->barco->getPrecio(), aux->barco->getNombre(), aux->barco->getSrc());
+        ut.addRow(aux->barco->getId(), aux->barco->getNombre(), aux->categoria, aux->barco->getPrecio());
         //aux->barco->mostrarDatos();
         aux = aux->sig;
     }
