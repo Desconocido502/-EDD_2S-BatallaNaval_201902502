@@ -4,8 +4,10 @@
 #include <sstream>
 #include <string.h>
 
+
 #include "lib/nlohmann/json.hpp"
 #include "lib/sha256.h"
+#include "lib/replace.h"
 #include "edd/DoublyLinkedListCircularUser.h"
 #include "edd/LinkedListCategoria.h"
 #include "edd/ColaTutorial.h"
@@ -24,6 +26,9 @@ void login();
 void subMenuUser(NodoUsuario*);
 void editarInfoUser(NodoUsuario*);
 int eliminarUser(string);
+void mostrarTutorial();
+void comprarArticulos(NodoUsuario*);
+void realizarMovimientos(NodoUsuario*);
 
 //*EDD y variables a usar
 int opcion = 0, edad = 0, monedas = 0;
@@ -180,28 +185,17 @@ void subMenuUser(NodoUsuario* nodoUser){
                 opcion2 = eliminarUser(nodoUser->user->getNick());
                 break;
             case 3:
-                cout<<"Se vera el tutorial del juego"<<endl;
-                if(cola_tutorial == NULL){
-                    cout<<"No hay tutorial disponible"<<endl;
-                }else{
-                    cola_tutorial->displayQueue();
-                }
+                mostrarTutorial();
                 break;
             case 4:
-                cout<<"Se veran los articulos de la tienda"<<endl;
-                if(articulos != NULL){
-                    cout<<"Tienda\t\t\t\tTotal: Tokens: "<<nodoUser->user->getMoney()<<endl;
-                    articulos->printLTienda();
-                    cout<<"Elija la opcion a comprar:"<<endl;
-                }else{
-                    cout<<"No hay articulos que mostrar"<<endl;
-                }
+                comprarArticulos(nodoUser);
                 break;
             case 5:
                 cout<<"Se realizan los movimientos del jugador"<<endl;
+                realizarMovimientos(nodoUser);
                 break;
             case 6:
-                cout<<"Gracias por jugar, vuelva pronto!!!"<<endl;
+                cout<<"Regresando al menu principal..."<<endl;
                 break;
             default:
                 cout<<"La opcion elegida no exista, digite correctamente!!"<<endl;
@@ -234,4 +228,72 @@ int eliminarUser(string nick){
     }
     return 6;
     DoublyLinkedListU->displayListSE();
+}
+
+void mostrarTutorial(){
+    cout<<"Se vera el tutorial del juego"<<endl;
+    if(cola_tutorial == NULL){
+        cout<<"No hay tutorial disponible"<<endl;
+    }else{
+        cola_tutorial->displayQueue();
+    }
+    return;
+}
+
+void realizarMovimientos(NodoUsuario* nodoUser){
+    int coordenadaX = 0, coordenadaY = 0;
+    PilaMov* pila = new PilaMov();
+    string nombrePila = "";
+    char seguirIngresandoCoordenadas = 'y', nameStack[250];
+    while (seguirIngresandoCoordenadas != 'n'){
+        cin.ignore();
+        cout<<"Ingrese su coordenada en X:";
+        cin>>coordenadaX;
+        cin.ignore();
+        cout<<"Ingrese su coordenada en Y:";
+        cin>>coordenadaY;
+        cin.ignore();
+        cout<<"Desea seguir ingresando mas coordenadas? [y/n]: ";
+        cin >> seguirIngresandoCoordenadas;
+        cin.ignore();
+        pila->push(coordenadaX, coordenadaY);
+    };
+    
+    cin.ignore();
+    cout<<"Ingrese el nombre de la pila:";
+    cin.getline(nameStack, 250, '\n');
+    cout<<nameStack<<endl;
+    nombrePila = string(nameStack); //parseamos de char[]  a string
+    pila->setNombrePilaMov(nombrePila);
+    cin.ignore();
+    cout<<pila->displayStack()<<endl;
+    cout<<nodoUser->user->getNick()<<endl;
+    nodoUser->user->listaPilaMovimientos->insertarAlFinal(replace(nombrePila," ", "_"), pila);
+    nodoUser->user->listaPilaMovimientos->desplegarLista();
+    nodoUser->user->getListaPilaMov()->drawListStacks();
+}
+
+void comprarArticulos(NodoUsuario* nodoUser){
+    int opcionCompra = 0;
+    char seguirComprando = 'y';
+    //cout<<"Se veran los articulos de la tienda"<<endl;
+    if(articulos == NULL){
+        cout<<"La lista de articulos esta vacia...\n"<<endl;
+        return;
+    }
+
+    do{
+        cout<<"Tienda\t\t\t\tTotal: Tokens: "<<nodoUser->user->getMoney()<<endl;
+        articulos->printLTienda();
+        cout<<"Elija la opcion a comprar: ";
+        cin.ignore();
+        cin >> opcionCompra;
+        //articulos->buyArticle(opcionCompra);  //*Se tiene que preguntar al aux que hacer aqui
+        cout<<"\n - "<<opcionCompra<<endl;
+        cout<<"Desea seguir comprando mas articulos? [y/n]: ";
+        cin.ignore();
+        cin >> seguirComprando;
+
+    } while (seguirComprando != 'n');
+
 }

@@ -3,6 +3,9 @@
 
 using namespace std;
 
+#ifndef NODOUSUARIO_H
+#define NODOUSUARIO_H
+
 class NodoUsuario{
 public:
     User* user;
@@ -30,3 +33,6 @@ NodoUsuario::NodoUsuario(string nick, string password, int money, int age){
 void NodoUsuario::mostrarDatos(){
     this->user->mostrarDatos();
 }
+
+
+#endif

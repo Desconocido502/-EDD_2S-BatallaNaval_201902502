@@ -1,22 +1,27 @@
 #include <iostream>
 
 #include "ListaPilaMov.h"
+#include "PilaMov.h"
+
 using namespace std;
+
+#ifndef USER_H
+#define USER_H
 
 class User{
 private:
     string nick;
     string password;
-    ListaPilaMov* listaPilaMovimientos;
     int money;
     int age;
 public:
+    ListaPilaMov* listaPilaMovimientos;
     User(string nick, string password, int money, int age){
         this->nick = nick;
         this->password = password;
         this->money = money;
         this->age = age;
-        this->listaPilaMovimientos = NULL;
+        this->listaPilaMovimientos = new ListaPilaMov();
     }
 
     User(){ //Constructor vacio
@@ -24,7 +29,7 @@ public:
         this->password = "";
         this->money = 0;
         this->age = 0;
-        this->listaPilaMovimientos = NULL;
+        this->listaPilaMovimientos = new ListaPilaMov();
     }
     
     ~User(){ //Destructor
@@ -67,3 +72,7 @@ public:
         return this->age;
     }
 };
+
+
+
+#endif

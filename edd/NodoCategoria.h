@@ -4,6 +4,9 @@
 
 using namespace std;
 
+#ifndef NODOCATEGORIA_H
+#define NODOCATEGORIA_H
+
 class NodoCategoria{
 public:
     string categoria;
@@ -28,3 +31,5 @@ NodoCategoria::NodoCategoria(string categoria){
     this->sig = NULL;
     this->ant = NULL;
 }
+
+#endif

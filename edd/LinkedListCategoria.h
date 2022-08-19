@@ -21,6 +21,7 @@ public:
     void insert(int, string, int, string, string);
     NodoCategoria* get(string);
     bool search(string);
+    NodoBarco* buyArticle(int);
     void printL();
     void printLTienda();
     void drawList();
@@ -54,6 +55,20 @@ bool LinkedListCategoria::search(string categoria){
         aux = aux->sig;
     }
     return false;
+}
+
+NodoBarco* LinkedListCategoria::buyArticle(int id){
+    if(this->isEmpty()) return NULL;
+    NodoCategoria* aux = this->primero;
+    NodoBarco* encontrado = NULL;
+    while(aux != nullptr){
+        encontrado = aux->barcos->searchBoat(id);
+        if(encontrado != NULL){
+            return encontrado;
+        }
+        aux = aux->sig;
+    }
+    return NULL;
 }
 
 NodoCategoria* LinkedListCategoria::get(string categoria){

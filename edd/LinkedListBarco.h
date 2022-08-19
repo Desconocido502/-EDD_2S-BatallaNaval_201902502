@@ -17,7 +17,7 @@ public:
     NodoBarco* returnHead();
     void insertAtStart(int, int, string, string, string);
     void insertAtEnd(int, int, string, string, string);
-    NodoBarco* searchBoat();
+    NodoBarco* searchBoat(int);
     void displayList();
     bool updateBoat();
     void sort();
@@ -87,6 +87,18 @@ void LinkedListBarco::displayList(){
     }
     ut.print(cout);
     cout<<"\n"<<endl;
+}
+
+NodoBarco* LinkedListBarco::searchBoat(int id){
+    if(this->isEmpty()) return NULL;
+    
+    NodoBarco* aux = new NodoBarco();
+    aux = this->primero;
+    while(aux != nullptr){
+        if(aux->getId() == id) return aux;
+        aux = aux->sig;
+    }
+    return NULL;
 }
 
 void LinkedListBarco::sort(){
