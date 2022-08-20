@@ -4,6 +4,7 @@
 #include "NodoCategoria.h"
 #include "LinkedListBarco.h"
 #include "NodoBarco.h"
+#include "generacionImg.h"
 
 using namespace std;
 
@@ -196,21 +197,8 @@ void LinkedListCategoria::drawList(){
     cadena += "};\n";
     cadena += "}\n";
 
-    //cout<<cadena<<endl;
-    try{
-        ofstream file;
-        file.open("Articles.dot", std::ios::out);
-
-        if(file.fail()){
-            exit(1);
-        }
-        file << cadena;
-        file.close();
-        string command = "dot -Tpng Articles.dot -o Articles.png";
-        system(command.c_str());
-    }catch(const std::exception& e){
-        cout<<"No se pudo crear la imagen :("<<endl;
-    }
+    //cout<<cadena<<endl;.
+    generacionImg("Articles", cadena);
 }
 
 #endif

@@ -29,6 +29,7 @@ int eliminarUser(string);
 void mostrarTutorial();
 void comprarArticulos(NodoUsuario*);
 void realizarMovimientos(NodoUsuario*);
+void generarReportes();
 
 //*EDD y variables a usar
 int opcion = 0, edad = 0, monedas = 0;
@@ -64,6 +65,7 @@ void menu(){
             break;
         case 4:
             cout<<"Se generan los reportes aqui"<<endl;
+            generarReportes();
             break;
         case 5:
             cout<<"Gracias por jugar, vuelva pronto!!!"<<endl;
@@ -94,7 +96,7 @@ void cargaMasiva(){
         DoublyLinkedListU->insertAtEnd(usuario.at("nick"), SHA256::cifrar(usuario.at("password")), stoi(usuario.at("monedas").get<string>()) , stoi(usuario.at("edad").get<string>()));
     }
     DoublyLinkedListU->sort();
-    DoublyLinkedListU->displayListSE();
+    //DoublyLinkedListU->displayListSE();
     
     //DoublyLinkedListU->drawList();
 
@@ -103,8 +105,8 @@ void cargaMasiva(){
     for(auto articulo: data.at("articulos")){
         articulos->insert(stoi(articulo.at("id").get<string>()), articulo.at("categoria"), stoi(articulo.at("precio").get<string>()), articulo.at("nombre"), articulo.at("src"));
     }
-    articulos->printL();
-    articulos->drawList();
+    //articulos->printL();
+    //articulos->drawList();
 
     cout<< "Tutorial:" << endl;
     cola_tutorial->enqueue(stoi(data.at("tutorial").at("ancho").get<string>()), stoi(data.at("tutorial").at("alto").get<string>()));
@@ -113,8 +115,8 @@ void cargaMasiva(){
         cola_tutorial->enqueue(stoi(movimiento.at("x").get<string>()), stoi(movimiento.at("y").get<string>())); //Tremenda conversion //error 302 revisar docu  https://json.nlohmann.me/home/exceptions/#jsonexceptiontype_error301
     }
 
-    cola_tutorial->displayQueue();
-    cola_tutorial->drawQueue();
+    //cola_tutorial->displayQueue();
+    //cola_tutorial->drawQueue();
 }
 
 void registrarUsuario(){
@@ -135,6 +137,7 @@ void registrarUsuario(){
     DoublyLinkedListU->insertAtEnd(std::string(nick_l), SHA256::cifrar(std::string(password_l)), monedas, edad);
     //cout<<nick_l<<", "<<password_l<<endl;
     //DoublyLinkedListU->displayListSE();
+    DoublyLinkedListU->sort();
     cout<<"Datos ingresados correctamente..."<<endl;
 }
 
@@ -191,11 +194,11 @@ void subMenuUser(NodoUsuario* nodoUser){
                 comprarArticulos(nodoUser);
                 break;
             case 5:
-                cout<<"Se realizan los movimientos del jugador"<<endl;
+                cout<<"Se realizan los movimientos del jugador\n"<<endl;
                 realizarMovimientos(nodoUser);
                 break;
             case 6:
-                cout<<"Regresando al menu principal..."<<endl;
+                cout<<"Regresando al menu principal...\n"<<endl;
                 break;
             default:
                 cout<<"La opcion elegida no exista, digite correctamente!!"<<endl;
@@ -215,8 +218,8 @@ void editarInfoUser(NodoUsuario* nodoUser){
     cout<<"Ingrese su nuevo password: ";
     cin.getline(password_l, 250, '\n');
     nodoUser->user->setPassword(SHA256::cifrar(std::string(password_l)));
-    nodoUser->mostrarDatos();
-    DoublyLinkedListU->displayListSE();
+    //nodoUser->mostrarDatos();
+    //DoublyLinkedListU->displayListSE();
 }
 
 int eliminarUser(string nick){
@@ -227,7 +230,7 @@ int eliminarUser(string nick){
         cout<<"El usuario No fue eliminado!!!"<<endl;
     }
     return 6;
-    DoublyLinkedListU->displayListSE();
+    //DoublyLinkedListU->displayListSE();
 }
 
 void mostrarTutorial(){
@@ -235,7 +238,9 @@ void mostrarTutorial(){
     if(cola_tutorial == NULL){
         cout<<"No hay tutorial disponible"<<endl;
     }else{
+        cout<<endl;
         cola_tutorial->displayQueue();
+        cout<<endl;
     }
     return;
 }
@@ -283,7 +288,7 @@ void comprarArticulos(NodoUsuario* nodoUser){
     }
 
     do{
-        cout<<"Tienda\t\t\t\tTotal: Tokens: "<<nodoUser->user->getMoney()<<endl;
+        cout<<"Tienda\t\t\t\t  Tokens: "<<nodoUser->user->getMoney()<<endl;
         articulos->printLTienda();
         cout<<"Elija la opcion a comprar: ";
         cin.ignore();
@@ -296,4 +301,77 @@ void comprarArticulos(NodoUsuario* nodoUser){
 
     } while (seguirComprando != 'n');
 
+}
+
+void generarReportes(){
+    int opcionGrafica = 0;
+    cout<<"Bienvenido a la creacion y visualizacion de reportes\n"<<endl;
+    
+    do{
+        cout<<"\t.:Menu graficar:.\t"<<endl;
+        cout<<"1. Visualizar lista de usuarios."<<endl;
+        cout<<"2. Visualizar lista de articulos."<<endl;
+        cout<<"3. Visualizar cola de movimientos del tutorial."<<endl;
+        cout<<"4. Visualizar una lista de pilas de algun usuario."<<endl;
+        cout<<"5. Mostrar listado de usuarios ordenado."<<endl;
+        cout<<"6. Mostrar listado de articulos ordenado."<<endl;
+        cout<<"7. Regresar al menu principal."<<endl;
+        cout<<"Elija una opcion: ";
+        cin >> opcionGrafica;
+
+        switch (opcionGrafica){
+            case 1:
+                /* Lista doblemente enlazada circular (Usuarios) */
+                if(DoublyLinkedListU != NULL){
+                    DoublyLinkedListU->drawList();
+                }else{
+                    cout<<"No existe una lista de usuarios...\n"<<endl;
+                }
+                break;
+            case 2:
+                /* Lista de listas (Articulos) */
+                if(articulos != NULL){
+                    articulos->drawList();
+                }else{
+                    cout<<"No existe una lista de articulos...\n"<<endl;
+                }
+                break;
+            case 3:
+                /* Cola de movimientos (Tutorial) */
+                if(cola_tutorial != NULL){
+                    cola_tutorial->drawQueue();
+                }else{
+                    cout<<"No existe una cola del tutorial del juego...\n"<<endl;
+                }
+                break;
+            case 4:
+                /* Lista de pilas (Listado de jugadas) */
+                //*Mostrarle los jugadores, y que elija al jugador para poder graficar la lista de pilas de jugador
+                cout<<"Pendiente...\n"<<endl;
+                case 5:
+                /* Listado de usuarios ordenados por edad, de forma ascendente o descendente */
+                if(DoublyLinkedListU != NULL){
+                    DoublyLinkedListU->sort();
+                    DoublyLinkedListU->displayListSE();
+                }else{
+                    cout<<"No existe una lista de usuarios a mostrar ordenada...\n"<<endl;
+                }
+                break;
+            case 6:
+                /* Listado de artículos ordenados por precio , de forma ascendente o descendente  */
+                if(articulos != NULL){
+                    articulos->printLTienda();
+                }else{
+                    cout<<"No existe una lista de articulos a mostrar ordenada...\n"<<endl;
+                }
+                break;
+            case 7:
+                cout<<"Regresando al menu principal...\n"<<endl;
+                break;
+            default:
+                cout<<"La opcion elegida no exista, digite correctamente!!"<<endl;
+                break;
+        }
+    } while (opcionGrafica != 7);
+    
 }

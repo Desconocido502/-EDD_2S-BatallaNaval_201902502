@@ -4,6 +4,7 @@
 #include "NodoLP.h"
 #include "PilaMov.h"
 #include "generacionImg.h"
+#include "../lib/replace.h"
 using namespace std;
 
 #ifndef LISTAPILAMOV_H
@@ -94,7 +95,7 @@ void ListaPilaMov::drawListStacks(){
 
     while (temp != NULL){
         
-        cadena += temp->getNombreNodoPila() + "_"+to_string(cont) +  "[shape=box, rankdir=UD, style=filled, label=\""  + temp->getNombreNodoPila() +  "\"" +",pos=\"0,-"+ to_string(cont) + "!\"];\n";
+        cadena += temp->getNombreNodoPila() + "_"+to_string(cont) +  "[shape=box, rankdir=UD, style=filled, label=\""  + replace(temp->getNombreNodoPila(),"_"," ") +  "\"" +",pos=\"0,-"+ to_string(cont) + "!\"];\n";
         
         if(temp->getSiguiente() == NULL){
             aux += temp->getNombreNodoPila() + "_"+to_string(cont) + "};\n";

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string.h>
 #include "NodoUsuario.h"
+#include "generacionImg.h"
 #include "../lib/VariadicTable.h" 
 
 using namespace std;
@@ -190,21 +191,8 @@ void DoublyLinkedListCircularUser::drawList(){
     datos += "Node"+ to_string(cont) + ":sn->" + "Node" + to_string(0) + ":se;\n";
     datos += "Node"+ to_string(0) + ":s->" + "Node" + to_string(cont) + ":sc;\n";
     datos += "}";
-    try{
-        ofstream file;
-        file.open("ListUsers.dot", std::ios::out);
-
-        if(file.fail()){
-            exit(1);
-        }
-        file <<datos;
-        file.close();
-        string command = "dot -Tpng ListUsers.dot -o ListUsers.png";
-        system(command.c_str());
-    }catch(const std::exception& e){
-        cout<<"No se pudo crear la imagen :("<<endl;
-    }
-    //delete aux;
+    generacionImg("ListUsers", datos);
+    aux = NULL;
 }
 
 bool DoublyLinkedListCircularUser::deleteNode(string nick){

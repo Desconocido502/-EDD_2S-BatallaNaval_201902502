@@ -1,9 +1,9 @@
 #include <iostream>
+#include <cstdlib>
+
 #include "menu.cpp"
 
-#include "edd/PilaMov.h"
-#include "edd/ListaPilaMov.h"
-#include "edd/User.h"
+
 using namespace std;
 
 int main(int argc, char const *argv[]){
