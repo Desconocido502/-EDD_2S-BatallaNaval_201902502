@@ -8,6 +8,7 @@
 #include "lib/nlohmann/json.hpp"
 #include "lib/sha256.h"
 #include "lib/replace.h"
+#include "edd/generacionImg.h"
 #include "edd/DoublyLinkedListCircularUser.h"
 #include "edd/LinkedListCategoria.h"
 #include "edd/ColaTutorial.h"
@@ -93,7 +94,9 @@ void cargaMasiva(){
     cout<< "Usuarios:" << endl;
 
     for(auto usuario: data.at("usuarios")){
-        DoublyLinkedListU->insertAtEnd(usuario.at("nick"), SHA256::cifrar(usuario.at("password")), stoi(usuario.at("monedas").get<string>()) , stoi(usuario.at("edad").get<string>()));
+        if(!DoublyLinkedListU->searchUserForNick(string(usuario.at("nick")))){ //*Se registra al usuario unicamente si no existe alguien mas con ese nick
+            DoublyLinkedListU->insertAtEnd(usuario.at("nick"), SHA256::cifrar(usuario.at("password")), stoi(usuario.at("monedas").get<string>()) , stoi(usuario.at("edad").get<string>()));
+        }
     }
     DoublyLinkedListU->sort();
     //DoublyLinkedListU->displayListSE();
@@ -127,6 +130,10 @@ void registrarUsuario(){
     cin.ignore();
     cout<<"Ingrese su nombre de jugador: ";
     cin.getline(nick_l, 250, '\n');
+    if(DoublyLinkedListU->searchUserForNick(string(nick_l))){
+        cout<<"El nombre de usuario ya existe, ingrese otro nick";
+        return;
+    }
     cin.ignore();
     cout<<"Ingrese su password: ";
     cin.getline(password_l, 250, '\n');
@@ -289,7 +296,7 @@ void comprarArticulos(NodoUsuario* nodoUser){
 
     do{
         cout<<"Tienda\t\t\t\t  Tokens: "<<nodoUser->user->getMoney()<<endl;
-        articulos->printLTienda();
+        articulos->printLTienda('s'); //*por defecto se ordena en orden ascendente
         cout<<"Elija la opcion a comprar: ";
         cin.ignore();
         cin >> opcionCompra;
@@ -305,6 +312,7 @@ void comprarArticulos(NodoUsuario* nodoUser){
 
 void generarReportes(){
     int opcionGrafica = 0;
+    char tipoOrden;
     cout<<"Bienvenido a la creacion y visualizacion de reportes\n"<<endl;
     
     do{
@@ -324,6 +332,8 @@ void generarReportes(){
                 /* Lista doblemente enlazada circular (Usuarios) */
                 if(DoublyLinkedListU != NULL){
                     DoublyLinkedListU->drawList();
+                    moveFile("ListUsers");
+                    openImg("ListUsers");
                 }else{
                     cout<<"No existe una lista de usuarios...\n"<<endl;
                 }
@@ -332,6 +342,8 @@ void generarReportes(){
                 /* Lista de listas (Articulos) */
                 if(articulos != NULL){
                     articulos->drawList();
+                    moveFile("Articles");
+                    openImg("Articles");
                 }else{
                     cout<<"No existe una lista de articulos...\n"<<endl;
                 }
@@ -340,6 +352,8 @@ void generarReportes(){
                 /* Cola de movimientos (Tutorial) */
                 if(cola_tutorial != NULL){
                     cola_tutorial->drawQueue();
+                    moveFile("ColaTutorial");
+                    openImg("ColaTutorial");
                 }else{
                     cout<<"No existe una cola del tutorial del juego...\n"<<endl;
                 }
@@ -348,19 +362,39 @@ void generarReportes(){
                 /* Lista de pilas (Listado de jugadas) */
                 //*Mostrarle los jugadores, y que elija al jugador para poder graficar la lista de pilas de jugador
                 cout<<"Pendiente...\n"<<endl;
-                case 5:
+                break;
+            case 5:
                 /* Listado de usuarios ordenados por edad, de forma ascendente o descendente */
+                tipoOrden = ' ';
                 if(DoublyLinkedListU != NULL){
                     DoublyLinkedListU->sort();
-                    DoublyLinkedListU->displayListSE();
+                    cin.ignore();
+                    cout<<"Ingrese si el orden tipo de orden ascendente[s]-descendente[r]: ";
+                    cin>>tipoOrden;
+                    if(tipoOrden == 's') {
+                        DoublyLinkedListU->sort();
+                        DoublyLinkedListU->displayListSE();
+                    }else if(tipoOrden == 'r') {
+                        DoublyLinkedListU->sortReverse();
+                        DoublyLinkedListU->displayListSE();
+                    }
+                    else {
+                        cout<<"Error!, el tipo de orden seleccionado no existe\n"<<endl;
+                    }
                 }else{
                     cout<<"No existe una lista de usuarios a mostrar ordenada...\n"<<endl;
                 }
                 break;
             case 6:
                 /* Listado de artículos ordenados por precio , de forma ascendente o descendente  */
+                tipoOrden = ' ';
                 if(articulos != NULL){
-                    articulos->printLTienda();
+                    cin.ignore();
+                    cout<<"Ingrese si el orden tipo de orden ascendente[s]-descendente[r]: ";
+                    cin>>tipoOrden;
+                    if(tipoOrden == 's') articulos->printLTienda('s');
+                    else if(tipoOrden == 'r') articulos->printLTienda('r');
+                    else cout<<"Error!, el tipo de orden seleccionado no existe\n"<<endl;
                 }else{
                     cout<<"No existe una lista de articulos a mostrar ordenada...\n"<<endl;
                 }

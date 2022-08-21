@@ -13,7 +13,9 @@ int main(int argc, char const *argv[]){
 }
 
 /*
-!Se queda pendiente la tienda de articulos, para ver como mostrarla de forma lineal
-!y tambien nos queda el de realizar movimientos,
+*La tienda de articulos, ya se puede ver de forma lineal ordenada ya sea en forma ascendente o descendente
+!los movimientos que se hagan para un usuario se van a una pila, se le da su name y los puntos de user aumentan
+!mostrar la lista de pilas de cada usuario por separado
+*validar que los usuarios no sean repetidos 
 *crear la estructura de lista de pilas -->lista
 **/

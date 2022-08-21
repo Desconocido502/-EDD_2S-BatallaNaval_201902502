@@ -29,8 +29,10 @@ public:
     void displayListSE();
     void displayListES();
     NodoUsuario* searchUser(string, string);
+    bool searchUserForNick(string);
     bool updateUser();
     void sort();
+    void sortReverse();
     void drawList();
     DoublyLinkedListCircularUser();
 };
@@ -188,8 +190,8 @@ void DoublyLinkedListCircularUser::drawList(){
             if (cont_aux == MAXVALUE) break;
         }
     }
-    datos += "Node"+ to_string(cont) + ":sn->" + "Node" + to_string(0) + ":se;\n";
-    datos += "Node"+ to_string(0) + ":s->" + "Node" + to_string(cont) + ":sc;\n";
+    datos += "Node"+ to_string(cont) + ":s->" + "Node" + to_string(0) + ":s;\n";
+    datos += "Node"+ to_string(0) + ":s->" + "Node" + to_string(cont) + ":s;\n";
     datos += "}";
     generacionImg("ListUsers", datos);
     aux = NULL;
@@ -224,6 +226,16 @@ NodoUsuario* DoublyLinkedListCircularUser::searchUser(string nick, string passwo
     }
 }
 
+bool DoublyLinkedListCircularUser::searchUserForNick(string nick){
+    if(this->isEmpty()) return false; //*Retorna false en caso de que la lista este no contenga usuarios
+    NodoUsuario* actual = this->primero;
+    while (actual != NULL){
+        if( (actual->user->getNick().compare(nick) == 0)) return true; //*retorna true en caso de encontrar al user
+        actual = actual->sig;
+        if(actual == this->primero) return false; //*Retorna false en caso de no encontrar al usuario
+    }
+}
+
 
 void DoublyLinkedListCircularUser::sort(){
     NodoUsuario* aux = new NodoUsuario();
@@ -245,7 +257,30 @@ void DoublyLinkedListCircularUser::sort(){
             actual = actual->sig;
         }
     }
-    return; //*Llegados aqui se ordeno todo
+    return; //*Llegados aqui se ordeno todo de menor a mayor
+}
+
+void DoublyLinkedListCircularUser::sortReverse(){
+    NodoUsuario* aux = new NodoUsuario();
+    NodoUsuario* actual = new NodoUsuario();
+    NodoUsuario* temp = new NodoUsuario();
+
+    if(!this->isEmpty()){
+        actual = this->primero;
+        while(actual->sig != this->primero){
+            aux = actual->sig;
+            while(aux != this->primero){
+                if(aux->user->getAge() > actual->user->getAge()){
+                    temp->user = actual->user;
+                    actual->user = aux->user;
+                    aux->user = temp->user;
+                }
+                aux = aux->sig;
+            }
+            actual = actual->sig;
+        }
+    }
+    return; //*Llegados aqui se ordeno todo de menor a mayor
 }
 
 #endif

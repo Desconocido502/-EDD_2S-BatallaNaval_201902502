@@ -24,7 +24,7 @@ public:
     bool search(string);
     NodoBarco* buyArticle(int);
     void printL();
-    void printLTienda();
+    void printLTienda(char);
     void drawList();
     LinkedListCategoria();
     ~LinkedListCategoria();
@@ -115,7 +115,7 @@ void LinkedListCategoria::printL(){
     }
 }
 
-void LinkedListCategoria::printLTienda(){
+void LinkedListCategoria::printLTienda(char tipoOrden){
     //*Tendremos que usar una lista de tipo barco, para mostrar la informacion ordenada por precios
     LinkedListBarco* auxBarcos = new LinkedListBarco();
     NodoBarco* aux_barco;
@@ -131,7 +131,8 @@ void LinkedListCategoria::printLTienda(){
         aux = aux->sig;
     }
     //*Falta ordenarlo ascendente o descendente por el precio
-    auxBarcos->sort();
+    if (tipoOrden == 's') auxBarcos->sort();
+    else auxBarcos->sortReverse();
     auxBarcos->displayList();
 }
 void LinkedListCategoria::drawList(){

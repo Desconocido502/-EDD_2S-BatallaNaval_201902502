@@ -21,6 +21,7 @@ public:
     void displayList();
     bool updateBoat();
     void sort();
+    void sortReverse();
     void drawList();
     LinkedListBarco();
 };
@@ -120,7 +121,29 @@ void LinkedListBarco::sort(){
             actual = actual->sig;
         }
     }
-    return; //*llegados aqui lo tendria que haber ordenado bien
+    return; //*llegados aqui lo tendria que haber ordenado bien ascendente
+}
+
+void LinkedListBarco::sortReverse(){
+    NodoBarco* aux = new NodoBarco();
+    NodoBarco* actual = new NodoBarco();
+    NodoBarco* temp = new NodoBarco();
+    if(!this->isEmpty()){
+        actual = this->primero;
+        while(actual->sig != NULL){
+            aux = actual->sig;
+            while (aux != NULL){
+                if(aux->getPrecio() > actual->getPrecio()){
+                    temp->setArticle(actual->getArticle());
+                    actual->setArticle(aux->getArticle());
+                    aux->setArticle(temp->getArticle());
+                }
+                aux = aux->sig;
+            }
+            actual = actual->sig;
+        }
+    }
+    return; //*llegados aqui lo tendria que haber ordenado bien ascendente
 }
 
 
