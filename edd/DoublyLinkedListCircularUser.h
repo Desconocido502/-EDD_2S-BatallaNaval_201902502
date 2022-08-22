@@ -29,6 +29,7 @@ public:
     void displayListSE();
     void displayListES();
     NodoUsuario* searchUser(string, string);
+    NodoUsuario* searchUser2(string); //*busca por el nick y devuelve el nodo usuario
     bool searchUserForNick(string);
     bool updateUser();
     void sort();
@@ -221,6 +222,16 @@ NodoUsuario* DoublyLinkedListCircularUser::searchUser(string nick, string passwo
     NodoUsuario* actual = this->primero;
     while (actual != NULL){
         if( (actual->user->getNick().compare(nick) == 0) && (actual->user->getPassword().compare(password) == 0)) return actual; //*retorna el nodo del usuario en caso de encontrarlo
+        actual = actual->sig;
+        if(actual == this->primero) return NULL; //*Retorna nulo en caso de no encontrar al usuario
+    }
+}
+
+NodoUsuario* DoublyLinkedListCircularUser::searchUser2(string nick){
+    if(this->isEmpty()) return NULL; //*Retorna nulo en caso de que la lista este no contenga usuarios
+    NodoUsuario* actual = this->primero;
+    while (actual != NULL){
+        if( (actual->user->getNick().compare(nick) == 0)) return actual; //*retorna el nodo del usuario en caso de encontrarlo
         actual = actual->sig;
         if(actual == this->primero) return NULL; //*Retorna nulo en caso de no encontrar al usuario
     }

@@ -1,0 +1,15 @@
+digraph G { 
+label="Goku";pila_1_0[shape=box, rankdir=UD, style=filled, label="pila 1",pos="0,-0!"];
+pila_1_0;
+
+{rank=same;pila_1_0};
+Nodo_pila_1_0[
+	label=<
+	<table border="1" cellborder="1" cellspacing="0">
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 2, Y: 5</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 2, Y: 4</font></td></tr>
+		<tr><td bgcolor="yellow"><font color="#0000ff">X: 1, Y: 2</font></td></tr>
+	</table>>
+ ,shape=plaintext];
+pila_1_0->Nodo_pila_1_0;
+}

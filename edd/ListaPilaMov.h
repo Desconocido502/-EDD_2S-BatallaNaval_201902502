@@ -21,7 +21,7 @@ public:
     void insertarAlFinal(string, PilaMov*);
     bool eliminarNodo(string);
     void desplegarLista(); 
-    void drawListStacks();
+    void drawListStacks(string);
     ListaPilaMov();
     ~ListaPilaMov();
 };
@@ -87,11 +87,11 @@ void ListaPilaMov::desplegarLista(){
     }
 }
 
-void ListaPilaMov::drawListStacks(){
+void ListaPilaMov::drawListStacks(string userName){
     NodoLP* temp = this->primero;
     int cont = 0;
     string cadena = "", aux = "", apuntadores = "";
-    cadena += "digraph G { \n";
+    cadena += "digraph G { \nlabel=\"" + userName + "\";";
 
     while (temp != NULL){
         

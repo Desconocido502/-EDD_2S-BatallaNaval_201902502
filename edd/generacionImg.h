@@ -25,7 +25,6 @@ void generacionImg(string nombreEstructura, string cadena){
         file.close();
         string command = "dot -Tpng " + nombreEstructura + ".dot -o " + nombreEstructura + ".png";
         system(command.c_str());
-        //moveFile(nombreEstructura);
     }catch(const std::exception& e){
         cout<<"No se pudo crear la imagen :("<<endl;
     }

@@ -51,6 +51,10 @@ public:
     void setNick(string nick){
         this->nick = nick;
     }
+    
+    void setMoney(int money){
+        this->money = money;
+    }
 
     string getNick(){
         return this->nick;

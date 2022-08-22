@@ -53,26 +53,26 @@ void menu(){
 
         switch (opcion){
         case 1:
-            cout<<"Vamos a realizar una carga masiva..."<<endl;
+            //cout<<"Vamos a realizar una carga masiva..."<<endl;
             cargaMasiva();
             break;
         case 2:
-            cout<<"Se esta registrando un usuario"<<endl;
+            //cout<<"Se esta registrando un usuario"<<endl;
             registrarUsuario();
             break;
         case 3:
-            cout<<"Se esta logueando un user"<<endl;
+            //cout<<"Se esta logueando un user"<<endl;
             login();
             break;
         case 4:
-            cout<<"Se generan los reportes aqui"<<endl;
+            //cout<<"Se generan los reportes aqui"<<endl;
             generarReportes();
             break;
         case 5:
-            cout<<"Gracias por jugar, vuelva pronto!!!"<<endl;
+            //cout<<"Gracias por jugar, vuelva pronto!!!"<<endl;
             break;
         default:
-            cout<<"La opcion elegida no exista, digite correctamente!!"<<endl;
+            //cout<<"La opcion elegida no exista, digite correctamente!!"<<endl;
             break;
         }
     }while(opcion != 5);
@@ -81,12 +81,18 @@ void menu(){
 
 
 void cargaMasiva(){
-    
-    ifstream file("./json/data.json", ios::in);
+    char ruta[550];
+    cout<<"Ingrese la ruta donde se leera el archivo: ";
+    cin.ignore();
+    cin.getline(ruta,550,'\n');
+    ifstream file(string(ruta), ios::in);
+    //"./json/data.json"
 
-    if(!file){
+    if(file.fail()){
         cout<<"Hubo un problema al leer el archivo"<<endl;
+        exit(1);
     }
+
     json data;
     file >> data;
     file.close();
@@ -274,15 +280,18 @@ void realizarMovimientos(NodoUsuario* nodoUser){
     cin.ignore();
     cout<<"Ingrese el nombre de la pila:";
     cin.getline(nameStack, 250, '\n');
-    cout<<nameStack<<endl;
-    nombrePila = string(nameStack); //parseamos de char[]  a string
+    //cout<<nameStack<<endl;
+    nombrePila = string(nameStack); //* parseamos de char[] a string
     pila->setNombrePilaMov(nombrePila);
     cin.ignore();
+    cout<<"\tTokens: + 1"<<endl;
+    cout<<"Movimientos Realizador: "<<endl;
     cout<<pila->displayStack()<<endl;
     cout<<nodoUser->user->getNick()<<endl;
     nodoUser->user->listaPilaMovimientos->insertarAlFinal(replace(nombrePila," ", "_"), pila);
-    nodoUser->user->listaPilaMovimientos->desplegarLista();
-    nodoUser->user->getListaPilaMov()->drawListStacks();
+    nodoUser->user->setMoney(nodoUser->user->getMoney() + 1);
+    //nodoUser->user->listaPilaMovimientos->desplegarLista();
+    //nodoUser->user->getListaPilaMov()->drawListStacks(nodoUser->user->getNick());
 }
 
 void comprarArticulos(NodoUsuario* nodoUser){
@@ -312,7 +321,7 @@ void comprarArticulos(NodoUsuario* nodoUser){
 
 void generarReportes(){
     int opcionGrafica = 0;
-    char tipoOrden;
+    char tipoOrden, nick_l[250];
     cout<<"Bienvenido a la creacion y visualizacion de reportes\n"<<endl;
     
     do{
@@ -362,6 +371,20 @@ void generarReportes(){
                 /* Lista de pilas (Listado de jugadas) */
                 //*Mostrarle los jugadores, y que elija al jugador para poder graficar la lista de pilas de jugador
                 cout<<"Pendiente...\n"<<endl;
+                if(DoublyLinkedListU != NULL){
+                    DoublyLinkedListU->displayListSE();
+                    cin.ignore();
+                    cout<<"Digite el nick del usuario a mostrar su lista de pilas: ";
+                    cin.getline(nick_l, 250, '\n');
+                    NodoUsuario* userAux = DoublyLinkedListU->searchUser2(string(nick_l));
+                    if(userAux != NULL){
+                        userAux->user->listaPilaMovimientos->drawListStacks(userAux->user->getNick());
+                    }else{
+                        cout<<"No se encontro el usuario para graficar su lista de pilas de movimientos."<<endl;
+                    }
+                }else{
+                    cout<<"No existe una lista de usuarios...\n"<<endl;
+                }
                 break;
             case 5:
                 /* Listado de usuarios ordenados por edad, de forma ascendente o descendente */
