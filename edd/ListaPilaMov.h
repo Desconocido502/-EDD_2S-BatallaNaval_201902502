@@ -120,7 +120,7 @@ void ListaPilaMov::drawListStacks(string userName){
     }
     cadena += "}";
     //cout<<cadena<<endl;
-    generacionImg("ListaPilas", cadena);
+    generacionImg("ListaPilas"+userName, cadena);
 }
 
 ListaPilaMov::~ListaPilaMov(){

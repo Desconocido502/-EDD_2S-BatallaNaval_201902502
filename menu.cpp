@@ -173,7 +173,7 @@ void login(){
         cout<<"El nombre de jugador no existe, ingrese correctamente su nombre de jugador"<<endl;
         return;
     }
-    // //*Sale de do-while en caso de que si exista un usuario
+
 
     subMenuUser(user);
 }
@@ -220,7 +220,7 @@ void subMenuUser(NodoUsuario* nodoUser){
     } while (opcion2 != 6);
 }
 
-void editarInfoUser(NodoUsuario* nodoUser){
+void editarInfoUser(NodoUsuario* nodoUser){ //!falta modificar la edad
     char nick_l[250];
     char password_l[250];
     cin.ignore();
@@ -370,7 +370,7 @@ void generarReportes(){
             case 4:
                 /* Lista de pilas (Listado de jugadas) */
                 //*Mostrarle los jugadores, y que elija al jugador para poder graficar la lista de pilas de jugador
-                cout<<"Pendiente...\n"<<endl;
+                //cout<<"Pendiente...\n"<<endl;
                 if(DoublyLinkedListU != NULL){
                     DoublyLinkedListU->displayListSE();
                     cin.ignore();
@@ -379,6 +379,8 @@ void generarReportes(){
                     NodoUsuario* userAux = DoublyLinkedListU->searchUser2(string(nick_l));
                     if(userAux != NULL){
                         userAux->user->listaPilaMovimientos->drawListStacks(userAux->user->getNick());
+                        moveFile("ListaPilas"+userAux->user->getNick());
+                        openImg("ListaPilas"+userAux->user->getNick());
                     }else{
                         cout<<"No se encontro el usuario para graficar su lista de pilas de movimientos."<<endl;
                     }

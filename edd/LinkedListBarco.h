@@ -18,6 +18,7 @@ public:
     void insertAtStart(int, int, string, string, string);
     void insertAtEnd(int, int, string, string, string);
     NodoBarco* searchBoat(int);
+    bool searchBoat2(int);
     void displayList();
     bool updateBoat();
     void sort();
@@ -63,6 +64,10 @@ void LinkedListBarco::insertAtEnd(int id,  int precio, string nombre, string src
     NodoBarco* nuevo = new NodoBarco(id, precio, nombre, src, categoria);
     NodoBarco* aux = new NodoBarco();
 
+    if(this->searchBoat2(id)){
+        return;  //*Se retorna en caso de que el id del bote sea el mismo
+    }
+
     if(this->isEmpty()){
         this->primero = this->ultimo = nuevo;
     }else{
@@ -100,6 +105,18 @@ NodoBarco* LinkedListBarco::searchBoat(int id){
         aux = aux->sig;
     }
     return NULL;
+}
+
+bool LinkedListBarco::searchBoat2(int id){
+    if(this->isEmpty()) return false;
+    
+    NodoBarco* aux = new NodoBarco();
+    aux = this->primero;
+    while(aux != nullptr){
+        if(aux->getId() == id) return true;
+        aux = aux->sig;
+    }
+    return false;
 }
 
 void LinkedListBarco::sort(){
