@@ -67,9 +67,13 @@ public:
     void setPassword(string password){
         this->password = password;
     }
-
+    
     int getMoney(){
         return this->money;
+    }
+    
+    void setAge(int age){
+        this->age = age;
     }
 
     int getAge(){

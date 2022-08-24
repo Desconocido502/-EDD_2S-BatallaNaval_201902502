@@ -91,7 +91,7 @@ void ListaPilaMov::drawListStacks(string userName){
     NodoLP* temp = this->primero;
     int cont = 0;
     string cadena = "", aux = "", apuntadores = "";
-    cadena += "digraph G { \nlabel=\"" + userName + "\";";
+    cadena += "digraph G { \nlabel=\"\n" + userName + "\";";
 
     while (temp != NULL){
         

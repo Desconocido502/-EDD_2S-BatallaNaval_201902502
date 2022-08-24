@@ -97,7 +97,7 @@ void cargaMasiva(){
     file >> data;
     file.close();
 
-    cout<< "Usuarios:" << endl;
+    //cout<< "Usuarios:" << endl;
 
     for(auto usuario: data.at("usuarios")){
         if(!DoublyLinkedListU->searchUserForNick(string(usuario.at("nick")))){ //*Se registra al usuario unicamente si no existe alguien mas con ese nick
@@ -109,7 +109,7 @@ void cargaMasiva(){
     
     //DoublyLinkedListU->drawList();
 
-    cout<< "articulos:" << endl;
+    //cout<< "articulos:" << endl;
     
     for(auto articulo: data.at("articulos")){
         articulos->insert(stoi(articulo.at("id").get<string>()), articulo.at("categoria"), stoi(articulo.at("precio").get<string>()), articulo.at("nombre"), articulo.at("src"));
@@ -117,7 +117,7 @@ void cargaMasiva(){
     //articulos->printL();
     //articulos->drawList();
 
-    cout<< "Tutorial:" << endl;
+    //cout<< "Tutorial:" << endl;
     cola_tutorial->enqueue(stoi(data.at("tutorial").at("ancho").get<string>()), stoi(data.at("tutorial").at("alto").get<string>()));
 
     for(auto movimiento: data.at("tutorial").at("movimientos")){
@@ -137,7 +137,7 @@ void registrarUsuario(){
     cout<<"Ingrese su nombre de jugador: ";
     cin.getline(nick_l, 250, '\n');
     if(DoublyLinkedListU->searchUserForNick(string(nick_l))){
-        cout<<"El nombre de usuario ya existe, ingrese otro nick";
+        cout<<"El nombre de usuario ya existe, ingrese otro nick\n";
         return;
     }
     cin.ignore();
@@ -223,6 +223,7 @@ void subMenuUser(NodoUsuario* nodoUser){
 void editarInfoUser(NodoUsuario* nodoUser){ //!falta modificar la edad
     char nick_l[250];
     char password_l[250];
+    int newAge = 0;
     cin.ignore();
     cout<<"Ingrese su nuevo nick: ";
     cin.getline(nick_l, 250, '\n');
@@ -230,15 +231,34 @@ void editarInfoUser(NodoUsuario* nodoUser){ //!falta modificar la edad
     cin.ignore();
     cout<<"Ingrese su nuevo password: ";
     cin.getline(password_l, 250, '\n');
+    cin.ignore();
+    cout<<"Ingrese su nueva edad: ";
+    cin>>newAge;
     nodoUser->user->setPassword(SHA256::cifrar(std::string(password_l)));
+    nodoUser->user->setAge(newAge);
     //nodoUser->mostrarDatos();
     //DoublyLinkedListU->displayListSE();
 }
 
 int eliminarUser(string nick){
+    char borrar = 'n';
+    cin.ignore();
+    cout<<"¿Esta seguro de borrar su cuenta? [y/n]: ";
+    cin>>borrar;
+
+    if(borrar == 'y'){
+        cout<<"Su cuenta fue eliminada...\n"<<endl;
+    }else if(borrar == 'n'){
+        cout<<"No se borro su cuenta..."<<endl;
+        return 6;
+    }else{
+        cout<<"Error al ingresar la opcion, cuenta no eliminada...\n"<<endl;
+        return 6;
+    }
+
     bool borrado = DoublyLinkedListU->deleteNode(nick);
     if(borrado){
-        cout<<"El usuario fue eliminado con exito!!!"<<endl;
+        cout<<"Su usuario fue eliminado con exito!!!"<<endl;
     }else{
         cout<<"El usuario No fue eliminado!!!"<<endl;
     }
@@ -287,7 +307,7 @@ void realizarMovimientos(NodoUsuario* nodoUser){
     cout<<"\tTokens: + 1"<<endl;
     cout<<"Movimientos Realizador: "<<endl;
     cout<<pila->displayStack()<<endl;
-    cout<<nodoUser->user->getNick()<<endl;
+    //cout<<nodoUser->user->getNick()<<endl;
     nodoUser->user->listaPilaMovimientos->insertarAlFinal(replace(nombrePila," ", "_"), pila);
     nodoUser->user->setMoney(nodoUser->user->getMoney() + 1);
     //nodoUser->user->listaPilaMovimientos->desplegarLista();

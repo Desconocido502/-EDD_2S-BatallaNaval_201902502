@@ -131,8 +131,11 @@ void LinkedListCategoria::printLTienda(char tipoOrden){
         aux = aux->sig;
     }
     //*Falta ordenarlo ascendente o descendente por el precio
-    if (tipoOrden == 's') auxBarcos->sort();
-    else auxBarcos->sortReverse();
+    if (tipoOrden == 's') {
+        auxBarcos->sort();
+    }else {
+        auxBarcos->sortReverse();
+    }
     auxBarcos->displayList();
 }
 void LinkedListCategoria::drawList(){

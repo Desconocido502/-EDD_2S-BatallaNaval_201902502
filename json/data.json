@@ -5,14 +5,23 @@
     { "nick": "Pikachu", "password": "beliz5a4", "monedas": "40", "edad": "19" },
     { "nick": "Naruto", "password": "jfagaga16a", "monedas": "150", "edad": "32" },
     { "nick": "Goku", "password": "agga516r", "monedas": "700", "edad": "170" },
-    { "nick": "Homero", "password": "agfa84aafg8", "monedas": "10", "edad": "16" }
+    { "nick": "Homero", "password": "agfa84aafg8", "monedas": "250", "edad": "25" },
+    { "nick": "Rubius", "password": "holaMundo", "monedas": "110", "edad": "41" },
+    { "nick": "KingKong", "password": "newMenu", "monedas": "19", "edad": "36" },
+    { "nick": "Kratos", "password": "Digitalize", "monedas": "400", "edad": "45" },
+    { "nick": "Homero", "password": "agfa84aafg8", "monedas": "145", "edad": "20" }
   ],
   "articulos": [
     {"id": "47", "categoria": "epico", "precio": "75", "nombre": "La Perla Negra", "src":"gagafrafgafba"},
     {"id": "48", "categoria": "legendario", "precio": "100", "nombre": "El Holandes Errante", "src":"afofnaokndo"},
     {"id": "47", "categoria": "raro", "precio": "50", "nombre": "La grajilla", "src":"fbsbaaklljka"},
     {"id": "12", "categoria": "atipico", "precio": "60", "nombre": "La delicada dama", "src":"mlflkanklalkgba"},
-    {"id": "14", "categoria": "tipico", "precio": "35", "nombre": "La morsa", "src":"mvklfnkoanfkonva"}
+    {"id": "14", "categoria": "tipico", "precio": "50", "nombre": "El viajero del alba", "src":"mvklfnkoanfkonva"},
+    {"id": "24", "categoria": "atipico", "precio": "350", "nombre": "Argo", "src":"vfbabafb"},
+    {"id": "35", "categoria": "raro", "precio": "150", "nombre": "El Pequod", "src":"bfbsfbzfbz"},
+    {"id": "16", "categoria": "legendario", "precio": "750", "nombre": "El Nautilus", "src":"bafabab"},
+    {"id": "50", "categoria": "epico", "precio": "500", "nombre": "Royale Fortune", "src":"bafbgnsrgfaf"},
+    {"id": "26", "categoria": "legendario", "precio": "550", "nombre": "El titanic", "src":"advabgsgttgs"}
   ],
   "tutorial": {
     "ancho":"7",

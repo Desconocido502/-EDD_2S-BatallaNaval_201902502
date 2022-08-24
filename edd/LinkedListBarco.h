@@ -132,6 +132,11 @@ void LinkedListBarco::sort(){
                     temp->setArticle(actual->getArticle());
                     actual->setArticle(aux->getArticle());
                     aux->setArticle(temp->getArticle());
+
+                    //*Cambio de categorias
+                    temp->categoria = actual->categoria;
+                    actual->categoria = aux->categoria;
+                    aux->categoria = temp->categoria;
                 }
                 aux = aux->sig;
             }
@@ -154,6 +159,11 @@ void LinkedListBarco::sortReverse(){
                     temp->setArticle(actual->getArticle());
                     actual->setArticle(aux->getArticle());
                     aux->setArticle(temp->getArticle());
+
+                    //*Cambio de categorias
+                    temp->categoria = actual->categoria;
+                    actual->categoria = aux->categoria;
+                    aux->categoria = temp->categoria;
                 }
                 aux = aux->sig;
             }

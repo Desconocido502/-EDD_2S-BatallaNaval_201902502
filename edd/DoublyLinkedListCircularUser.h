@@ -80,7 +80,6 @@ void DoublyLinkedListCircularUser::insertAtEnd(string nick, string password, int
     NodoUsuario* nuevo = new NodoUsuario(nick, password, money, age);
     NodoUsuario* aux = new NodoUsuario();
 
-
     if(this->isEmpty()){
         this->primero = this->ultimo = nuevo;
     }else{
@@ -90,7 +89,7 @@ void DoublyLinkedListCircularUser::insertAtEnd(string nick, string password, int
     }
     this->__joinNodes();
     this->tam += 1;
-    //delete aux;
+    aux = NULL;
 }
 
 void DoublyLinkedListCircularUser::deleteAtStart(){
@@ -138,7 +137,7 @@ void DoublyLinkedListCircularUser::displayListSE(){
         }
     }
     ut.print(cout);
-    //delete aux;
+    aux = NULL;
     cout<<"\n";
 }
 
@@ -207,6 +206,9 @@ bool DoublyLinkedListCircularUser::deleteNode(string nick){
             if(actual->user->getNick() == nick){
                 check = true;
                 (actual->ant)->sig = actual->sig;
+                if(actual == this->ultimo || actual == this->primero){
+                    this->__joinNodes();
+                }
             }
             actual = actual->sig;
         } while (actual != this->primero && check == false); //*mientras el nodo actual sea diferente de primero, entre al ciclo.

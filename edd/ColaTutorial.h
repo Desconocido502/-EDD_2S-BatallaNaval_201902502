@@ -115,6 +115,7 @@ void ColaTutorial::drawQueue(){
 
 
 ColaTutorial::~ColaTutorial(){
+    
 }
 
 
