@@ -19,5 +19,5 @@ int main(int argc, char const *argv[]){
 *validar que los usuarios no sean repetidos 
 *crear la estructura de lista de pilas -->lista
 *Generar un nombre diferente para que cada lista de pilas tenga diferente nombre
-!Problema a la hora de borrar un nodo al final, no puede encontrar y se queda en bucle
+*Problema arreglado a la hora de borrar un nodo al final
 **/

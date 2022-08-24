@@ -26,6 +26,7 @@ public:
     void deleteAtStart();
     void deleteAtEnd();
     bool deleteNode(string);
+    bool deleteNode2(string);
     void displayListSE();
     void displayListES();
     NodoUsuario* searchUser(string, string);
@@ -216,6 +217,32 @@ bool DoublyLinkedListCircularUser::deleteNode(string nick){
         return true;
     }else{
         return false;
+    }
+}
+
+
+bool DoublyLinkedListCircularUser::deleteNode2(string nick){
+    //*Nuevo codigo para eliminar un nodo de la lista circular doblemente enlazada
+    if(this->isEmpty()) {
+        return false;
+    }else if(this->primero->user->getNick().compare(nick) == 0){ //Si son iguales
+        this->deleteAtStart();
+        return true;
+    }else if(this->ultimo->user->getNick().compare(nick) == 0){
+        this->deleteAtEnd();
+        return true;
+    }else{ //* Se realiza un recorrido hasta encontrar el nodo a eliminar
+        NodoUsuario* aux = this->searchUser2(nick);
+        if(aux != NULL){
+            NodoUsuario* auxSiguiente = aux->sig;
+            NodoUsuario* auxAnterior = aux->ant;
+            aux = NULL;
+            auxSiguiente->ant = auxAnterior;
+            auxAnterior->sig = auxSiguiente;
+            return true;
+        }else{
+            return false;
+        } 
     }
 }
 

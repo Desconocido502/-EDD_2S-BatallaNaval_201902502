@@ -256,14 +256,14 @@ int eliminarUser(string nick){
         return 6;
     }
 
-    bool borrado = DoublyLinkedListU->deleteNode(nick);
+    bool borrado = DoublyLinkedListU->deleteNode2(nick);
     if(borrado){
         cout<<"Su usuario fue eliminado con exito!!!"<<endl;
     }else{
         cout<<"El usuario No fue eliminado!!!"<<endl;
     }
     return 6;
-    //DoublyLinkedListU->displayListSE();
+    DoublyLinkedListU->displayListSE();
 }
 
 void mostrarTutorial(){

@@ -9,7 +9,14 @@
     { "nick": "Rubius", "password": "holaMundo", "monedas": "110", "edad": "41" },
     { "nick": "KingKong", "password": "newMenu", "monedas": "19", "edad": "36" },
     { "nick": "Kratos", "password": "Digitalize", "monedas": "400", "edad": "45" },
-    { "nick": "Homero", "password": "agfa84aafg8", "monedas": "145", "edad": "20" }
+    { "nick": "Homero", "password": "agfa84aafg8", "monedas": "145", "edad": "20" },
+    { "nick": "Mario Bros", "password": "NewAge", "monedas": "450", "edad": "22" },
+    { "nick": "Meteoro", "password": "holiday", "monedas": "147", "edad": "24" },
+    { "nick": "Homer el Homer", "password": "pokemon", "monedas": "180", "edad": "48" },
+    { "nick": "Candy", "password": "salidaJurassic", "monedas": "240", "edad": "32" },
+    { "nick": "Ash", "password": "entertaiment", "monedas": "205", "edad": "25" },
+    { "nick": "Kitty", "password": "charizar45", "monedas": "190", "edad": "24" },
+    { "nick": "Planton", "password": "salida45", "monedas": "350", "edad": "14" }
   ],
   "articulos": [
     {"id": "47", "categoria": "epico", "precio": "75", "nombre": "La Perla Negra", "src":"gagafrafgafba"},
@@ -20,8 +27,13 @@
     {"id": "24", "categoria": "atipico", "precio": "350", "nombre": "Argo", "src":"vfbabafb"},
     {"id": "35", "categoria": "raro", "precio": "150", "nombre": "El Pequod", "src":"bfbsfbzfbz"},
     {"id": "16", "categoria": "legendario", "precio": "750", "nombre": "El Nautilus", "src":"bafabab"},
-    {"id": "50", "categoria": "epico", "precio": "500", "nombre": "Royale Fortune", "src":"bafbgnsrgfaf"},
-    {"id": "26", "categoria": "legendario", "precio": "550", "nombre": "El titanic", "src":"advabgsgttgs"}
+    {"id": "50", "categoria": "epico", "precio": "525", "nombre": "Royale Fortune", "src":"bafbgnsrgfaf"},
+    {"id": "30", "categoria": "legendario", "precio": "550", "nombre": "El titanic", "src":"advabgsgttgs"},
+    {"id": "27", "categoria": "tipico", "precio": "530", "nombre": "Moby Dick", "src":"gsrhsthsthst"},
+    {"id": "55", "categoria": "raro", "precio": "570", "nombre": "Baratle", "src":"fadfarhthjty"},
+    {"id": "26", "categoria": "legendario", "precio": "650", "nombre": "Going Merry", "src":"yuyueyewrq"},
+    {"id": "59", "categoria": "raro", "precio": "750", "nombre": "Red force", "src":"yeueththytjejy"},
+    {"id": "74", "categoria": "legendario", "precio": "230", "nombre": "Striker", "src":"ahtjyukiofjfuf"}
   ],
   "tutorial": {
     "ancho":"7",
@@ -31,7 +43,16 @@
       {"x":"1","y":"5"},
       {"x":"4","y":"3"},
       {"x":"2","y":"1"},
-      {"x":"5","y":"1"}
+      {"x":"5","y":"3"},
+      {"x":"3","y":"2"},
+      {"x":"2","y":"5"},
+      {"x":"2","y":"3"},
+      {"x":"1","y":"6"},
+      {"x":"5","y":"7"},
+      {"x":"3","y":"5"},
+      {"x":"4","y":"3"},
+      {"x":"6","y":"5"},
+      {"x":"2","y":"3"}
     ]
   }
 }
