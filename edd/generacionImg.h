@@ -23,7 +23,8 @@ void generacionImg(string nombreEstructura, string cadena){
         }
         file << cadena;
         file.close();
-        string command = "dot -Tpng " + nombreEstructura + ".dot -o " + nombreEstructura + ".png";
+        //*dot -Tsvg ListUsers.dot -o ListUsers.svg
+        string command = "dot -Tsvg " + nombreEstructura + ".dot -o " + nombreEstructura + ".svg";
         system(command.c_str());
     }catch(const std::exception& e){
         cout<<"No se pudo crear la imagen :("<<endl;
@@ -34,7 +35,7 @@ void moveFile(string nombreEstructura){
     string command1 = "cd .. && move Proyecto_F1\\" + nombreEstructura + ".dot " + "Proyecto_F1/Extras";
     system(command1.c_str());
     cout<<command1<<endl;
-    string command2 = "cd .. && move Proyecto_F1\\" + nombreEstructura + ".png " + "Proyecto_F1/Extras";
+    string command2 = "cd .. && move Proyecto_F1\\" + nombreEstructura + ".svg " + "Proyecto_F1/Extras";
     cout<<command2<<endl;
     system(command2.c_str());
     //*move Proyecto_F1\ColaTutorial.png Proyecto_F1/Extras
@@ -42,7 +43,7 @@ void moveFile(string nombreEstructura){
 
 void openImg(string nombreEstructura){
     //*cd Extras && ListaPilas.png
-    string command = "cd Extras && " + nombreEstructura + ".png";
+    string command = "cd Extras && " + nombreEstructura + ".svg";
     //string command = nombreEstructura + ".png";
     system(command.c_str());
 }

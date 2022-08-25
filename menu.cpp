@@ -100,6 +100,7 @@ void cargaMasiva(){
     //cout<< "Usuarios:" << endl;
 
     for(auto usuario: data.at("usuarios")){
+        //cout<<usuario.at("nick")<<", "<<usuario.at("password")<<", "<<stoi(usuario.at("monedas").get<string>())<<", "<<stoi(usuario.at("edad").get<string>())<<endl;
         if(!DoublyLinkedListU->searchUserForNick(string(usuario.at("nick")))){ //*Se registra al usuario unicamente si no existe alguien mas con ese nick
             DoublyLinkedListU->insertAtEnd(usuario.at("nick"), SHA256::cifrar(usuario.at("password")), stoi(usuario.at("monedas").get<string>()) , stoi(usuario.at("edad").get<string>()));
         }
@@ -112,13 +113,14 @@ void cargaMasiva(){
     //cout<< "articulos:" << endl;
     
     for(auto articulo: data.at("articulos")){
-        articulos->insert(stoi(articulo.at("id").get<string>()), articulo.at("categoria"), stoi(articulo.at("precio").get<string>()), articulo.at("nombre"), articulo.at("src"));
+        //cout<<articulo.at("id")<<", "<<articulo.at("categoria")<<", "<<articulo.at("precio")<<","<<articulo.at("nombre")<<","<<articulo.at("src")<<endl;
+        articulos->insert(articulo.at("id"), articulo.at("categoria"), stoi(articulo.at("precio").get<string>()), articulo.at("nombre"), articulo.at("src"));
     }
     //articulos->printL();
     //articulos->drawList();
 
     //cout<< "Tutorial:" << endl;
-    cola_tutorial->enqueue(stoi(data.at("tutorial").at("ancho").get<string>()), stoi(data.at("tutorial").at("alto").get<string>()));
+    // cola_tutorial->enqueue(stoi(data.at("tutorial").at("ancho").get<string>()), stoi(data.at("tutorial").at("alto").get<string>()));
 
     for(auto movimiento: data.at("tutorial").at("movimientos")){
         cola_tutorial->enqueue(stoi(movimiento.at("x").get<string>()), stoi(movimiento.at("y").get<string>())); //Tremenda conversion //error 302 revisar docu  https://json.nlohmann.me/home/exceptions/#jsonexceptiontype_error301
@@ -315,7 +317,7 @@ void realizarMovimientos(NodoUsuario* nodoUser){
 }
 
 void comprarArticulos(NodoUsuario* nodoUser){
-    int opcionCompra = 0;
+    char opcionCompra[350];
     char seguirComprando = 'y';
     //cout<<"Se veran los articulos de la tienda"<<endl;
     if(articulos == NULL){
@@ -328,7 +330,7 @@ void comprarArticulos(NodoUsuario* nodoUser){
         articulos->printLTienda('s'); //*por defecto se ordena en orden ascendente
         cout<<"Elija la opcion a comprar: ";
         cin.ignore();
-        cin >> opcionCompra;
+        cin.getline(opcionCompra, 350, '\n');
         //articulos->buyArticle(opcionCompra);  //*Se tiene que preguntar al aux que hacer aqui
         cout<<"\n - "<<opcionCompra<<endl;
         cout<<"Desea seguir comprando mas articulos? [y/n]: ";

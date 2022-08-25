@@ -18,6 +18,7 @@ public:
     int getCoordenadaX();
     void setCoordenadaY(int);
     int getCoordenadaY();
+    
     NodoP* getSiguiente(){
         return this->sig;
     }

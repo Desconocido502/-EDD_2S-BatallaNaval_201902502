@@ -7,12 +7,12 @@ using namespace std;
 
 class ArticleB{
 private:
-    int id;
+    string id;
     int precio;
     string nombre;
     string src;
 public:
-    ArticleB(int id, int precio, string nombre, string src){
+    ArticleB(string id, int precio, string nombre, string src){
         this->id = id;
         this->precio = precio;
         this->nombre = nombre;
@@ -20,7 +20,7 @@ public:
     }
 
     ArticleB(){ //*Constructor vacio
-        this->id = 0;
+        this->id = "";
         this->precio = 0;
         this->nombre = "";
         this->src = "";
@@ -34,11 +34,11 @@ public:
         cout<<"Id: "<<this->id<<", precio: "<<this->precio<<", nombre: "<<this->nombre<<", src: "<<this->src<<endl;
     }
 
-    void setId(int id){
+    void setId(string id){
         this->id = id;
     }
 
-    int getId(){
+    string getId(){
         return this->id;
     }
 

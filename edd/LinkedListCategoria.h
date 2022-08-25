@@ -19,10 +19,10 @@ private:
 public:
     bool isEmpty();
     int length();
-    void insert(int, string, int, string, string);
+    void insert(string, string, int, string, string);
     NodoCategoria* get(string);
     bool search(string);
-    NodoBarco* buyArticle(int);
+    NodoBarco* buyArticle(string);
     void printL();
     void printLTienda(char);
     void drawList();
@@ -58,7 +58,7 @@ bool LinkedListCategoria::search(string categoria){
     return false;
 }
 
-NodoBarco* LinkedListCategoria::buyArticle(int id){
+NodoBarco* LinkedListCategoria::buyArticle(string id){
     if(this->isEmpty()) return NULL;
     NodoCategoria* aux = this->primero;
     NodoBarco* encontrado = NULL;
@@ -84,7 +84,7 @@ NodoCategoria* LinkedListCategoria::get(string categoria){
     return NULL;
 }
 
-void LinkedListCategoria::insert(int id, string categoria, int precio, string nombre, string src){
+void LinkedListCategoria::insert(string id, string categoria, int precio, string nombre, string src){
     if(this->isEmpty()){
         this->primero = this->ultimo = new NodoCategoria(categoria);
         this->primero->barcos->insertAtEnd(id, precio, nombre, src, categoria);
@@ -150,7 +150,7 @@ void LinkedListCategoria::drawList(){
         horizontal = vertical->barcos->returnHead();
         cont2 = 0;
         while(horizontal != NULL){
-            cadena += "\""+to_string(cont) + "Node" + to_string(horizontal->getId()) + "_" + to_string(cont2) + "\"[shape=box, rankdir=LR, style=filled, label=\"Id:" + to_string(horizontal->getId()) + "\\n, Precio:"+ to_string(horizontal->getPrecio()) + "\\n, Nombre:" + horizontal->getNombre() + "\\n, Src:" + horizontal->getSrc()  + "\", pos=\""+to_string(cont2)+",-"+to_string(cont)+"!\"];\n";
+            cadena += "\""+to_string(cont) + "Node" + horizontal->getId() + "_" + to_string(cont2) + "\"[shape=box, rankdir=LR, style=filled, label=\"Id:" + horizontal->getId() + "\\n, Precio:"+ to_string(horizontal->getPrecio()) + "\\n, Nombre:" + horizontal->getNombre() + "\\n, Src:" + horizontal->getSrc()  + "\", pos=\""+to_string(cont2)+",-"+to_string(cont)+"!\"];\n";
             cont2 += 1;
             horizontal = horizontal->sig;
         }
@@ -178,9 +178,9 @@ void LinkedListCategoria::drawList(){
             cadena += "\""+to_string(0) + vertical->categoria+"\"->"; //+ to_string(cont)+"Node"+to_string(horizontal->getId())+"_"+to_string(cont2) + "\""
             while(horizontal != NULL){
                 if(horizontal == vertical->barcos->returnHead()){
-                    cadena += "\""+to_string(cont)+"Node"+to_string(horizontal->getId())+"_"+to_string(cont2)+ "\"";
+                    cadena += "\""+to_string(cont)+"Node"+horizontal->getId()+"_"+to_string(cont2)+ "\"";
                 }else{
-                    cadena += "->\"" + to_string(cont)+"Node"+to_string(horizontal->getId())+"_"+to_string(cont2)+"\"";
+                    cadena += "->\"" + to_string(cont)+"Node"+horizontal->getId()+"_"+to_string(cont2)+"\"";
                 }
                 cont2 += 1;
                 horizontal = horizontal->sig;

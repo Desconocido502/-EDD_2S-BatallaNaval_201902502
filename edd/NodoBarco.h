@@ -14,7 +14,7 @@ public:
     NodoBarco* sig;
     NodoBarco* ant;
     NodoBarco();
-    NodoBarco(int, int, string, string, string);
+    NodoBarco(string, int, string, string, string);
     void mostrarDatos();
 
     void setArticle(ArticleB* barco){
@@ -25,11 +25,11 @@ public:
         return this->barco;
     }
 
-    void setId(int id){
+    void setId(string id){
         this->barco->setId(id);
     }
 
-    int getId(){
+    string getId(){
         return this->barco->getId();
     }
 
@@ -64,7 +64,7 @@ NodoBarco::NodoBarco(){
     this->ant = NULL;
 }
 
-NodoBarco::NodoBarco(int id, int precio, string nombre, string src, string categoria){
+NodoBarco::NodoBarco(string id, int precio, string nombre, string src, string categoria){
     this->categoria = categoria;
     this->barco = new ArticleB(id, precio, nombre, src);
     this->sig = NULL;

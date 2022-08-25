@@ -15,10 +15,10 @@ public:
     bool isEmpty();
     int length();
     NodoBarco* returnHead();
-    void insertAtStart(int, int, string, string, string);
-    void insertAtEnd(int, int, string, string, string);
-    NodoBarco* searchBoat(int);
-    bool searchBoat2(int);
+    void insertAtStart(string, int, string, string, string);
+    void insertAtEnd(string, int, string, string, string);
+    NodoBarco* searchBoat(string);
+    bool searchBoat2(string);
     void displayList();
     bool updateBoat();
     void sort();
@@ -45,7 +45,7 @@ NodoBarco* LinkedListBarco::returnHead(){
     return this->primero;
 }
 
-void LinkedListBarco::insertAtStart(int id,  int precio, string nombre, string src, string categoria){
+void LinkedListBarco::insertAtStart(string id,  int precio, string nombre, string src, string categoria){
     NodoBarco* nuevo = new NodoBarco(id, precio, nombre, src, categoria);
     NodoBarco* aux = new NodoBarco();
 
@@ -60,7 +60,7 @@ void LinkedListBarco::insertAtStart(int id,  int precio, string nombre, string s
     this->tam += 1;
 }
 
-void LinkedListBarco::insertAtEnd(int id,  int precio, string nombre, string src, string categoria){
+void LinkedListBarco::insertAtEnd(string id,  int precio, string nombre, string src, string categoria){
     NodoBarco* nuevo = new NodoBarco(id, precio, nombre, src, categoria);
     NodoBarco* aux = new NodoBarco();
 
@@ -83,7 +83,7 @@ void LinkedListBarco::displayList(){
         cout<<"La lista se encuentra vacia"<<endl;
         return;
     }
-    VariadicTable<int, std::string, std::string, int > ut({"ID", "Nombre", "Categoria", "Precio"});
+    VariadicTable<std::string, std::string, std::string, int > ut({"ID", "Nombre", "Categoria", "Precio"});
     NodoBarco* aux = new NodoBarco();
     aux = this->primero;
     while(aux != nullptr){
@@ -95,19 +95,19 @@ void LinkedListBarco::displayList(){
     cout<<"\n"<<endl;
 }
 
-NodoBarco* LinkedListBarco::searchBoat(int id){
+NodoBarco* LinkedListBarco::searchBoat(string id){
     if(this->isEmpty()) return NULL;
     
     NodoBarco* aux = new NodoBarco();
     aux = this->primero;
     while(aux != nullptr){
-        if(aux->getId() == id) return aux;
+        if(aux->getId().compare(id) == 0) return aux;
         aux = aux->sig;
     }
     return NULL;
 }
 
-bool LinkedListBarco::searchBoat2(int id){
+bool LinkedListBarco::searchBoat2(string id){
     if(this->isEmpty()) return false;
     
     NodoBarco* aux = new NodoBarco();
