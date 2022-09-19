@@ -2,13 +2,14 @@
 #include <cstdlib>
 
 //#include "menu.cpp"
-
+#include "Fase2/helloWorld.cpp"
 
 using namespace std;
 
 int main(int argc, char const *argv[]){
     cout<<"Inicio del proyecto"<<endl;
     //menu();
+    hello();
     return 0;
 }
 
