@@ -84,7 +84,7 @@ public:
 
     map<string, string> to_map(){
         map<string, string> datosUser = {{"nick", this->nick}, {"monedas", to_string(this->money)}, {"edad", to_string(this->age)}};
-        
+        return datosUser;
     }
 };
 

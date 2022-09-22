@@ -48,7 +48,7 @@ vector<crow::json::wvalue> DoublyLinkedListCircularUser::to_vector(){
     if(isEmpty()){
         cout<<"NO hay elementos enla lista"<<endl;
     }else{
-        NodoUsuario* aux = this->primero;
+        NodoUsuario* aux = primero;
         while(aux != NULL){
             crow::json::wvalue x;
             x["nick"] = aux->getUsuario()->getNick();
@@ -56,6 +56,10 @@ vector<crow::json::wvalue> DoublyLinkedListCircularUser::to_vector(){
             x["edad"] = aux->getUsuario()->getAge();
             datos.push_back(x);
             aux = aux->sig;
+
+            if(aux == primero){
+               break;
+            }
         }
     }
     return datos;
@@ -276,6 +280,7 @@ NodoUsuario* DoublyLinkedListCircularUser::searchUser(string nick, string passwo
         actual = actual->sig;
         if(actual == this->primero) return NULL; //*Retorna nulo en caso de no encontrar al usuario
     }
+    return NULL;
 }
 
 NodoUsuario* DoublyLinkedListCircularUser::searchUser2(string nick){
@@ -286,6 +291,7 @@ NodoUsuario* DoublyLinkedListCircularUser::searchUser2(string nick){
         actual = actual->sig;
         if(actual == this->primero) return NULL; //*Retorna nulo en caso de no encontrar al usuario
     }
+    return NULL;
 }
 
 bool DoublyLinkedListCircularUser::searchUserForNick(string nick){
@@ -296,6 +302,7 @@ bool DoublyLinkedListCircularUser::searchUserForNick(string nick){
         actual = actual->sig;
         if(actual == this->primero) return false; //*Retorna false en caso de no encontrar al usuario
     }
+    return false;
 }
 
 

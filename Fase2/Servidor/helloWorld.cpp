@@ -8,3 +8,9 @@ void hello();
 void hello(){
     cout<<"Hola mundo!!!"<<endl;
 }
+
+int main(){
+    hello();
+
+    return 0;
+}
