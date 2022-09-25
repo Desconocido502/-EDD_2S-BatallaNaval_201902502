@@ -52,6 +52,7 @@ vector<crow::json::wvalue> DoublyLinkedListCircularUser::to_vector(){
         while(aux != NULL){
             crow::json::wvalue x;
             x["nick"] = aux->getUsuario()->getNick();
+            x["password"] = aux->getUsuario()->getPassword();
             x["monedas"] = aux->getUsuario()->getMoney();
             x["edad"] = aux->getUsuario()->getAge();
             datos.push_back(x);

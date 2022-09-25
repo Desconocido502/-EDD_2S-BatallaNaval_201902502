@@ -10,6 +10,7 @@
 #include "lib/json.hpp"
 
 #include "EDD/User.h"
+#include "EDD/NodoUsuario.h"
 #include "EDD/DoublyLinkedListCircularUser.h"
 #include "lib/sha256.h"
 #include "lib/replace.h"
@@ -18,63 +19,150 @@
 using namespace std;
 using json = nlohmann::json;
 
-
-
-void to_json(json &JSON, User &user)
+json to_json(User &user)
 {
+    json JSON;
     JSON = {
-            {"nickname", user.getNick()},
-            {"password", user.getPassword()},
-            {"monedas", user.getMoney()},
-            {"edad", user.getAge()}
-        };
+        {"nickname", user.getNick()},
+        {"password", user.getPassword()},
+        {"monedas", user.getMoney()},
+        {"edad", user.getAge()}};
+    return JSON;
 }
 
-void from_json(json &JSON, User &user){
+void from_json(json &JSON, User &user)
+{
     user.setNick(JSON.at("nick").get<string>());
     user.setPassword(JSON.at("password").get<string>());
     user.setMoney(JSON.at("monedas").get<int>());
     user.setAge(JSON.at("edad").get<int>());
 }
 
-void cargarDatos(DoublyLinkedListCircularUser &lts){
+void cargarDatos(DoublyLinkedListCircularUser &lts)
+{
     ifstream json_read("json/usuarios.json", ios::in);
     json dict_json = json::parse(json_read);
     json usuarios = dict_json.at("usuarios");
 
-    for(auto usuario: usuarios){
-        if(!lts.searchUserForNick(string(usuario.at("nick")))){
-            lts.insertAtEnd(usuario.at("nick"), SHA256::cifrar(usuario.at("nick")), stoi(usuario.at("monedas").get<string>()), stoi(usuario.at("edad").get<string>()));
+    for (auto usuario : usuarios)
+    {
+        if (!lts.searchUserForNick(string(usuario.at("nick"))))
+        {
+            lts.insertAtEnd(usuario.at("nick"), SHA256::cifrar(usuario.at("password")), stoi(usuario.at("monedas").get<string>()), stoi(usuario.at("edad").get<string>()));
         }
     }
     lts.sort();
-    lts.displayListSE();
+    // lts.displayListSE();
 }
+
+
 
 int main(int argc, char const *argv[])
 {
     cout << "Inicio del proyecto fase 2" << endl;
     DoublyLinkedListCircularUser ltsUsers;
-    cargarDatos(ltsUsers);
+    ltsUsers.insertAtEnd("EDD", SHA256::cifrar("edd123"), 50, 25);
+    //cargarDatos(ltsUsers);
 
-    
+
 
     crow::SimpleApp app;
     CROW_ROUTE(app, "/")
     ([]
-     {
-            crow::json::wvalue x({{"status", "OK!"},{"otro", 12}});
-            return x; });
+    {
+        crow::json::wvalue x({{"status", "OK!"},{"otro", 12}});
+        return x; 
+    });
 
 
     CROW_ROUTE(app, "/usuarios")
-	([&ltsUsers]()
-	 { 
+    ([&ltsUsers]()
+     { 
 		std::vector<crow::json::wvalue> temp = ltsUsers.to_vector();
 		crow::json::wvalue final = std::move(temp);
 		return crow::response(std::move(final)); });
 
-    //AQUI ABAJO NO SE TOCA, TODA RUTA SE COLOCA ENCIMA DE ESTE MENSAJE
+    CROW_ROUTE(app, "/login")
+    ([&ltsUsers](const crow::request &req)
+     {
+        auto x = crow::json::load(req.body);
+        if (!x)
+            return crow::response(400);
+		string nick=x["nick"].s();
+        string pass= SHA256::cifrar(x["password"].s());
+        //string pass=x["password"].s();
+
+		//Usuario *usuario=ls.buscar(nick);
+        NodoUsuario* aux = ltsUsers.searchUser2(nick);
+		
+		if(aux != NULL){
+            //Si aux es diferente de null quiere decir que el user si existe
+            if(aux->getUsuario()->getPassword()==pass){
+                //crow::json::wvalue cuerpo({{"nick", usuario.getNick()},{"password", usuario.getPassword()}, {"money", usuario.getMoney()}, {"age", usuario.getAge()}});
+                crow::json::wvalue cuerpo(crow::json::wvalue::list({false, aux->getUsuario()->to_map()}));
+                crow::response send(std::move(cuerpo));
+                return send;
+            }
+
+        }else{
+            //{"error", "usuario no encontrado"}
+            //crow::json::wvalue c({{"error", "usuario no encontrado"}});
+            crow::json::wvalue cuerpo(crow::json::wvalue::list({true, {{"error", "usuario no encontrado"}}}));
+            crow::response send(std::move(cuerpo));
+            send.code=404;
+            return send;
+        }
+        crow::json::wvalue response(crow::json::wvalue::list({true, {{"error", "Contraseña incorrecta"}}}));
+        return crow::response(std::move(response)); });
+
+    CROW_ROUTE(app, "/guardar_usuario")
+        .methods("POST"_method)([&ltsUsers](const crow::request &req)
+        {
+            auto x = crow::json::load(req.body);
+			if (!x) return crow::response(400);
+
+			string nick=x["nick"].s();
+			string pass=x["password"].s();
+			int monedas=x["monedas"].i();
+			int edad=x["edad"].i();
+            if (!ltsUsers.searchUserForNick(nick)){
+                ltsUsers.insertAtEnd(nick,SHA256::cifrar(pass),monedas,edad);
+            }
+			return crow::response(200);
+        });
+
+    CROW_ROUTE(app, "/eliminar_usuario")
+		.methods("DELETE"_method)([&ltsUsers](const crow::request &req)
+		{
+          auto x = crow::json::load(req.body);
+			if (!x)
+				return crow::response(400);
+			string nick=x["nick"].s();
+	
+			bool nodoAELiminar = ltsUsers.deleteNode2(nick);
+            if(nodoAELiminar) return crow::response(200); //Todo nice, se borro el user
+			return crow::response(404);  //Error no se encontro usuario a borrar
+        });
+        
+    CROW_ROUTE(app, "/usuarios/oast")
+    ([&ltsUsers]()
+     { 
+        ltsUsers.sort(); //Se ordena la lista ascendentemente
+		std::vector<crow::json::wvalue> temp = ltsUsers.to_vector();
+		crow::json::wvalue final = std::move(temp);
+		return crow::response(std::move(final)); });
+
+    CROW_ROUTE(app, "/usuarios/odst")
+    ([&ltsUsers]()
+     { 
+        ltsUsers.sortReverse(); //Se ordena la lista descendentemente
+        //ltsUsers.displayListSE();
+		std::vector<crow::json::wvalue> temp = ltsUsers.to_vector();
+		crow::json::wvalue final = std::move(temp);
+		return crow::response(std::move(final)); });
+        
+
+    // AQUI ABAJO NO SE TOCA, TODA RUTA SE COLOCA ENCIMA DE ESTE MENSAJE
 
     app.port(5000).multithreaded().run();
     return 0;

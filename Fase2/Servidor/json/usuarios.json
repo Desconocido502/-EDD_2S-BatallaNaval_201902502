@@ -1,6 +1,12 @@
 {
     "usuarios": [
         {
+            "nick": "EDD",
+            "password": "edd123",
+            "monedas": "0",
+            "edad": "50"
+        },
+        {
             "nick": "sdobble0",
             "password": "RrQk5kx",
             "monedas": "2311",

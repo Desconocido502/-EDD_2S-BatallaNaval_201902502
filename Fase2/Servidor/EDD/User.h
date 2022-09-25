@@ -4,6 +4,7 @@
 
 #include "ListaPilaMov.h"
 #include "PilaMov.h"
+#include "../lib/crow_all.h"
 
 using namespace std;
 
@@ -82,8 +83,8 @@ public:
         return this->age;
     }
 
-    map<string, string> to_map(){
-        map<string, string> datosUser = {{"nick", this->nick}, {"monedas", to_string(this->money)}, {"edad", to_string(this->age)}};
+    crow::json::wvalue to_map(){
+        crow::json::wvalue datosUser = {{"nick", this->nick}, {"monedas", to_string(this->money)}, {"edad", to_string(this->age)}};
         return datosUser;
     }
 };

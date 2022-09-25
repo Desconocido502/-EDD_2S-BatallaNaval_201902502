@@ -1,5 +1,3 @@
-from principal.VInicial import VInicial
+from Login.Login import Login   
 
-if __name__ == "__main__":
-    vinicial = VInicial()
-    vinicial.mainloop()
+Login()
