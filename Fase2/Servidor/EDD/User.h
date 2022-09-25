@@ -51,6 +51,10 @@ public:
         cout<<"Nick: "<<this->nick<<", password: "<<this->password<<", money: "<<this->money<<", age: "<<this->age<<endl;
     }
 
+    string mostrarDatos2(){
+        return "Nick: " + this->nick + ",\\n password: " + this->password + ",\\n monedas: " + to_string(this->money) + ",\\n edad: " + to_string(this->age);
+    }
+
     void setNick(string nick){
         this->nick = nick;
     }

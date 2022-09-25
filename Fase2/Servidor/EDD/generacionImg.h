@@ -24,7 +24,7 @@ void generacionImg(string nombreEstructura, string cadena){
         file << cadena;
         file.close();
         //*dot -Tsvg ListUsers.dot -o ListUsers.svg
-        string command = "dot -Tsvg " + nombreEstructura + ".dot -o " + nombreEstructura + ".svg";
+        string command = "dot -Tpng " + nombreEstructura + ".dot -o " + nombreEstructura + ".png";
         system(command.c_str());
     }catch(const std::exception& e){
         cout<<"No se pudo crear la imagen :("<<endl;
