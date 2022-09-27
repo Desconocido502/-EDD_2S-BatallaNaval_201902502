@@ -18,7 +18,7 @@ public:
     NodoUsuario* ant;
     NodoUsuario();
     NodoUsuario(string, string, int, int);
-    void mostrarDatos();
+    string mostrarDatos();
     User* getUsuario();
 
 };
@@ -36,8 +36,8 @@ NodoUsuario::NodoUsuario(string nick, string password, int money, int age){
     this->ant = NULL;
 }
 
-void NodoUsuario::mostrarDatos(){
-    this->user->mostrarDatos();
+string NodoUsuario::mostrarDatos(){
+    return this->user->mostrarDatos2();
 }
 
 

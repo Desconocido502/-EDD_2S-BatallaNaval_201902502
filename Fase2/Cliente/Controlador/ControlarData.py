@@ -52,3 +52,7 @@ def deleteUser(nick):
     name = {"nick": nick}
     res = requests.delete(f"{base_url}/eliminar_usuario", json=name)
     return res.status_code
+
+def drawTree():
+    res = requests.get(f"{base_url}/usuarios/graficarArbol")
+    return res.status_code

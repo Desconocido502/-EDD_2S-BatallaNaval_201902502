@@ -1,11 +1,23 @@
 digraph g {
  node [shape = record,height=.1];
-"Nodo74e64ff0-7bff-4f0d-a1cf-aca6d8c60e86"[label="<P0>|Nick: Folagor,\n password: alfal475,\n monedas: 700,\n edad: 29|<P1>|Nick: Pikachu,\n password: beliz5a4,\n monedas: 59,\n edad: 18|<P2>"];
-"Nodof4b5af18-a9c5-049b-fe6b-1c08a48f061e"[label="<P0>|Nick: Carlos,\n password: edd123,\n monedas: 550,\n edad: 22|<P1>"];
-"Nodo74e64ff0-7bff-4f0d-a1cf-aca6d8c60e86":P0 -> "Nodof4b5af18-a9c5-049b-fe6b-1c08a48f061e";
-"Nodo6e63e704-10d8-8920-28f6-740bab675841"[label="<P0>|Nick: Goku,\n password: agga516r,\n monedas: 56,\n edad: 20|<P1>|Nick: Homero,\n password: agfa84aafg8,\n monedas: 86,\n edad: 45|<P2>"];
-"Nodo74e64ff0-7bff-4f0d-a1cf-aca6d8c60e86":P1 -> "Nodo6e63e704-10d8-8920-28f6-740bab675841";
-"Nodoc8f3ac39-800a-2845-9c19-afe3f8f9620e"[label="<P0>|Nick: Planton,\n password: cam78dad,\n monedas: 50,\n edad: 20|<P1>"];
-"Nodo74e64ff0-7bff-4f0d-a1cf-aca6d8c60e86":P2 -> "Nodoc8f3ac39-800a-2845-9c19-afe3f8f9620e";
+"Nodo6cd1a20a-4a51-4ab2-ee6f-7a1bccbe72d0"[label="<P0>||<P1>||<P2>"];
+"Nodo69a295f3-29e7-ae68-ea5b-fbbea5ebab03"[label="<P0>|Goku|<P1>"];
+"Nodo5e55c1d7-5822-9fc3-60a0-6c62dac95f26"[label="<P0>|Folagor|<P1>"];
+"Nodo69a295f3-29e7-ae68-ea5b-fbbea5ebab03":P0 -> "Nodo5e55c1d7-5822-9fc3-60a0-6c62dac95f26";
+"Nodob413a74f-2ed4-94fc-b7cd-ce08da225c85"[label="<P0>|KingKong|<P1>|Naruto|<P2>"];
+"Nodo69a295f3-29e7-ae68-ea5b-fbbea5ebab03":P1 -> "Nodob413a74f-2ed4-94fc-b7cd-ce08da225c85";
+"Nodo6cd1a20a-4a51-4ab2-ee6f-7a1bccbe72d0":P0 -> "Nodo69a295f3-29e7-ae68-ea5b-fbbea5ebab03";
+"Nodo5fc122d7-ed3e-f876-44cb-e6583961a00a"[label="<P0>|Kratos|<P1>"];
+"Nodo5813da12-778a-900f-4e41-cd809f494924"[label="<P0>|Homero|<P1>"];
+"Nodo5fc122d7-ed3e-f876-44cb-e6583961a00a":P0 -> "Nodo5813da12-778a-900f-4e41-cd809f494924";
+"Nodoeb609467-cfe2-52d4-4fdc-18bc28d2b85b"[label="<P0>|Mario Bros|<P1>|Meteoro|<P2>"];
+"Nodo5fc122d7-ed3e-f876-44cb-e6583961a00a":P1 -> "Nodoeb609467-cfe2-52d4-4fdc-18bc28d2b85b";
+"Nodo6cd1a20a-4a51-4ab2-ee6f-7a1bccbe72d0":P1 -> "Nodo5fc122d7-ed3e-f876-44cb-e6583961a00a";
+"Nodo3087c9bf-c02c-e017-c3fa-314a75b270c1"[label="<P0>|Homer el Homer|<P1>"];
+"Nodo5f4ce622-87a7-6548-f810-d8207c54731c"[label="<P0>|Ash|<P1>|Candy|<P2>"];
+"Nodo3087c9bf-c02c-e017-c3fa-314a75b270c1":P0 -> "Nodo5f4ce622-87a7-6548-f810-d8207c54731c";
+"Nodo223c6b89-067c-2228-55f5-cd56028264c2"[label="<P0>|Kitty|<P1>|Rubius|<P2>"];
+"Nodo3087c9bf-c02c-e017-c3fa-314a75b270c1":P1 -> "Nodo223c6b89-067c-2228-55f5-cd56028264c2";
+"Nodo6cd1a20a-4a51-4ab2-ee6f-7a1bccbe72d0":P2 -> "Nodo3087c9bf-c02c-e017-c3fa-314a75b270c1";
 
 }

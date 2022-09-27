@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter import filedialog as fd
 from tkinter.font import BOLD
-from Controlador.ControlarData import cargarUser, deleteUser, getUsers, getUsersOrderedAST, getUsersOrderedDST, deleteUser
+from Controlador.ControlarData import cargarUser, deleteUser, getUsers, getUsersOrderedAST, getUsersOrderedDST, deleteUser, drawTree
 import json
 
 
@@ -42,7 +42,9 @@ class Admin(ttk.Frame):
                 self.add_row(user)
 
     def graphTree(self):
-        pass
+        res = drawTree()
+        if(res == 400):
+             messagebox.showerror(message="NO SE PUDO CREAR LA IMAGEN DEL ARBOL", title="Error!!!")
 
     def add_row(self, row):
         self.treeview.insert(
@@ -54,19 +56,20 @@ class Admin(ttk.Frame):
             item = self.treeview.item(item)
             iid = self.treeview.focus()
             #print("iid = ", iid, "Item = ", item, "Child iid's =", item_child)
-            if(item['text'] == "EDD"):
-                messagebox.showerror(message="NO SE PUEDE ELIMINAR UN ADMIN", title="Error!!!")
+            if (item['text'] == "EDD"):
+                messagebox.showerror(
+                    message="NO SE PUEDE ELIMINAR UN ADMIN", title="Error!!!")
             else:
                 res = deleteUser(item['text'])
-                if(res == 200): #Si el codigo es 200 fue eliminado correctamente el usuario de la edd
-                    select_item = self.treeview.selection()[0] #se obtiene el item seleccionado
-                    self.treeview.delete(select_item) #Pa borrarlo en la tabla
+                if (res == 200):  # Si el codigo es 200 fue eliminado correctamente el usuario de la edd
+                    # se obtiene el item seleccionado
+                    select_item = self.treeview.selection()[0]
+                    # Pa borrarlo en la tabla
+                    self.treeview.delete(select_item)
                 else:
                     text = "No se encontro el usuario a eliminar"
                     messagebox.showerror(message=text, title="Error!!!")
-                
-                
-    
+
     def CleanTreeView(self):
         for i in self.treeview.get_children():
             self.treeview.delete(i)
@@ -84,7 +87,8 @@ class Admin(ttk.Frame):
         framep.pack(side="left", expand=tk.YES, fill=tk.BOTH)
 
         # Creación de la vista de árbol.
-        self.treeview = ttk.Treeview(framep, columns=("password", "money", "age"))
+        self.treeview = ttk.Treeview(
+            framep, columns=("password", "money", "age"))
 
         # Agregamos dos scrollbars
 
@@ -131,7 +135,7 @@ class Admin(ttk.Frame):
         self.cargar_users.pack(fill=tk.BOTH)
 
         self.graph_tree = tk.Button(self.main_window, text="Graficar Arbol", font=(
-            'Times', 15, BOLD), bg='#666a88', bd=0, fg="#fff", pady=30)
+            'Times', 15, BOLD), bg='#666a88', bd=0, fg="#fff", pady=30, command=self.graphTree)
         self.graph_tree.pack(fill=tk.BOTH)
 
         self.deleteUser = tk.Button(self.main_window, text="Eliminar Usuario", font=(

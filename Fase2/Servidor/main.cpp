@@ -12,6 +12,7 @@
 #include "EDD/User.h"
 #include "EDD/NodoUsuario.h"
 #include "EDD/DoublyLinkedListCircularUser.h"
+#include "EDD/BTree.h"
 #include "lib/sha256.h"
 #include "lib/replace.h"
 
@@ -61,7 +62,13 @@ int main(int argc, char const *argv[])
 {
     cout << "Inicio del proyecto fase 2" << endl;
     DoublyLinkedListCircularUser ltsUsers;
-    ltsUsers.insertAtEnd("EDD", SHA256::cifrar("edd123"), 50, 25);
+    /*
+    BTree arbolUsers;
+    arbolUsers.root = nullptr;
+    arbolUsers.MinDeg = 2;
+
+    arbolUsers.insert("EDD", ltsUsers.insertAtEnd("EDD", SHA256::cifrar("edd123"), 50, 25));
+    */
     //cargarDatos(ltsUsers);
 
 
@@ -126,7 +133,7 @@ int main(int argc, char const *argv[])
 			int monedas=x["monedas"].i();
 			int edad=x["edad"].i();
             if (!ltsUsers.searchUserForNick(nick)){
-                ltsUsers.insertAtEnd(nick,SHA256::cifrar(pass),monedas,edad);
+                //arbolUsers.insert(nick, ltsUsers.insertAtEnd(nick,SHA256::cifrar(pass),monedas,edad));
             }
 			return crow::response(200);
         });
@@ -139,8 +146,11 @@ int main(int argc, char const *argv[])
 				return crow::response(400);
 			string nick=x["nick"].s();
 	
-			bool nodoAELiminar = ltsUsers.deleteNode2(nick);
-            if(nodoAELiminar) return crow::response(200); //Todo nice, se borro el user
+            bool nodoAELiminar = ltsUsers.deleteNode2(nick);
+            if(nodoAELiminar) {
+                //arbolUsers.remove(nick);
+                return crow::response(200);
+            } //Todo nice, se borro el user
 			return crow::response(404);  //Error no se encontro usuario a borrar
         });
         
@@ -160,6 +170,22 @@ int main(int argc, char const *argv[])
 		std::vector<crow::json::wvalue> temp = ltsUsers.to_vector();
 		crow::json::wvalue final = std::move(temp);
 		return crow::response(std::move(final)); });
+
+    //pendiente
+    /*
+    CROW_ROUTE(app, "/usuarios/graficarArbol")
+    ([&arbolUsers]()
+    { 
+        //arbolUsers.traverse();
+        arbolUsers.DrawBTree();
+		string drawSucces = "0"; 
+        //cout<<arbolUsers.DrawBTree()<<endl;
+        if(stoi(drawSucces) == 0){
+            return crow::response(200);
+        }
+        return crow::response(400);
+    });
+    */
         
 
     // AQUI ABAJO NO SE TOCA, TODA RUTA SE COLOCA ENCIMA DE ESTE MENSAJE

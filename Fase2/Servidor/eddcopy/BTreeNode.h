@@ -73,7 +73,9 @@ public:
     // Find the first location index equal to or greater than key
     int findKey(Contenedor key){
         int idx = 0;
-         while (idx < num && keys[idx].getIdUnico() < key.getIdUnico())
+        //keys[idx].getIdUnico() < key.getIdUnico() mala
+        //((keys[idx].getIdUnico().compare(key.getIdUnico())) < 0) buena
+        while (idx < num && ((keys[idx].getIdUnico().compare(key.getIdUnico())) < 0))
         {
             ++idx;
         }
@@ -266,12 +268,14 @@ public:
     }
 
     void insertNotFull(Contenedor key){
-        int i = num -1;
+        int i = num - 1;
         // Initialize i as the rightmost index
         if(isLeaf){
             // When it is a leaf node
             // Find the location where the new key should be inserted
-            while(i >= 0 && keys[i].getIdUnico() > key.getIdUnico()){
+            
+            //keys[i].getIdUnico() > key.getIdUnico() mala
+            while(i >= 0 && ((keys[i].getIdUnico().compare(key.getIdUnico())) > 0)){
                 keys[i + 1] = keys[i];
                 //keys backward shift
                 i--;
@@ -280,14 +284,16 @@ public:
             num = num + 1;
         }else{
             // Find the child node location that should be inserted
-            while (i >= 0 && keys[i].getIdUnico() > key.getIdUnico()){
+            while (i >= 0 && ((keys[i].getIdUnico().compare(key.getIdUnico())) > 0)){
                 i--;
             }
             if(children[i + 1]->num == 2 * MinDeg - 1){
                 // When the child node is full
                 splitChild(i + 1, children[i + 1]);
                 // After splitting, the key in the middle of the child node moves up, and the child node splits into two
-                if(keys[i + 1].getIdUnico() < key.getIdUnico()){
+                //((keys[i + 1].getIdUnico().compare(key.getIdUnico())) < 0) buena
+                //keys[i + 1].getIdUnico() < key.getIdUnico() mala
+                if(((keys[i + 1].getIdUnico().compare(key.getIdUnico())) < 0)){
                     i++;
                 }
             }
@@ -337,7 +343,8 @@ public:
 
     BTreeNode* search(string key){
         int i = 0;
-        while(i <= num && key > keys[i].getIdUnico()){
+        //key > keys[i].getIdUnico()
+        while(i <= num && ((key.compare(keys[i].getIdUnico())) > 0)){
             i++;
         }
         if(keys[i].getIdUnico() == key){
@@ -348,6 +355,21 @@ public:
         }
         return children[i]->search(key);
     }
+
+    BTreeNode* search2(string key){
+        int i = 0;
+        while(i <= num && ((key.compare(keys[i].getIdUnico())) > 0)){
+            i++;
+        }
+        if(keys[i].getIdUnico() == key){
+            return this;
+        }
+        if(isLeaf){
+            return nullptr;
+        }
+        return children[i]->search(key);
+    }
+
 private:
     void Writer()
     {
@@ -374,7 +396,9 @@ public:
     {
         Writer();
         Counter();
+        //cout<<this->walk()<<endl;
         return "digraph g {\n node [shape = record,height=.1];\n" + this->walk() + "\n" + "}";
+        //return "hola";
     }
 private:
     std::string getDotName(){
@@ -386,8 +410,11 @@ private:
 
         cadena += (getDotName());
         cadena += ("[label=\"<P0>");
+        
         for(int i = 0; i < num; i++){
-            cadena += ("|" + this->keys[i].getNodoUsuario()->getUsuario()->mostrarDatos2());
+            //cadena += ("|" + this->keys[i].getNodoUsuario()->getUsuario()->mostrarDatos2());
+            cout<<"|"<<this->keys[i].getNodoUsuario()<<" | "<<this->keys[i].getIdUnico() + " |"<<endl;
+            cadena += ("|" + this->keys[i].getIdUnico());
             cadena += ("|<P" + std::to_string((i + 1)) + ">");
         }
         cadena += ("\"];\n");

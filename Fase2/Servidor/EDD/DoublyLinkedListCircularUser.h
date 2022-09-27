@@ -25,7 +25,7 @@ public:
     bool isEmpty();
     int length();
     void insertAtStart(string, string, int, int);
-    void insertAtEnd(string, string, int, int);
+    NodoUsuario* insertAtEnd(string, string, int, int);
     void deleteAtStart();
     void deleteAtEnd();
     bool deleteNode(string);
@@ -104,8 +104,10 @@ void DoublyLinkedListCircularUser::insertAtStart(string nick, string password, i
     //delete aux;
 }
 
-void DoublyLinkedListCircularUser::insertAtEnd(string nick, string password, int money, int age){
+NodoUsuario* DoublyLinkedListCircularUser::insertAtEnd(string nick, string password, int money, int age){
     NodoUsuario* nuevo = new NodoUsuario(nick, password, money, age);
+    cout<<"\n-------------------"<<endl;
+    cout<<nuevo<<"| "<<nick<<endl;
     NodoUsuario* aux = new NodoUsuario();
 
     if(this->isEmpty()){
@@ -118,6 +120,9 @@ void DoublyLinkedListCircularUser::insertAtEnd(string nick, string password, int
     this->__joinNodes();
     this->tam += 1;
     aux = NULL;
+    cout<<"\n-------------------"<<endl;
+    cout<<nuevo<<endl;
+    return nuevo;
 }
 
 void DoublyLinkedListCircularUser::deleteAtStart(){

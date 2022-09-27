@@ -20,6 +20,11 @@ public:
         this->MinDeg = deg;
     }
 
+    BTree(){
+        this->root = nullptr;
+        this->MinDeg = -1;
+    }
+
     void traverse(){
         if(root != nullptr){
             root->traverse();
@@ -28,10 +33,13 @@ public:
 
     void DrawBTree(){
         //std::cout<<"\n" + root->toDot() << std::endl;
-        generacionImg("ArbolB", root->toDot());
-        string command = "eog ArbolB.png";
-        system(command.c_str());
-
+        string datos = root->toDot();
+        //cout<<datos<<endl;
+        generacionImg("ArbolB", datos);
+        string command = "xdg-open ArbolB.png";
+        //string command = "eog ArbolB.png";
+        string x = to_string(system(command.c_str()));
+        cout<<"x:"<<x<<endl;
     }
 
     //Function to find key
@@ -40,6 +48,9 @@ public:
     }
 
     void insert(string idUnico, NodoUsuario* nodo_usuario){
+        cout<<"\n-------------------insert btree"<<endl;
+        cout<<nodo_usuario<<endl;
+        cout<<"\n-------------------"<<endl;
         Contenedor key;
         key.setIdUnico(idUnico);
         key.setNodoUsuario(nodo_usuario);
@@ -85,8 +96,21 @@ public:
                 root = nullptr;
             }else{
                 root = root->children[0];
+                cout<<root<<endl;
             }
         }
+    }
+    //Sirve como complemento del metodo search
+    Contenedor valueFound(BTreeNode* aux, string valueToBeSearch){
+        Contenedor auxContenedor;
+        auxContenedor.setIdUnico("NULL");
+        if (aux == nullptr) return auxContenedor;
+        for(int i =0; i < aux->num; i++){
+            if(aux->keys[i].getIdUnico() == valueToBeSearch){
+                return aux->keys[i];
+            }
+        }
+        return auxContenedor;
     }
 
     ~BTree(){
