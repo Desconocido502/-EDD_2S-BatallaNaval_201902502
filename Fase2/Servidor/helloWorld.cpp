@@ -5,13 +5,13 @@
 
 using namespace std;
 
-//Definicion de funciones
+//Definicion de funciones  
 void hello();
 
 void hello(){
     cout<<"Hola mundo!!!"<<endl;
 }
-
+   
 int main(){
     //hello();
     BTree* t = new BTree(2);

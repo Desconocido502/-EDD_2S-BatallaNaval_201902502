@@ -3,18 +3,17 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <algorithm>
 #include "BTreeNode.h"
 #include "generacionImg.h"
 
 using namespace std;
 
 class BTree{
-
 public:
-    BTreeNode* root;
+    BTreeNode *root;
     int MinDeg;
-
-    //Constructor
+    // Constructor
     BTree(int deg){
         this->root = nullptr;
         this->MinDeg = deg;
@@ -22,7 +21,7 @@ public:
 
     BTree(){
         this->root = nullptr;
-        this->MinDeg = -1;
+        this->MinDeg = 0;
     }
 
     void traverse(){
@@ -31,30 +30,28 @@ public:
         }   
     }
 
-    void DrawBTree(){
-        //std::cout<<"\n" + root->toDot() << std::endl;
-        string datos = root->toDot();
-        //cout<<datos<<endl;
-        generacionImg("ArbolB", datos);
+    string DrawBTree(){
+        //std::cout << "\n" + root->toDot() << std::endl;
+        generacionImg("ArbolB", root->toDot());
         string command = "xdg-open ArbolB.png";
-        //string command = "eog ArbolB.png";
+        //string command = "ArbolB.png";
         string x = to_string(system(command.c_str()));
         cout<<"x:"<<x<<endl;
+        return x;
     }
 
-    //Function to find key
-    BTreeNode* search(string key){
+
+    // Function to find key
+    BTreeNode *search(string key){
+       
         return ((root == nullptr) ? nullptr : root->search(key));
     }
 
-    void insert(string idUnico, NodoUsuario* nodo_usuario){
-        cout<<"\n-------------------insert btree"<<endl;
-        cout<<nodo_usuario<<endl;
-        cout<<"\n-------------------"<<endl;
+    void insert(string idUnico, NodoUsuario *nodo_usuario){
         Contenedor key;
         key.setIdUnico(idUnico);
         key.setNodoUsuario(nodo_usuario);
-        if(root == nullptr){
+        if (root == nullptr){
             root = new BTreeNode(MinDeg, true);
             root->keys[0] = key;
             root->num = 1;
@@ -68,7 +65,7 @@ public:
                 s->splitChild(0, root);
                 // The new root node has 2 child nodes. Move the old one over there
                 int i = 0;
-                if(s->keys[0].getIdUnico() < key.getIdUnico()){
+                if ((s->keys[0].getIdUnico().compare(key.getIdUnico())) < 0){
                     i++;
                 }
                 s->children[i]->insertNotFull(key);
@@ -87,8 +84,10 @@ public:
         }
         Contenedor aux;
         aux.setIdUnico(key);
+        aux.setNodoUsuario(new NodoUsuario("","",0,0));
+
         root->remove(aux);
-        if(root->num == 0){
+        if (root->num == 0){
             // If the root node has 0 keys
             // If it has a child, its first child is taken as the new root,
             // Otherwise, set the root node to null
@@ -100,6 +99,7 @@ public:
             }
         }
     }
+
     //Sirve como complemento del metodo search
     Contenedor valueFound(BTreeNode* aux, string valueToBeSearch){
         Contenedor auxContenedor;
@@ -111,8 +111,10 @@ public:
             }
         }
         return auxContenedor;
-    }
+    } 
+
 
     ~BTree(){
+
     }
 };

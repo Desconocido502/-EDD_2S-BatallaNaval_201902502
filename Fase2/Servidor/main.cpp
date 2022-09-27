@@ -62,13 +62,13 @@ int main(int argc, char const *argv[])
 {
     cout << "Inicio del proyecto fase 2" << endl;
     DoublyLinkedListCircularUser ltsUsers;
-    /*
+    
     BTree arbolUsers;
     arbolUsers.root = nullptr;
     arbolUsers.MinDeg = 2;
 
     arbolUsers.insert("EDD", ltsUsers.insertAtEnd("EDD", SHA256::cifrar("edd123"), 50, 25));
-    */
+    
     //cargarDatos(ltsUsers);
 
 
@@ -123,7 +123,7 @@ int main(int argc, char const *argv[])
         return crow::response(std::move(response)); });
 
     CROW_ROUTE(app, "/guardar_usuario")
-        .methods("POST"_method)([&ltsUsers](const crow::request &req)
+        .methods("POST"_method)([&ltsUsers, &arbolUsers](const crow::request &req)
         {
             auto x = crow::json::load(req.body);
 			if (!x) return crow::response(400);
@@ -133,13 +133,13 @@ int main(int argc, char const *argv[])
 			int monedas=x["monedas"].i();
 			int edad=x["edad"].i();
             if (!ltsUsers.searchUserForNick(nick)){
-                //arbolUsers.insert(nick, ltsUsers.insertAtEnd(nick,SHA256::cifrar(pass),monedas,edad));
+                arbolUsers.insert(nick, ltsUsers.insertAtEnd(nick,SHA256::cifrar(pass),monedas,edad));
             }
 			return crow::response(200);
         });
 
     CROW_ROUTE(app, "/eliminar_usuario")
-		.methods("DELETE"_method)([&ltsUsers](const crow::request &req)
+		.methods("DELETE"_method)([&ltsUsers, &arbolUsers](const crow::request &req)
 		{
           auto x = crow::json::load(req.body);
 			if (!x)
@@ -148,7 +148,7 @@ int main(int argc, char const *argv[])
 	
             bool nodoAELiminar = ltsUsers.deleteNode2(nick);
             if(nodoAELiminar) {
-                //arbolUsers.remove(nick);
+                arbolUsers.remove(nick);
                 return crow::response(200);
             } //Todo nice, se borro el user
 			return crow::response(404);  //Error no se encontro usuario a borrar
@@ -170,22 +170,21 @@ int main(int argc, char const *argv[])
 		std::vector<crow::json::wvalue> temp = ltsUsers.to_vector();
 		crow::json::wvalue final = std::move(temp);
 		return crow::response(std::move(final)); });
+    
 
-    //pendiente
-    /*
     CROW_ROUTE(app, "/usuarios/graficarArbol")
     ([&arbolUsers]()
     { 
         //arbolUsers.traverse();
-        arbolUsers.DrawBTree();
-		string drawSucces = "0"; 
+        
+		string drawSucces = arbolUsers.DrawBTree(); 
         //cout<<arbolUsers.DrawBTree()<<endl;
         if(stoi(drawSucces) == 0){
             return crow::response(200);
         }
         return crow::response(400);
     });
-    */
+    
         
 
     // AQUI ABAJO NO SE TOCA, TODA RUTA SE COLOCA ENCIMA DE ESTE MENSAJE
