@@ -186,7 +186,15 @@ int main(int argc, char const *argv[])
     });
     
         
-
+    /*
+    comun
+    poco comun
+    raro
+    legendario
+    especial
+    epico
+    mitico
+    */
     // AQUI ABAJO NO SE TOCA, TODA RUTA SE COLOCA ENCIMA DE ESTE MENSAJE
 
     app.port(5000).multithreaded().run();

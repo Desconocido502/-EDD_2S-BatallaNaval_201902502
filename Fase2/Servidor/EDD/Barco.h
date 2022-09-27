@@ -5,33 +5,37 @@ using namespace std;
 #ifndef ARTICLEB_H
 #define ARTICLEB_H
 
-class ArticleB{
+class Barco{
 private:
     string id;
     int precio;
     string nombre;
     string src;
 public:
-    ArticleB(string id, int precio, string nombre, string src){
+    Barco(string id, int precio, string nombre, string src){
         this->id = id;
         this->precio = precio;
         this->nombre = nombre;
         this->src = src;
     }
 
-    ArticleB(){ //*Constructor vacio
+    Barco(){ //*Constructor vacio
         this->id = "";
         this->precio = 0;
         this->nombre = "";
         this->src = "";
     }
     
-    ~ArticleB(){ //*Destructor
+    ~Barco(){ //*Destructor
 
     }
 
     void mostrarDatos(){
         cout<<"Id: "<<this->id<<", precio: "<<this->precio<<", nombre: "<<this->nombre<<", src: "<<this->src<<endl;
+    }
+
+    string mostrarDatos2(){
+        return "Id: " + id +  ",\n nombre: " + nombre + ",\n precio: " + to_string(precio);
     }
 
     void setId(string id){

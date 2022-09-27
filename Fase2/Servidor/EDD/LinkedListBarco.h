@@ -129,9 +129,9 @@ void LinkedListBarco::sort(){
             aux = actual->sig;
             while (aux != NULL){
                 if(aux->getPrecio() < actual->getPrecio()){
-                    temp->setArticle(actual->getArticle());
-                    actual->setArticle(aux->getArticle());
-                    aux->setArticle(temp->getArticle());
+                    temp->setBarco(actual->getBarco());
+                    actual->setBarco(aux->getBarco());
+                    aux->setBarco(temp->getBarco());
 
                     //*Cambio de categorias
                     temp->categoria = actual->categoria;
@@ -156,9 +156,9 @@ void LinkedListBarco::sortReverse(){
             aux = actual->sig;
             while (aux != NULL){
                 if(aux->getPrecio() > actual->getPrecio()){
-                    temp->setArticle(actual->getArticle());
-                    actual->setArticle(aux->getArticle());
-                    aux->setArticle(temp->getArticle());
+                    temp->setBarco(actual->getBarco());
+                    actual->setBarco(aux->getBarco());
+                    aux->setBarco(temp->getBarco());
 
                     //*Cambio de categorias
                     temp->categoria = actual->categoria;

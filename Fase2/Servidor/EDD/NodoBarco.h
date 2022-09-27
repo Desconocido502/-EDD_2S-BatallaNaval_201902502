@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "ArticleB.h"
+#include "Barco.h"
 
 using namespace std;
 #ifndef NODOBARCO_H
@@ -8,7 +8,7 @@ using namespace std;
 
 class NodoBarco{
 public:
-    ArticleB* barco;
+    Barco* barco;
 public:
     string categoria;
     NodoBarco* sig;
@@ -17,11 +17,11 @@ public:
     NodoBarco(string, int, string, string, string);
     void mostrarDatos();
 
-    void setArticle(ArticleB* barco){
+    void setBarco(Barco* barco){
         this->barco = barco;
     }
 
-    ArticleB* getArticle(){
+    Barco* getBarco(){
         return this->barco;
     }
 
@@ -66,7 +66,7 @@ NodoBarco::NodoBarco(){
 
 NodoBarco::NodoBarco(string id, int precio, string nombre, string src, string categoria){
     this->categoria = categoria;
-    this->barco = new ArticleB(id, precio, nombre, src);
+    this->barco = new Barco(id, precio, nombre, src);
     this->sig = NULL;
     this->ant = NULL;
 }

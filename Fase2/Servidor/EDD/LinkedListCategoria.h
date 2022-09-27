@@ -23,6 +23,7 @@ public:
     NodoCategoria* get(string);
     bool search(string);
     NodoBarco* buyArticle(string);
+    NodoBarco* buyArticle2(string, string);
     void printL();
     void printLTienda(char);
     void drawList();
@@ -70,6 +71,14 @@ NodoBarco* LinkedListCategoria::buyArticle(string id){
         aux = aux->sig;
     }
     return NULL;
+}
+
+//Nos develvera la referencia del nodo barco que contiene la categoria y resto de informacion del barco
+NodoBarco* LinkedListCategoria::buyArticle2(string categoria, string id){
+    NodoCategoria* aux = this->get(categoria);
+    NodoBarco* barcoEncontrado = aux->barcos->searchBoat(id);
+    if(barcoEncontrado != nullptr) return barcoEncontrado;
+    return barcoEncontrado; //sigue siendo nullptr dado que venga 
 }
 
 NodoCategoria* LinkedListCategoria::get(string categoria){
