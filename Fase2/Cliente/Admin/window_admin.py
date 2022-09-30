@@ -1,9 +1,10 @@
+from distutils import archive_util
 from select import select
 import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter import filedialog as fd
 from tkinter.font import BOLD
-from Controlador.ControlarData import cargarUser, deleteUser, getUsers, getUsersOrderedAST, getUsersOrderedDST, deleteUser, drawTree
+from Controlador.ControlarData import *
 import json
 
 
@@ -21,7 +22,7 @@ class Admin(ttk.Frame):
         for user in users:
             self.add_row(user)
 
-    def cargarUsers(self):
+    def cargarData(self):
         ruta = fd.askopenfilename(title="Seleccione archivo", filetypes=[
                                   ("Ficheros json", "*.json"), ("todos los archivos", "*.*")])
         contenido = None
@@ -35,6 +36,10 @@ class Admin(ttk.Frame):
                            user['monedas'], user["edad"])
                 #print("nick:", user['nick'])
 
+            for article in contenido['articulos']:
+                cargarSkinBarco(article["id"], article["categoria"],
+                                article["precio"], article["nombre"], article["src"])
+
             # En este punto se tendria que haber cargado toda la informacion del user
             # ahora a insertar los datos de la API
             users = getUsers()
@@ -43,8 +48,9 @@ class Admin(ttk.Frame):
 
     def graphTree(self):
         res = drawTree()
-        if(res == 400):
-             messagebox.showerror(message="NO SE PUDO CREAR LA IMAGEN DEL ARBOL", title="Error!!!")
+        if (res == 400):
+            messagebox.showerror(
+                message="NO SE PUDO CREAR LA IMAGEN DEL ARBOL", title="Error!!!")
 
     def add_row(self, row):
         self.treeview.insert(
@@ -73,6 +79,9 @@ class Admin(ttk.Frame):
     def CleanTreeView(self):
         for i in self.treeview.get_children():
             self.treeview.delete(i)
+    # ----------------------------------------------------------
+    #                       Constructor                       |
+    # ----------------------------------------------------------
 
     def __init__(self):
         self.main_window = tk.Tk()
@@ -131,7 +140,7 @@ class Admin(ttk.Frame):
         self.orderedDST.pack(fill=tk.BOTH)
 
         self.cargar_users = tk.Button(self.main_window, text="cargar Usuarios", font=(
-            'Times', 15, BOLD), bg='#666a88', bd=0, fg="#fff", pady=30, command=self.cargarUsers)
+            'Times', 15, BOLD), bg='#666a88', bd=0, fg="#fff", pady=30, command=self.cargarData)
         self.cargar_users.pack(fill=tk.BOTH)
 
         self.graph_tree = tk.Button(self.main_window, text="Graficar Arbol", font=(

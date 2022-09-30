@@ -56,3 +56,8 @@ def deleteUser(nick):
 def drawTree():
     res = requests.get(f"{base_url}/usuarios/graficarArbol")
     return res.status_code
+
+#*Carga un sink barco
+def cargarSkinBarco(id, categoria, precio, nombre, src):
+    newSKinBoat = {"id": id, "categoria": categoria, "precio": precio ,"nombre": nombre, "src": src}
+    res = requests.post(f"{base_url}/skins/guardar_skin_barco", json=newSKinBoat)

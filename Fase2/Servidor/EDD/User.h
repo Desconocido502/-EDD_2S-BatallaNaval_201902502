@@ -4,6 +4,7 @@
 
 #include "ListaPilaMov.h"
 #include "PilaMov.h"
+#include "AVL.h"
 #include "../lib/crow_all.h"
 
 using namespace std;
@@ -19,12 +20,14 @@ private:
     int age;
 public:
     ListaPilaMov* listaPilaMovimientos;
+    AVL* avl; //Arbol avl para los productos
     User(string nick, string password, int money, int age){
         this->nick = nick;
         this->password = password;
         this->money = money;
         this->age = age;
         this->listaPilaMovimientos = new ListaPilaMov();
+        
     }
 
     User(){ //Constructor vacio
@@ -86,6 +89,11 @@ public:
     int getAge(){
         return this->age;
     }
+    
+    void addBoat(NodoBarco* barcoComprado){
+        avl->add(barcoComprado);
+    }
+    
 
     crow::json::wvalue to_map(){
         crow::json::wvalue datosUser = {{"nick", this->nick}, {"monedas", to_string(this->money)}, {"edad", to_string(this->age)}};

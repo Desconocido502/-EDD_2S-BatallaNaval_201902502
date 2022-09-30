@@ -13,6 +13,7 @@
 #include "EDD/NodoUsuario.h"
 #include "EDD/DoublyLinkedListCircularUser.h"
 #include "EDD/BTree.h"
+#include "EDD/LinkedListCategoria.h"
 #include "lib/sha256.h"
 #include "lib/replace.h"
 
@@ -63,11 +64,15 @@ int main(int argc, char const *argv[])
     cout << "Inicio del proyecto fase 2" << endl;
     DoublyLinkedListCircularUser ltsUsers;
     
+    //-------------Arbol de usuarios-------------
     BTree arbolUsers;
     arbolUsers.root = nullptr;
     arbolUsers.MinDeg = 2;
 
     arbolUsers.insert("EDD", ltsUsers.insertAtEnd("EDD", SHA256::cifrar("edd123"), 50, 25));
+
+    //---------------Lista de listas de barcos------------------
+    LinkedListCategoria ltsBarcos;
     
     //cargarDatos(ltsUsers);
 
@@ -184,17 +189,31 @@ int main(int argc, char const *argv[])
         }
         return crow::response(400);
     });
-    
-        
     /*
-    comun
-    poco comun
-    raro
-    legendario
-    especial
-    epico
-    mitico
+    CROW_ROUTE(app, "/skins")
+    ([&ltsBarcos]()
+     { 
+
+		std::vector<crow::json::wvalue> temp = ltsUsers.to_vector();
+		crow::json::wvalue final = std::move(temp);
+		return crow::response(std::move(final)); });
     */
+
+    CROW_ROUTE(app, "/skins/guardar_skin_barco")
+        .methods("POST"_method)([&ltsBarcos](const crow::request &req)
+        {
+            auto x = crow::json::load(req.body);
+			if (!x) return crow::response(400);
+
+			string id=x["id"].s();
+			string categoria =x["categoria"].s();
+			int precio=x["precio"].i();
+			string nombre =x["nombre"].s();
+            string src =x["src"].s();
+            ltsBarcos.insert(id, categoria, precio, nombre, src);
+			return crow::response(200);
+        });        
+
     // AQUI ABAJO NO SE TOCA, TODA RUTA SE COLOCA ENCIMA DE ESTE MENSAJE
 
     app.port(5000).multithreaded().run();

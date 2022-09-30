@@ -1,0 +1,19 @@
+digraph G{ 
+rankdir=TB;
+node[color="blue",style="rounded,filled",fillcolor=lightgray, shape=record];
+"Nodod420339a-4fde-fa7a-39eb-0881c679fa56"[label="<P0>|Nick: Kratos,\n password: agga516r,\n monedas: 56,\n edad: 20|<P1>"];
+"Nodo1d659bc1-826c-376b-72bf-780582a56aee"[label="<P0>|Nick: Goku,\n password: agga516r,\n monedas: 56,\n edad: 20|<P1>|Nick: Homero,\n password: agga516r,\n monedas: 56,\n edad: 20|<P2>"];
+"Nodod985a111-509d-dac2-6dbc-6ddf59dd4be3"[label="<P0>|Nick: Ash,\n password: agga516r,\n monedas: 56,\n edad: 20|<P1>|Nick: Candy,\n password: agga516r,\n monedas: 56,\n edad: 20|<P2>|Nick: Folagor,\n password: alfal475,\n monedas: 700,\n edad: 29|<P3>"];
+"Nodo1d659bc1-826c-376b-72bf-780582a56aee":P0 -> "Nodod985a111-509d-dac2-6dbc-6ddf59dd4be3";
+"Nodo8ca5cf57-b321-f54f-fe5b-50088f07aeb4"[label="<P0>|Nick: Homer el Homer,\n password: agga516r,\n monedas: 56,\n edad: 20|<P1>"];
+"Nodo1d659bc1-826c-376b-72bf-780582a56aee":P1 -> "Nodo8ca5cf57-b321-f54f-fe5b-50088f07aeb4";
+"Nodoe435544a-86ca-6724-7298-ab51b6cd39ca"[label="<P0>|Nick: KingKong,\n password: agga516r,\n monedas: 56,\n edad: 20|<P1>|Nick: Kitty,\n password: agga516r,\n monedas: 56,\n edad: 20|<P2>"];
+"Nodo1d659bc1-826c-376b-72bf-780582a56aee":P2 -> "Nodoe435544a-86ca-6724-7298-ab51b6cd39ca";
+"Nodod420339a-4fde-fa7a-39eb-0881c679fa56":P0 -> "Nodo1d659bc1-826c-376b-72bf-780582a56aee";
+"Nodo5f0ae241-be8b-f659-6e0e-0dce1faa4f13"[label="<P0>|Nick: Pikachu,\n password: beliz5a4,\n monedas: 59,\n edad: 18|<P1>"];
+"Nododaa0e449-cf11-634a-e648-e81f4922731c"[label="<P0>|Nick: Mario Bros,\n password: agga516r,\n monedas: 56,\n edad: 20|<P1>|Nick: Meteoro,\n password: agga516r,\n monedas: 56,\n edad: 20|<P2>|Nick: Naruto,\n password: jfagaga16a,\n monedas: 80,\n edad: 19|<P3>"];
+"Nodo5f0ae241-be8b-f659-6e0e-0dce1faa4f13":P0 -> "Nododaa0e449-cf11-634a-e648-e81f4922731c";
+"Nodoe8a6d3db-eea8-a34e-aded-8dcb9d6fd0df"[label="<P0>|Nick: Planton,\n password: cam78dad,\n monedas: 50,\n edad: 20|<P1>|Nick: Rubius,\n password: agga516r,\n monedas: 56,\n edad: 20|<P2>"];
+"Nodo5f0ae241-be8b-f659-6e0e-0dce1faa4f13":P1 -> "Nodoe8a6d3db-eea8-a34e-aded-8dcb9d6fd0df";
+"Nodod420339a-4fde-fa7a-39eb-0881c679fa56":P1 -> "Nodo5f0ae241-be8b-f659-6e0e-0dce1faa4f13";
+}

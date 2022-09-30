@@ -35,7 +35,7 @@ public:
     }
 
     string mostrarDatos2(){
-        return "Id: " + id +  ",\n nombre: " + nombre + ",\n precio: " + to_string(precio);
+        return "Id: " + id +  ",\\n nombre: " + nombre + ",\\n precio: " + to_string(precio);
     }
 
     void setId(string id){

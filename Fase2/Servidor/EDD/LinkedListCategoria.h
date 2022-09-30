@@ -28,7 +28,6 @@ public:
     void printLTienda(char);
     void drawList();
     LinkedListCategoria();
-    ~LinkedListCategoria();
 };
 
 LinkedListCategoria::LinkedListCategoria(){
