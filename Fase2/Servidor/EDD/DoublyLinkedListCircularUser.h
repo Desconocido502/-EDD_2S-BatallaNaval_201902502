@@ -70,7 +70,7 @@ DoublyLinkedListCircularUser::DoublyLinkedListCircularUser(){
     this->tam = 0;
     this->primero = NULL;
     this->ultimo = NULL;
-}
+} 
 
 bool DoublyLinkedListCircularUser::isEmpty(){
     return this->primero == NULL;
@@ -106,8 +106,8 @@ void DoublyLinkedListCircularUser::insertAtStart(string nick, string password, i
 
 NodoUsuario* DoublyLinkedListCircularUser::insertAtEnd(string nick, string password, int money, int age){
     NodoUsuario* nuevo = new NodoUsuario(nick, password, money, age);
-    cout<<"\n-------------------"<<endl;
-    cout<<nuevo<<"| "<<nick<<endl;
+    //cout<<"\n-------------------"<<endl;
+    //cout<<nuevo<<"| "<<nick<<endl;
     NodoUsuario* aux = new NodoUsuario();
 
     if(this->isEmpty()){
@@ -120,8 +120,8 @@ NodoUsuario* DoublyLinkedListCircularUser::insertAtEnd(string nick, string passw
     this->__joinNodes();
     this->tam += 1;
     aux = NULL;
-    cout<<"\n-------------------"<<endl;
-    cout<<nuevo<<endl;
+    //cout<<"\n-------------------"<<endl;
+    //cout<<nuevo<<endl;
     return nuevo;
 }
 

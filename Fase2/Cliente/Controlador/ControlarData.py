@@ -1,4 +1,4 @@
-from email.mime import base
+
 import requests
 import json
 
@@ -61,3 +61,8 @@ def drawTree():
 def cargarSkinBarco(id, categoria, precio, nombre, src):
     newSKinBoat = {"id": id, "categoria": categoria, "precio": precio ,"nombre": nombre, "src": src}
     res = requests.post(f"{base_url}/skins/guardar_skin_barco", json=newSKinBoat)
+
+def getSkins():
+    res = requests.get(f"{base_url}/skins")
+    data = res.json()  # Convertimos la respuesta en dict
+    return data

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "NodoBarco.h"
+#include "../lib/crow_all.h"
 #include "../lib/VariadicTable.h"
 
 using namespace std;
@@ -25,12 +26,32 @@ public:
     void sortReverse();
     void drawList();
     LinkedListBarco();
+    vector<crow::json::wvalue> to_vector();
 };
 
 LinkedListBarco::LinkedListBarco(){
     this->tam = 0;
     this->primero = NULL;
     this->ultimo = NULL;
+}
+
+vector<crow::json::wvalue> LinkedListBarco::to_vector(){
+    std::vector<crow::json::wvalue> datos;
+    if(isEmpty()){
+        cout<<"lista barcos vacia"<<endl;
+    }else{
+        NodoBarco* aux = this->primero;
+        while (aux != nullptr){
+            crow::json::wvalue x;
+            x["id"] = aux->getId();
+            x["precio"] =  aux->getPrecio();
+            x["nombre"] = aux->getNombre();
+            x["src"] = aux->getSrc();
+            datos.push_back(x);
+            aux = aux->sig;
+        }
+    }
+    return datos;
 }
 
 bool LinkedListBarco::isEmpty(){

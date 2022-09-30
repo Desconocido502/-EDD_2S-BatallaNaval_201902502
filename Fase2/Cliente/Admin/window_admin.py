@@ -1,10 +1,10 @@
-from distutils import archive_util
+
 from select import select
 import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter import filedialog as fd
 from tkinter.font import BOLD
-from Controlador.ControlarData import *
+from Controlador.ControlarData import getUsersOrderedAST, getUsersOrderedDST, cargarUser, cargarSkinBarco, getUsers, getSkins, drawTree, deleteUser              
 import json
 
 
@@ -46,6 +46,8 @@ class Admin(ttk.Frame):
             for user in users:
                 self.add_row(user)
 
+            #Servidor/img/BarcoComun1.png
+
     def graphTree(self):
         res = drawTree()
         if (res == 400):
@@ -75,6 +77,15 @@ class Admin(ttk.Frame):
                 else:
                     text = "No se encontro el usuario a eliminar"
                     messagebox.showerror(message=text, title="Error!!!")
+    
+    def salir(self):
+        """
+        Lo realizamos de esta manera para evitar la dependencia circular
+        """
+        self.main_window.destroy()
+        from Login.Login import Login
+        Login()
+        
 
     def CleanTreeView(self):
         for i in self.treeview.get_children():
@@ -150,5 +161,9 @@ class Admin(ttk.Frame):
         self.deleteUser = tk.Button(self.main_window, text="Eliminar Usuario", font=(
             'Times', 15, BOLD), bg='#666a88', bd=0, fg="#fff", pady=30, command=self.item_selected)
         self.deleteUser.pack(fill=tk.BOTH)
+
+        self.salirLogin = tk.Button(self.main_window, text="Salir", font=(
+            'Times', 15, BOLD), bg='#666a88', bd=0, fg="#fff", pady=30, command=self.salir)
+        self.salirLogin.pack(fill=tk.BOTH)
 
         self.main_window.mainloop()

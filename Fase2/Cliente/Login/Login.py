@@ -6,7 +6,7 @@ import util.generic as utl
 from Controlador.ControlarData import verificarLogueo
 #*Importamos la ventana que sige luego del login
 from Admin.window_admin import Admin
-
+from User.windows_user import User
 class Login():
     
     def verificar(self):
@@ -19,11 +19,13 @@ class Login():
         #print(err)
         if(not err): #no existe error, entramos dentro de la sentencia if
             if(user['nick'] == "EDD"):
-                print("Admin")
+                #print("Admin")
                 self.ventana.destroy()
                 Admin()
             else:
-                print("user")
+                #print("user", user)
+                self.ventana.destroy()
+                User(user) #Se le pasa el user para llenar algunos campos necesarios en la nueva ventana
                 #Nos falta crear la interfaz del usuario
             #print(user['nick'], user['monedas'], user['edad'])
         else:

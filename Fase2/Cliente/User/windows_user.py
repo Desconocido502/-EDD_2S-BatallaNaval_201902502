@@ -1,12 +1,13 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
-from turtle import heading
-from ScrollableFrame import ScrollableFrame
-import json
+import util.generic as utl
+from ScrollableFrame.ScrollableFrame import ScrollableFrame
+from Controlador.ControlarData import getSkins
 
 
-class User:
-    def __init__(self):
+class User():
+    def __init__(self, user): #Se traen los datos del usuario
+        self.userData = user
         self.main_window = tk.Tk()
         self.main_window.title("Notebook")
         self.main_window.resizable(0, 0)
@@ -21,7 +22,7 @@ class User:
         self.page1.grid(row=0, column=0, sticky=tk.N+tk.E+tk.S+tk.W)
         self.notebook.add(self.page1, text="Home")
 
-        self.userName = ttk.Label(self.page1, text="Carlos")
+        self.userName = ttk.Label(self.page1, text=self.userData["nick"])
         self.userName.config(
             foreground="blue", background="green", font=("Verdana", 14))
         self.userName.place(x=980, y=10)
@@ -60,8 +61,9 @@ class User:
         self.salir = ttk.Button(self.page1, text="Salir")
         self.salir.place(x=1000, y=580)
 
+        """
         self.frameCategoria1 = ScrollableFrame(
-            self.frameskins, direction='horizontal', width=1082, height=250)
+        self.frameskins, direction='horizontal', width=1082, height=250)
         self.frameCategoria1.grid(row=0, column=0, sticky="nsew")
 
         self.frameCategoria2 = ScrollableFrame(
@@ -70,18 +72,59 @@ class User:
 
         self.lots_of_labels(self.frameCategoria1.frame,
                             "blue horizontal", (5, 20))
-
+        """
+        
         self.frames = []
+        self.loadSkins()
 
         self.page2 = ttk.Frame(self.notebook)
         self.notebook.add(self.page2, text="About")
 
         self.main_window.mainloop()
 
-    def lots_of_labels_buttons(self, ltsProducts):
+    def loadSkins(self):
+        """
+        skins = getSkins()#Solo para ver como impreme los valores en consola
+            for skin in skins:
+                print("categoria:" ,skin["categoria"])
+                print("ltsBarcos:")
+                for barco in skin["ltsBarcos"]:
+                    print("id: ", barco["id"])
+                    print("nombre: " , barco["nombre"])
+                    print("precio: ", barco["precio"])
+                    print("src: ", barco["src"])
+                    print("-----------------")
         for i, product in ltsProducts:
                 self.frames[i] = ScrollableFrame(self.frameskins, direction="horizontal", width=1082, height=250).grid(row=i, column=0)
                 tk.Label(self.frames[i], text=product[0], font=("Verdana", 14)).grid(row=0, column=0)
+        """
+        skins = getSkins()#Solo para ver como impreme los valores en consola
+        fila = 0
+        for skin in skins:
+            frameAux = ScrollableFrame(self.frameskins, direction="horizontal", width=1082, height=250)
+            frameAux.grid(row=fila, column=0)
+            tk.Label(frameAux.frame, text=skin["categoria"], font=("Verdana", 14)).grid(row=0, column=0)
+            print("categoria:" ,skin["categoria"])
+            print("ltsBarcos:")
+            fila += 1
+            
+            col = 0
+            for barco in skin["ltsBarcos"]:
+                img = utl.leer_imagen(barco["src"], (100, 100)) #Se lee la img
+                tk.Label(frameAux.frame, image=img, bg='#3a7ff6').grid(row=1, column=col) #Se crea el label donde va la img
+                tk.Label(frameAux.frame, text=barco["precio"], font=("Verdana", 14)).grid(row=2, column=col) #Label que muestra el precio
+                tk.Button(frameAux.frame, text="Comprar", borderwidth="1", relief="solid", command=lambda e=barco["nombre"]:self.itemSelected(e)).grid(row=3, column=col)
+                col += 1
+                print("id: ", barco["id"])
+                print("nombre: " , barco["nombre"])
+                print("precio: ", barco["precio"])
+                print("src: ", barco["src"])
+                print("-----------------")
+            
+            self.frames.append(frameAux)
+            #self.frames[i] = ScrollableFrame(self.frameskins, direction="horizontal", width=1082, height=250).grid(row=i, column=0)
+            #tk.Label(self.frames[i], text=skin["categoria"], font=("Verdana", 14)).grid(row=0, column=0)
+            #img = utl.leer_imagen("./img/loginIcon.png", (100, 100))
                 
 
     # Populates a frame with a grid of labes of given text and same bg as frame
@@ -102,8 +145,8 @@ class User:
                 tk.Button(self.frameskins, text=s, width=3, borderwidth="1", relief="solid", command=lambda e=s: self.itemSelected(e)).grid(
                     row=row, column=column, padx=5, pady=5, ipadx=15, ipady=15)
 
-    def itemSelected(self, label_press):
-        print(label_press)
+    def itemSelected(self, button_press):
+        print(button_press)
 
         """
         for row in range(100):
@@ -118,4 +161,4 @@ class User:
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
 
 
-User()
+#User()

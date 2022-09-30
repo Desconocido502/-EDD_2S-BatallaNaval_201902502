@@ -189,15 +189,16 @@ int main(int argc, char const *argv[])
         }
         return crow::response(400);
     });
-    /*
+    
     CROW_ROUTE(app, "/skins")
     ([&ltsBarcos]()
      { 
 
-		std::vector<crow::json::wvalue> temp = ltsUsers.to_vector();
+		std::vector<crow::json::wvalue> temp = ltsBarcos.lista_productos();
 		crow::json::wvalue final = std::move(temp);
-		return crow::response(std::move(final)); });
-    */
+		return crow::response(std::move(final));
+     });
+    
 
     CROW_ROUTE(app, "/skins/guardar_skin_barco")
         .methods("POST"_method)([&ltsBarcos](const crow::request &req)

@@ -5,6 +5,7 @@
 #include "LinkedListBarco.h"
 #include "NodoBarco.h"
 #include "generacionImg.h"
+#include "../lib/crow_all.h"
 
 using namespace std;
 
@@ -28,6 +29,7 @@ public:
     void printLTienda(char);
     void drawList();
     LinkedListCategoria();
+    crow::json::wvalue::list lista_productos();
 };
 
 LinkedListCategoria::LinkedListCategoria(){
@@ -121,6 +123,19 @@ void LinkedListCategoria::printL(){
         aux->barcos->displayList();
         aux = aux->sig;
     }
+}
+
+crow::json::wvalue::list LinkedListCategoria::lista_productos(){
+    crow::json::wvalue::list lts;
+    NodoCategoria* aux = this->primero;
+    crow::json::wvalue::object x;
+    while (aux != nullptr){
+        x["categoria"] = aux->categoria;
+        x["ltsBarcos"] = aux->barcos->to_vector();
+        lts.push_back(x);
+        aux = aux->sig;
+    }
+    return lts;
 }
 
 void LinkedListCategoria::printLTienda(char tipoOrden){
