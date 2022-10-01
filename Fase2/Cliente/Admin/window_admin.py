@@ -4,7 +4,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter import filedialog as fd
 from tkinter.font import BOLD
-from Controlador.ControlarData import getUsersOrderedAST, getUsersOrderedDST, cargarUser, cargarSkinBarco, getUsers, getSkins, drawTree, deleteUser              
+from Controlador.ControlarData import getTutorial, getUsersOrderedAST, getUsersOrderedDST, cargarUser, cargarSkinBarco, getUsers, getTutorial, drawTree, deleteUser, cargarCoorTutorial              
 import json
 
 
@@ -39,6 +39,14 @@ class Admin(ttk.Frame):
             for article in contenido['articulos']:
                 cargarSkinBarco(article["id"], article["categoria"],
                                 article["precio"], article["nombre"], article["src"])
+            
+            #print(contenido['tutorial']["ancho"], contenido['tutorial']["alto"])
+            cargarCoorTutorial(contenido['tutorial']["ancho"], contenido['tutorial']["alto"])
+            for tutorial in contenido['tutorial']["movimientos"]:
+                cargarCoorTutorial(tutorial["x"], tutorial["y"])
+                #print(tutorial["x"], tutorial["y"])
+
+            #getTutorial() todo nice
 
             # En este punto se tendria que haber cargado toda la informacion del user
             # ahora a insertar los datos de la API

@@ -14,6 +14,7 @@
 #include "EDD/DoublyLinkedListCircularUser.h"
 #include "EDD/BTree.h"
 #include "EDD/LinkedListCategoria.h"
+#include "EDD/ColaTutorial.h"
 #include "lib/sha256.h"
 #include "lib/replace.h"
 
@@ -74,6 +75,10 @@ int main(int argc, char const *argv[])
     //---------------Lista de listas de barcos------------------
     LinkedListCategoria ltsBarcos;
     
+
+    //---------------Cola tutorial------------------
+    ColaTutorial tutorial;
+
     //cargarDatos(ltsUsers);
 
 
@@ -213,7 +218,63 @@ int main(int argc, char const *argv[])
             string src =x["src"].s();
             ltsBarcos.insert(id, categoria, precio, nombre, src);
 			return crow::response(200);
+        });
+
+    CROW_ROUTE(app, "/skins/comprar_skin_barco")
+        .methods("POST"_method)([&ltsUsers, &ltsBarcos](const crow::request &req)
+        {
+            auto x = crow::json::load(req.body);
+			if (!x) return crow::response(400);
+
+			string id=x["id"].s();
+			string categoria =x["categoria"].s();
+			string userName =x["precio"].s();
+            NodoBarco* barco_a_comprar = ltsBarcos.buyArticle2(categoria, id);
+            NodoUsuario* usuario = ltsUsers.searchUser2(userName);
+            if(barco_a_comprar != NULL &&  usuario != NULL){
+                int credito = usuario->getUsuario()->getMoney();
+                int precioBarco = barco_a_comprar->getPrecio();
+                if(credito < precioBarco){
+                    //no se puede comprar el barco por falta de credito
+                }else{
+                    /*Se tienen dos opciones, que se pueda comprar:
+                        1.Se compra y se almacena sin problemas
+                        2.El barco ya se tenga y no se puede repetir
+                    */
+                }
+
+
+            }else{
+                return crow::response(400);
+            }
+
+            
+			return crow::response(200);
         });        
+
+    //-------------------------------TUTORIAL------------------------------------
+
+    CROW_ROUTE(app, "/tutorial/guardar_coordenada")
+        .methods("POST"_method)([&tutorial](const crow::request &req)
+        {
+            auto z = crow::json::load(req.body);
+			if (!z) return crow::response(400);
+
+			string x=z["x"].s();
+			string y =z["y"].s();
+            tutorial.enqueue(stoi(x), stoi(y));
+            //ltsBarcos.insert(id, categoria, precio, nombre, src);
+			return crow::response(200);
+        });  
+
+    //Se manda una lista del tutorial
+    CROW_ROUTE(app, "/tutorial")
+    ([&tutorial]()
+     { 
+		std::vector<crow::json::wvalue> temp = tutorial.to_vector();
+		crow::json::wvalue final = std::move(temp);
+		return crow::response(std::move(final));
+     }); 
 
     // AQUI ABAJO NO SE TOCA, TODA RUTA SE COLOCA ENCIMA DE ESTE MENSAJE
 

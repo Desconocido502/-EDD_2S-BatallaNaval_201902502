@@ -3,6 +3,7 @@
 
 #include "NodoCola.h"
 #include "generacionImg.h"
+#include "../lib/crow_all.h"
 using namespace std;
 
 #ifndef COLATUTORIAL_H
@@ -23,7 +24,25 @@ public:
     void drawQueue();
     ColaTutorial();
     ~ColaTutorial();
+    vector<crow::json::wvalue> to_vector();
 };
+
+vector<crow::json::wvalue> ColaTutorial::to_vector(){
+    std::vector<crow::json::wvalue> datos;
+    if(this->isEmpty()){
+        cout<<"La cola esta vacia"<<endl;
+        return datos;
+    }
+    NodoCola* actual = this->frente;
+    while(actual != NULL){
+        crow::json::wvalue x;
+        x["AnchoX"] = actual->getAnchoX();
+        x["AltoY"] = actual->getAltoY();
+        datos.push_back(x);
+        actual = actual->getSiguiente();
+    }
+    return datos;
+}
 
 ColaTutorial::ColaTutorial(){
     this->frente = this->final = NULL;

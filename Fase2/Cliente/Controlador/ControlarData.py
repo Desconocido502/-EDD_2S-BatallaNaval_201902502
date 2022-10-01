@@ -66,3 +66,18 @@ def getSkins():
     res = requests.get(f"{base_url}/skins")
     data = res.json()  # Convertimos la respuesta en dict
     return data
+
+#*Carga una coordenada o tamaño del tutoria;
+def cargarCoorTutorial(x, y):
+    newCoord = {"x": x, "y": y}
+    res = requests.post(f"{base_url}/tutorial/guardar_coordenada", json=newCoord)
+
+def getTutorial():
+    res = requests.get(f"{base_url}/tutorial")
+    data = res.json()  # Convertimos la respuesta en dict
+    print(data)
+    #return data
+
+def buySKinBarco(categoria, id, userName):
+    newCoord = {"categoria": categoria, "id": id, "userName": userName}
+    res = requests.post(f"{base_url}/skins/comprar_skin_barco", json=newCoord)

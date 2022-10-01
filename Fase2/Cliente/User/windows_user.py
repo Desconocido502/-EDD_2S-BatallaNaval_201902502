@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import util.generic as utl
 from ScrollableFrame.ScrollableFrame import ScrollableFrame
-from Controlador.ControlarData import getSkins
+from Controlador.ControlarData import getSkins, buySKinBarco
 from PIL import ImageTk, Image
 
 
@@ -121,7 +121,7 @@ class User():
                 #canvitas.grid(row=1, column=col)
                 #canvitas.create_image(0,0, image=self.img, anchor="nw")
                 tk.Label(frameAux.frame, text=barco["precio"], font=("Verdana", 14)).grid(row=2, column=col) #Label que muestra el precio
-                tk.Button(frameAux.frame, text="Comprar", borderwidth="1", relief="solid", command=lambda e=barco["nombre"]:self.itemSelected(e)).grid(row=3, column=col)
+                tk.Button(frameAux.frame, text="Comprar", borderwidth="1", relief="solid", command=lambda e=[skin["categoria"], barco["id"], self.userData["nick"]]:self.itemSelected(e)).grid(row=3, column=col)
                 col += 1
                 #print("id: ", barco["id"])
                 #print("nombre: " , barco["nombre"])
@@ -161,8 +161,9 @@ class User():
                 tk.Button(self.frameskins, text=s, width=3, borderwidth="1", relief="solid", command=lambda e=s: self.itemSelected(e)).grid(
                     row=row, column=column, padx=5, pady=5, ipadx=15, ipady=15)
 
-    def itemSelected(self, button_press):
-        print(button_press)
+    def itemSelected(self, button_press_data):
+        buySKinBarco(button_press_data["categoria"], button_press_data["id"], button_press_data["nick"])
+        print(button_press_data)
 
         """
         for row in range(100):
