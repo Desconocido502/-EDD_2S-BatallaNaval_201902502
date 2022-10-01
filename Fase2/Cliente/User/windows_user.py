@@ -1,8 +1,12 @@
+from cmath import exp
+from email.mime import image
+from textwrap import fill
 import tkinter as tk
 from tkinter import ttk, messagebox
 import util.generic as utl
 from ScrollableFrame.ScrollableFrame import ScrollableFrame
 from Controlador.ControlarData import getSkins
+from PIL import ImageTk, Image
 
 
 class User():
@@ -58,8 +62,9 @@ class User():
         self.nuevaPartida = ttk.Button(self.page1, text="Nueva partida")
         self.nuevaPartida.place(x=10, y=580)
 
-        self.salir = ttk.Button(self.page1, text="Salir")
+        self.salir = ttk.Button(self.page1, text="Salir", command=self.regresar)
         self.salir.place(x=1000, y=580)
+
 
         """
         self.frameCategoria1 = ScrollableFrame(
@@ -75,6 +80,8 @@ class User():
         """
         
         self.frames = []
+        self.photos=[] #*Almacena las rutas de las imagenes
+
         self.loadSkins()
 
         self.page2 = ttk.Frame(self.notebook)
@@ -83,21 +90,7 @@ class User():
         self.main_window.mainloop()
 
     def loadSkins(self):
-        """
-        skins = getSkins()#Solo para ver como impreme los valores en consola
-            for skin in skins:
-                print("categoria:" ,skin["categoria"])
-                print("ltsBarcos:")
-                for barco in skin["ltsBarcos"]:
-                    print("id: ", barco["id"])
-                    print("nombre: " , barco["nombre"])
-                    print("precio: ", barco["precio"])
-                    print("src: ", barco["src"])
-                    print("-----------------")
-        for i, product in ltsProducts:
-                self.frames[i] = ScrollableFrame(self.frameskins, direction="horizontal", width=1082, height=250).grid(row=i, column=0)
-                tk.Label(self.frames[i], text=product[0], font=("Verdana", 14)).grid(row=0, column=0)
-        """
+
         skins = getSkins()#Solo para ver como impreme los valores en consola
         fila = 0
         for skin in skins:
@@ -106,26 +99,49 @@ class User():
             tk.Label(frameAux.frame, text=skin["categoria"], font=("Verdana", 14)).grid(row=0, column=0)
             print("categoria:" ,skin["categoria"])
             print("ltsBarcos:")
-            fila += 1
             
-            col = 0
+            """
             for barco in skin["ltsBarcos"]:
-                img = utl.leer_imagen(barco["src"], (100, 100)) #Se lee la img
-                tk.Label(frameAux.frame, image=img, bg='#3a7ff6').grid(row=1, column=col) #Se crea el label donde va la img
+                self.photos.append(utl.leer_imagen(barco["src"], (110, 110))) #Se lee la img
+            self.chargeImgInLabel(frameAux.frame, self.photos)
+            self.photos = []
+            """
+
+            col = 0
+            #canvitas = tk.Canvas(frameAux.frame)
+            #Se crea el arreglo de label tipo img
+            
+            for barco in skin["ltsBarcos"]:
+                self.img = utl.leer_imagen(barco["src"], (110, 110)) #Se lee la img
+                #self.img = ImageTk.PhotoImage(file=barco["src"])
+                labelImg = tk.Label(frameAux.frame, bg='#3a7ff6', text=barco["nombre"], image=self.img) #Se crea el label donde va la img
+                #labelImg.configure(image=self.img)
+                labelImg.grid(row=1, column=col)
+                #canvitas.configure(width=100, height=100)
+                #canvitas.grid(row=1, column=col)
+                #canvitas.create_image(0,0, image=self.img, anchor="nw")
                 tk.Label(frameAux.frame, text=barco["precio"], font=("Verdana", 14)).grid(row=2, column=col) #Label que muestra el precio
                 tk.Button(frameAux.frame, text="Comprar", borderwidth="1", relief="solid", command=lambda e=barco["nombre"]:self.itemSelected(e)).grid(row=3, column=col)
                 col += 1
-                print("id: ", barco["id"])
-                print("nombre: " , barco["nombre"])
-                print("precio: ", barco["precio"])
-                print("src: ", barco["src"])
-                print("-----------------")
-            
+                #print("id: ", barco["id"])
+                #print("nombre: " , barco["nombre"])
+                #print("precio: ", barco["precio"])
+                #print("src: ", barco["src"])
+                #print("-----------------")
+            fila += 1
             self.frames.append(frameAux)
             #self.frames[i] = ScrollableFrame(self.frameskins, direction="horizontal", width=1082, height=250).grid(row=i, column=0)
             #tk.Label(self.frames[i], text=skin["categoria"], font=("Verdana", 14)).grid(row=0, column=0)
             #img = utl.leer_imagen("./img/loginIcon.png", (100, 100))
-                
+    
+
+    def chargeImgInLabel(self, parent, imgs):
+        col = 0
+        for img in imgs:
+            print(img)
+            tk.Label(parent, bg='#3a7ff6', image=img).grid(row=1, column=col)
+            col += 1
+        
 
     # Populates a frame with a grid of labes of given text and same bg as frame
 
@@ -159,6 +175,40 @@ class User():
     def onFrameConfigure(self, event):
         '''Reset the scroll region to encompass the inner frame'''
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+    
+    def regresar(self):
+        self.main_window.destroy()
+        from Login.Login import Login
+        Login()
 
 
 #User()
+        """
+        skins = getSkins()#Solo para ver como impreme los valores en consola
+            for skin in skins:
+                print("categoria:" ,skin["categoria"])
+                print("ltsBarcos:")
+                for barco in skin["ltsBarcos"]:
+                    print("id: ", barco["id"])
+                    print("nombre: " , barco["nombre"])
+                    print("precio: ", barco["precio"])
+                    print("src: ", barco["src"])
+                    print("-----------------")
+        for i, product in ltsProducts:
+                self.frames[i] = ScrollableFrame(self.frameskins, direction="horizontal", width=1082, height=250).grid(row=i, column=0)
+                tk.Label(self.frames[i], text=product[0], font=("Verdana", 14)).grid(row=0, column=0)
+
+
+
+
+
+
+
+
+
+
+                 bg = ImageTk.PhotoImage(file = "Your_img.png")
+        canvitas = tk.Canvas(self.frameskins, width=100, height=100)
+        canvitas.pack(fill="both", expand=True)
+        canvitas.create_image(0,0, image="efafa", anchor="nw")
+        """
