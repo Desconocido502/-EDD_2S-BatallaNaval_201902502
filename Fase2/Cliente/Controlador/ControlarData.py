@@ -93,45 +93,6 @@ def buySKinBarco(categoria, id, userName):
     res = requests.put(f"{base_url}/skins/buy_boat", json=newCoord)
     return res
 
-    #res = requests.put(f"{base_url}/skins/comprar_skin_barco", json=newCoord)
-
-
-
-"""
-            auto x = crow::json::load(req.body);
-			if (!x) return crow::response(400);
-
-			string id=x["id"].s();
-			string categoria =x["categoria"].s();
-			string userName =x["userName"].s();
-            cout<<id<<", "<<categoria<<", "<<userName<<endl;
-            /*
-            NodoBarco* barco_a_comprar = ltsBarcos.buyArticle2(categoria, id);
-            NodoUsuario* usuario = ltsUsers.searchUser2(userName);
-            if(barco_a_comprar != NULL &&  usuario != NULL){
-                int credito = usuario->getUsuario()->getMoney();
-                int precioBarco = barco_a_comprar->getPrecio();
-                if(credito < precioBarco){
-                    //no se puede comprar el barco por falta de credito
-                    return crow::response(400);
-                }else{
-                    //Se tienen dos opciones, que se pueda comprar:
-                    //   1.Se compra y se almacena sin problemas
-                    //    2.El barco ya se tenga y no se puede repetir
-                    usuario->user->addBoat(barco_a_comprar);
-                    bool isBoatRepeat = usuario->user->avl->repetido;
-                    //Si el valor de isBoatRepeat es true no se puede comprar por que ya se ha comprado antes
-                    if(isBoatRepeat){
-                        usuario->user->avl->repetido = false;
-                        return crow::response(404);
-                    }else{
-                        credito = credito - precioBarco;
-                        usuario->user->setMoney(credito);
-                    }
-                }
-            }else{
-                return crow::response(400);
-            }
-            */
-			return crow::response(200);
-"""
+def draw_avl_tree(nick):
+    res = requests.get(f"{base_url}/usuarios/graficarArbolAvl", json={"nick":nick})
+    return res.status_code

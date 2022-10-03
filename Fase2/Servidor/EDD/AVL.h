@@ -194,7 +194,7 @@ void AVL::graficar(string nombre)
     cadena += "} \n";
     //cout << cadena << endl;
     generacionImg(nombre + "_ArbolAVl", cadena);
-        //string command = "ArbolB.png";
+    //string command = nombre + "_ArbolAVl.png";
     string command = "xdg-open " + nombre + "_ArbolAVl.png";
     to_string(system(command.c_str()));
 }

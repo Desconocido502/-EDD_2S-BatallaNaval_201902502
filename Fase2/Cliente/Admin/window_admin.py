@@ -4,7 +4,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter import filedialog as fd
 from tkinter.font import BOLD
-from Controlador.ControlarData import getTutorial, getUsersOrderedAST, getUsersOrderedDST, cargarUser, cargarSkinBarco, getUsers, getTutorial, drawTree, deleteUser, cargarCoorTutorial              
+from Controlador.ControlarData import getUsersOrderedAST, getUsersOrderedDST, cargarUser, cargarSkinBarco, getUsers, drawTree, deleteUser, cargarCoorTutorial, draw_avl_tree             
 import json
 
 
@@ -50,9 +50,13 @@ class Admin(ttk.Frame):
 
             # En este punto se tendria que haber cargado toda la informacion del user
             # ahora a insertar los datos de la API
-            users = getUsers()
-            for user in users:
-                self.add_row(user)
+            self.fillTreeViewUsers()
+    
+    def fillTreeViewUsers(self):
+        users = getUsers()
+        for user in users:
+            self.add_row(user)
+        
 
             #Servidor/img/BarcoComun1.png
 
@@ -60,7 +64,20 @@ class Admin(ttk.Frame):
         res = drawTree()
         if (res == 400):
             messagebox.showerror(
-                message="NO SE PUDO CREAR LA IMAGEN DEL ARBOL", title="Error!!!")
+                message="NO SE PUDO CREAR LA IMAGEN DEL ARBOL B", title="Error!!!")
+    
+    def drawAvlTree(self):
+        select_item = self.treeview.selection()[0]
+        if (select_item == "EDD"):
+                messagebox.showerror(message="NO SE PUEDE CREAR UN ARBOL AVL AL ADMIN", title="Error!!!")
+                return
+        
+        res = draw_avl_tree(select_item) #Se le pasa el item seleccionado, en este caso el nombre
+        if(res == 400):
+            text = "No se encontro el usuario a graficar su arbol avl o el arbol avl no contiene datos"
+            messagebox.showerror(message=text, title="Error!!!")
+        elif(res == 200):
+            messagebox.showinfo(message="Arbol AVL graficandose!!!", title="arbol AVL")
 
     def add_row(self, row):
         self.treeview.insert(
@@ -150,6 +167,8 @@ class Admin(ttk.Frame):
         self.button.pack(after=self.treeview)
         """
 
+        #self.fillTreeViewUsers() #Se llama por cada vez que se cree una ventana de admin
+
         self.orderedAST = tk.Button(self.main_window, text="Ordenar Ascedente", font=(
             'Times', 15, BOLD), bg='#666a88', bd=0, fg="#fff", pady=30, command=self.orderedAst)
         self.orderedAST.pack(fill=tk.BOTH)
@@ -165,6 +184,9 @@ class Admin(ttk.Frame):
         self.graph_tree = tk.Button(self.main_window, text="Graficar Arbol", font=(
             'Times', 15, BOLD), bg='#666a88', bd=0, fg="#fff", pady=30, command=self.graphTree)
         self.graph_tree.pack(fill=tk.BOTH)
+
+        self.graph_avltree = tk.Button(self.main_window, text="Graficar Arbol Avl Usuario", font=('Times', 15, BOLD), bg='#666a88', bd=0, fg="#fff", pady=30, command=self.drawAvlTree)
+        self.graph_avltree.pack(fill=tk.BOTH)
 
         self.deleteUser = tk.Button(self.main_window, text="Eliminar Usuario", font=(
             'Times', 15, BOLD), bg='#666a88', bd=0, fg="#fff", pady=30, command=self.item_selected)

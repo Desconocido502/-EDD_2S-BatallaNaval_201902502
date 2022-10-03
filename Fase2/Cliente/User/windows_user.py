@@ -181,7 +181,7 @@ class User():
             else:
                 print(user)
                 self.userMoney.configure(text=user["monedas"] + " Tokens Disponibles")
-                messagebox.showinfo(message="Compra realizada correctamente!!!", title="Compra Nice")
+                messagebox.showinfo(message="Compra realizada correctamente!!!", title="Compra Nice") 
         
         
         

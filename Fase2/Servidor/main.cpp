@@ -99,6 +99,28 @@ int main(int argc, char const *argv[])
 		crow::json::wvalue final = std::move(temp);
 		return crow::response(std::move(final)); });
 
+    CROW_ROUTE(app, "/usuarios/graficarArbolAvl")
+    ([&ltsUsers](const crow::request &req)
+     { 
+        auto x = crow::json::load(req.body);
+        if (!x)
+            return crow::response(400);
+        
+        string nick=x["nick"].s();
+        //cout<<nick<<endl;
+        NodoUsuario* aux = ltsUsers.searchUser2(nick);
+        
+        if (aux != NULL){
+            NodoAvl* raiz = aux->user->avl.root;
+            if(raiz == NULL) return crow::response(400);
+            else {
+                aux->user->avl.graficar(nick);
+                return crow::response(200);
+            }
+        }
+		return crow::response(400); 
+    });
+
     CROW_ROUTE(app, "/usuarios/get_user")
     ([&ltsUsers](const crow::request &req)
         { 
