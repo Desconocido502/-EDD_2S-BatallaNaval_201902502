@@ -99,6 +99,19 @@ int main(int argc, char const *argv[])
 		crow::json::wvalue final = std::move(temp);
 		return crow::response(std::move(final)); });
 
+    CROW_ROUTE(app, "/usuarios/get_user")
+    ([&ltsUsers](const crow::request &req)
+        { 
+            auto x = crow::json::load(req.body);
+            if (!x)
+                return crow::response(400);
+            string nick=x["nick"].s();
+            NodoUsuario* userTmp = ltsUsers.searchUser2(nick);
+            crow::json::wvalue temp = userTmp->user->to_map();
+            crow::json::wvalue final = std::move(temp);
+            return crow::response(std::move(final)); 
+        });
+
     CROW_ROUTE(app, "/login")
     ([&ltsUsers](const crow::request &req)
      {
@@ -198,7 +211,6 @@ int main(int argc, char const *argv[])
     CROW_ROUTE(app, "/skins")
     ([&ltsBarcos]()
      { 
-
 		std::vector<crow::json::wvalue> temp = ltsBarcos.lista_productos();
 		crow::json::wvalue final = std::move(temp);
 		return crow::response(std::move(final));
@@ -220,39 +232,49 @@ int main(int argc, char const *argv[])
 			return crow::response(200);
         });
 
-    CROW_ROUTE(app, "/skins/comprar_skin_barco")
-        .methods("POST"_method)([&ltsUsers, &ltsBarcos](const crow::request &req)
-        {
+
+    CROW_ROUTE(app, "/skins/buy_boat")
+        .methods("PUT"_method)([&ltsUsers, &ltsBarcos](const crow::request &req){
             auto x = crow::json::load(req.body);
 			if (!x) return crow::response(400);
 
-			string id=x["id"].s();
+            string id=x["id"].s();
 			string categoria =x["categoria"].s();
-			string userName =x["precio"].s();
+			string userName =x["userName"].s();
+            //cout<<id<<", "<<categoria<<", "<<userName<<endl;
             NodoBarco* barco_a_comprar = ltsBarcos.buyArticle2(categoria, id);
             NodoUsuario* usuario = ltsUsers.searchUser2(userName);
             if(barco_a_comprar != NULL &&  usuario != NULL){
                 int credito = usuario->getUsuario()->getMoney();
                 int precioBarco = barco_a_comprar->getPrecio();
+                //cout<<"credito:"<<credito<<"precio:"<<precioBarco<<endl;
                 if(credito < precioBarco){
                     //no se puede comprar el barco por falta de credito
+                    return crow::response(400);
                 }else{
-                    /*Se tienen dos opciones, que se pueda comprar:
-                        1.Se compra y se almacena sin problemas
-                        2.El barco ya se tenga y no se puede repetir
-                    */
+                    usuario->user->addBoat(barco_a_comprar);
+                    bool isBoatRepeat = usuario->user->avl.repetido;
+                    //Si el valor de isBoatRepeat es true no se puede comprar por que ya se ha comprado antes
+                    cout<<isBoatRepeat<<endl;
+                    if(isBoatRepeat){
+                        usuario->user->avl.repetido = false;
+                        return crow::response(404);
+                    }else{
+                        credito = credito - precioBarco;
+                        usuario->user->setMoney(credito);
+                    }
+                    //credito = credito - precioBarco;
+                    //cout<<"nuevo credito: "<<credito<<endl;
+                    return crow::response(200);
                 }
-
-
             }else{
                 return crow::response(400);
             }
-
-            
 			return crow::response(200);
-        });        
-
-    //-------------------------------TUTORIAL------------------------------------
+        }); 
+        
+        
+     //-------------------------------TUTORIAL------------------------------------
 
     CROW_ROUTE(app, "/tutorial/guardar_coordenada")
         .methods("POST"_method)([&tutorial](const crow::request &req)

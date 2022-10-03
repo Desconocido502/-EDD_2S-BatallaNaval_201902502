@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import util.generic as utl
 from ScrollableFrame.ScrollableFrame import ScrollableFrame
-from Controlador.ControlarData import getSkins, buySKinBarco
+from Controlador.ControlarData import getSkins, buySKinBarco, getUser
 from PIL import ImageTk, Image
 
 
@@ -27,9 +27,12 @@ class User():
         self.notebook.add(self.page1, text="Home")
 
         self.userName = ttk.Label(self.page1, text=self.userData["nick"])
-        self.userName.config(
-            foreground="blue", background="green", font=("Verdana", 14))
+        self.userName.config(foreground="blue", background="green", font=("Verdana", 14))
         self.userName.place(x=980, y=10)
+
+        self.userMoney = ttk.Label(self.page1, text=self.userData["monedas"] + " Tokens Disponibles")
+        self.userMoney.config(foreground="blue", background="green", font=("Verdana", 14))
+        self.userMoney.place(x=730, y=10)
 
         self.labelTienda = ttk.Label(self.page1, text="Tienda")
         self.labelTienda.config(font=("Verdana", 14))
@@ -97,8 +100,8 @@ class User():
             frameAux = ScrollableFrame(self.frameskins, direction="horizontal", width=1082, height=250)
             frameAux.grid(row=fila, column=0)
             tk.Label(frameAux.frame, text=skin["categoria"], font=("Verdana", 14)).grid(row=0, column=0)
-            print("categoria:" ,skin["categoria"])
-            print("ltsBarcos:")
+            #print("categoria:" ,skin["categoria"])
+            #print("ltsBarcos:")
             
             """
             for barco in skin["ltsBarcos"]:
@@ -121,7 +124,7 @@ class User():
                 #canvitas.grid(row=1, column=col)
                 #canvitas.create_image(0,0, image=self.img, anchor="nw")
                 tk.Label(frameAux.frame, text=barco["precio"], font=("Verdana", 14)).grid(row=2, column=col) #Label que muestra el precio
-                tk.Button(frameAux.frame, text="Comprar", borderwidth="1", relief="solid", command=lambda e=[skin["categoria"], barco["id"], self.userData["nick"]]:self.itemSelected(e)).grid(row=3, column=col)
+                tk.Button(frameAux.frame, text="Comprar", borderwidth="1", relief="solid", command=lambda e=[skin["categoria"], str(barco["id"]), self.userData["nick"]]:self.itemSelected(e)).grid(row=3, column=col)
                 col += 1
                 #print("id: ", barco["id"])
                 #print("nombre: " , barco["nombre"])
@@ -162,8 +165,27 @@ class User():
                     row=row, column=column, padx=5, pady=5, ipadx=15, ipady=15)
 
     def itemSelected(self, button_press_data):
-        buySKinBarco(button_press_data["categoria"], button_press_data["id"], button_press_data["nick"])
-        print(button_press_data)
+        #print(button_press_data)
+                            #   "categoria"            "id"                   "nick"
+        res = buySKinBarco(button_press_data[0], button_press_data[1], button_press_data[2])
+        
+        if(res.status_code == 400):
+            messagebox.showerror(message="NO tiene el credito suficiente para comprar la skin!", title="Error!!!")
+        elif(res.status_code == 404):
+            messagebox.showerror(message="Skin repetida, imposible comprar", title="Error!!!")
+        elif(res.status_code == 200):
+            #En caso de que todo este bien se muestran los cambios del user en la interfaz
+            user = getUser(button_press_data[2])
+            if (user == None):
+                messagebox.showerror(message="Sucedio un error", title="error!!!")
+            else:
+                print(user)
+                self.userMoney.configure(text=user["monedas"] + " Tokens Disponibles")
+                messagebox.showinfo(message="Compra realizada correctamente!!!", title="Compra Nice")
+        
+        
+        
+            #print(user)
 
         """
         for row in range(100):

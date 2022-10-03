@@ -20,7 +20,7 @@ private:
     int age;
 public:
     ListaPilaMov* listaPilaMovimientos;
-    AVL* avl; //Arbol avl para los productos
+    AVL avl; //Arbol avl para los productos
     User(string nick, string password, int money, int age){
         this->nick = nick;
         this->password = password;
@@ -91,7 +91,7 @@ public:
     }
     
     void addBoat(NodoBarco* barcoComprado){
-        avl->add(barcoComprado);
+        avl.add(barcoComprado);
     }
     
 

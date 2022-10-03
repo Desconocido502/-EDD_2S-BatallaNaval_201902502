@@ -23,7 +23,8 @@ int main(){
     avl->add(new NodoBarco("2bae79d6-9054-42e3-96c8-135f1e546aab", 8340, "Macropus rufus", "/usr/libe/skins/nombre", "Site Furnishings"));
     avl->add(new NodoBarco("730607bb-59d5-4c7a-92ec-8e25ec213c74", 7294, "Hystrix cristata", "/usr/libe/skins/nombre", "Doors, Frames & Hardware"));
     avl->add(new NodoBarco("2f591fc3-c533-4d92-a676-29fd30633510", 95808, "Bubalus arnee", "/usr/libe/skins/nombre", "Roofing (Metal)"));
-    avl->graficar();
+    avl->add(new NodoBarco("6ae94616-45e2-498f-8a40-e54b678e09ce", 8, "Lycosa godeffroyi", "/usr/libe/skins/nombre", "Waterproofing & Caulking"));
+    avl->graficar("Carlos");
     return 0;
 }
 

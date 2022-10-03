@@ -158,7 +158,7 @@ class Admin(ttk.Frame):
             'Times', 15, BOLD), bg='#666a88', bd=0, fg="#fff", pady=30, command=self.orderedDst)
         self.orderedDST.pack(fill=tk.BOTH)
 
-        self.cargar_users = tk.Button(self.main_window, text="cargar Usuarios", font=(
+        self.cargar_users = tk.Button(self.main_window, text="cargar Data", font=(
             'Times', 15, BOLD), bg='#666a88', bd=0, fg="#fff", pady=30, command=self.cargarData)
         self.cargar_users.pack(fill=tk.BOTH)
 

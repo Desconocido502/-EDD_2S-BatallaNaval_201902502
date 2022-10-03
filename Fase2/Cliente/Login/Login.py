@@ -12,7 +12,7 @@ class Login():
     def verificar(self):
         usu = self.usuario.get()
         password = self.password.get()        
-        print(usu, password)
+        #print(usu, password)
         res = verificarLogueo(usu, password)
         err = bool(res[0])
         user = dict(res[1])
@@ -29,7 +29,7 @@ class Login():
                 #Nos falta crear la interfaz del usuario
             #print(user['nick'], user['monedas'], user['edad'])
         else:
-            print(user['error'])
+            #print(user['error'])
             messagebox.showerror(message=user['error'], title="Error!!!")
                       
     def __init__(self):        

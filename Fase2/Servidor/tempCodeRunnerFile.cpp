@@ -1,1 +1,0 @@
-guardar_skin_barco

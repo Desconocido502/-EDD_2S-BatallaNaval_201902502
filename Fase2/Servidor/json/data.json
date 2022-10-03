@@ -1,6 +1,6 @@
 {
     "usuarios": [
-      { "nick": "Folagor", "password": "alfal475", "monedas": "35", "edad": "24" },
+      { "nick": "Folagor", "password": "alfal475", "monedas": "1500", "edad": "24" },
       { "nick": "Planton", "password": "cam78dad", "monedas": "15", "edad": "15" },
       { "nick": "Pikachu", "password": "beliz5a4", "monedas": "40", "edad": "19" },
       { "nick": "Naruto", "password": "jfagaga16a", "monedas": "150", "edad": "32" },
@@ -19,21 +19,21 @@
       { "nick": "Planton", "password": "salida45", "monedas": "350", "edad": "14" }
     ],
     "articulos": [  
-      {"id": "47", "categoria": "epico", "precio": "75", "nombre": "La Perla Negra", "src":"./img/BarcoEpico1.png"},
-      {"id": "48", "categoria": "legendario", "precio": "100", "nombre": "El Holandes Errante", "src":"./img/BarcoLegendario1.png"},
-      {"id": "47", "categoria": "raro", "precio": "50", "nombre": "La grajilla", "src":"./img/BarcoRaro1.png"},
-      {"id": "12", "categoria": "atipico", "precio": "60", "nombre": "La delicada dama", "src":"./img/BarcoPocoComun1.png"},
-      {"id": "14", "categoria": "tipico", "precio": "50", "nombre": "El viajero del alba", "src":"./img/BarcoComun1.png"},
-      {"id": "24", "categoria": "atipico", "precio": "350", "nombre": "Argo", "src":"./img/BarcoPocoComun2.png"},
-      {"id": "35", "categoria": "raro", "precio": "150", "nombre": "El Pequod", "src":"./img/BarcoRaro2.png"},
-      {"id": "16", "categoria": "legendario", "precio": "750", "nombre": "El Nautilus", "src":"./img/BarcoLegendario2.png"},
-      {"id": "50", "categoria": "epico", "precio": "525", "nombre": "Royale Fortune", "src":"./img/BarcoEpico2.png"},
-      {"id": "30", "categoria": "legendario", "precio": "550", "nombre": "El titanic", "src":"./img/BarcoLegendario5.png"},
-      {"id": "27", "categoria": "tipico", "precio": "530", "nombre": "Moby Dick", "src":"./img/BarcoComun2.png"},
-      {"id": "55", "categoria": "raro", "precio": "570", "nombre": "Baratle", "src":"./img/BarcoRaro3.png"},
-      {"id": "26", "categoria": "legendario", "precio": "650", "nombre": "Going Merry", "src":"./img/BarcoLegendario6.png"},
-      {"id": "59", "categoria": "raro", "precio": "750", "nombre": "Red force", "src":"./img/BarcoRaro4.png"},
-      {"id": "74", "categoria": "legendario", "precio": "230", "nombre": "Striker", "src":"./img/BarcoLegendario1.png"}
+      {"id": "fada-47fafa", "categoria": "epico", "precio": "75", "nombre": "La Perla Negra", "src":"./img/BarcoEpico1.png"},
+      {"id": "fafa-48grga", "categoria": "legendario", "precio": "100", "nombre": "El Holandes Errante", "src":"./img/BarcoLegendario1.png"},
+      {"id": "fafa-47rtwr", "categoria": "raro", "precio": "50", "nombre": "La grajilla", "src":"./img/BarcoRaro1.png"},
+      {"id": "fafa-12gfsa", "categoria": "atipico", "precio": "60", "nombre": "La delicada dama", "src":"./img/BarcoPocoComun1.png"},
+      {"id": "fafa-14gfsa", "categoria": "tipico", "precio": "50", "nombre": "El viajero del alba", "src":"./img/BarcoComun1.png"},
+      {"id": "fafa-24gfsa", "categoria": "atipico", "precio": "350", "nombre": "Argo", "src":"./img/BarcoPocoComun2.png"},
+      {"id": "fafa-35gfsa", "categoria": "raro", "precio": "150", "nombre": "El Pequod", "src":"./img/BarcoRaro2.png"},
+      {"id": "fafa-16gfsa", "categoria": "legendario", "precio": "750", "nombre": "El Nautilus", "src":"./img/BarcoLegendario2.png"},
+      {"id": "fafa-50gfsa", "categoria": "epico", "precio": "525", "nombre": "Royale Fortune", "src":"./img/BarcoEpico2.png"},
+      {"id": "fafa-30gfsa", "categoria": "legendario", "precio": "550", "nombre": "El titanic", "src":"./img/BarcoLegendario5.png"},
+      {"id": "fafa-27gfsa", "categoria": "tipico", "precio": "530", "nombre": "Moby Dick", "src":"./img/BarcoComun2.png"},
+      {"id": "fafa-55gfsa", "categoria": "raro", "precio": "570", "nombre": "Baratle", "src":"./img/BarcoRaro3.png"},
+      {"id": "fafa-26gfsa", "categoria": "legendario", "precio": "650", "nombre": "Going Merry", "src":"./img/BarcoLegendario6.png"},
+      {"id": "fafa-59gfsa", "categoria": "raro", "precio": "750", "nombre": "Red force", "src":"./img/BarcoRaro4.png"},
+      {"id": "fafa-74gfsa", "categoria": "legendario", "precio": "230", "nombre": "Striker", "src":"./img/BarcoLegendario1.png"}
     ],
     "tutorial": {
       "ancho":"15",

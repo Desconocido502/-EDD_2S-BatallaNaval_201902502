@@ -23,6 +23,7 @@ private:
     void InOrdenInterno(NodoAvl*);
     string graficadora(NodoAvl*);
 public:
+    bool repetido;
     NodoAvl* root;
     AVL();
     ~AVL();
@@ -31,11 +32,12 @@ public:
     void PostOrden();
     void InOrden();
     bool search(string);
-    void graficar();
+    void graficar(string);
 };
 
 AVL::AVL(){
     this->root = NULL;
+    this->repetido = false;
 }
 
 AVL::~AVL(){
@@ -104,6 +106,9 @@ NodoAvl* AVL::addInternal(NodoBarco* nodoBarco, NodoAvl* root){
                     root = this->drl(root);
                 }
             }
+        }else if(nodoBarco->getId() == root->nodoBarco->getId()){
+            this->repetido = true;
+            cout<<"NO se puede ingresar valores repetidos al arbol avl"<<endl;
         }else{
             if((nodoBarco->getId().compare(root->nodoBarco->getId())) > 0){
                 root->right = this->addInternal(nodoBarco, root->right);
@@ -176,16 +181,22 @@ bool AVL::search(NodoAvl* pivote, string id){
 }
 
 // graficar
-void AVL::graficar()
+void AVL::graficar(string nombre)
 {
     string cadena = "";
     cadena += "digraph G { \n";
     cadena += "rankdir=TB; \n";
-    cadena += "node [shape = record, color=black , style=filled, fillcolor=gray93];\n";
+    cadena += "label=\"";
+    cadena.append(nombre).append("\"\n");
+    cadena.append("fontname=\"Arial Black\"\n").append("fontsize=\"25pt\"\n");
+    cadena += "node[color=\"blue\",style=\"rounded,filled\",fillcolor=lightgray, shape=record, fontname=\"Arial\"];\n";
     cadena += this->graficadora(this->root);
     cadena += "} \n";
     //cout << cadena << endl;
-    generacionImg("ArbolAVl", cadena);
+    generacionImg(nombre + "_ArbolAVl", cadena);
+        //string command = "ArbolB.png";
+    string command = "xdg-open " + nombre + "_ArbolAVl.png";
+    to_string(system(command.c_str()));
 }
 
 string AVL::graficadora(NodoAvl *node)
