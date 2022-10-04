@@ -430,7 +430,7 @@ fontsize="25pt"
             contenido += '\n\ty{}->y{}[dir=back];'.format(j, j + 1)
         contenido += '\n\traiz->y{};'.format(1)
 
-        print(contenido)
+        #print(contenido)
         
         #* ya con las cabeceras graficadas, lo siguiente es los nodos internos, o nodosCelda
         pivote = self.filas.primero
@@ -488,9 +488,9 @@ fontsize="25pt"
             pivote = pivote.next
         
         contenido += '\n}' 
-        print(contenido)
+        #print(contenido)
 
-    def graficar(self):
+    def graficar(self, nombre):
         
         raiz = "raiz->F1 \nraiz->C1 "
         rCol ="{rank=same;raiz;"
@@ -566,13 +566,13 @@ fontsize="25pt"
         dot = "digraph G { \n  subgraph cluster_0 { \n       node[shape=box fontname=\"Arial\" fillcolor = \"LightSteelBlue\" style = filled ] \n         label = \"Matriz dispersa\" \n         bgcolor = \"Plum\" \n         raiz[label = \"0,0\"] \n edge[style = \"bold\" color=\"#1e8449\"]\n"
         dot+= (Cabeceras+Uniones+raiz+rCol+rF+Nodos+Dir1+Dir2+"edge [dir = both]\n"+Dir3+"\n}\n}") #Dir 4 quitado
         #print(dot)
-        dotX = "matriz_{}_dot.dot".format("Z")
+        dotX = "./EDDimg/matriz_{}_dis.dot".format("Z")
         file = open(dotX, "w")
         file.write(dot)
         file.close()
-        result = "matriz_{}.png".format("Z")
+        result = "./EDDimg/matriz_{}_dis.png".format(nombre)
         os.system("dot -Tpng " + dotX + " -o " + result)
-        webbrowser.open(result)
+        #webbrowser.open(result)
 
     def colorbarco(self,tipo,estado):
         if estado!="L":

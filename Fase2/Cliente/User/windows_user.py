@@ -122,16 +122,26 @@ class User():
             if(self.contImg == self.limitImg):
                 messagebox.showinfo(message="ULtima imagen disponible", title="Fin tutorial")
             else:
-                self.logo = utl.leer_imagen(f"./EDDimg/matriz_tutorial{self.contImg}_html.png", (550, 550))
+                self.contImg += 1
+                if (os.path.exists('./EDDimg/matriz_tutorial'+str(self.contImg)+".png")==True):
+                    self.logo = utl.leer_imagen(f"./EDDimg/matriz_tutorial{self.contImg}_html.png", (550, 550))
+                    self.labelTutorialImg.configure(image=self.logo)
+                    self.labelTutorialImg["image"] = self.logo
+                else:
+                    pass
+
+
+
+                #self.logo = utl.leer_imagen(f"./EDDimg/matriz_tutorial{self.contImg}_html.png", (550, 550))
                 #print(self.logo)
-                self.labelTutorialImg = tk.Label(self.page2, text=f"matriz_tutorial{self.contImg}_html.png", image=self.logo)
-                self.labelTutorialImg.configure(image=self.logo)
-                self.labelTutorialImg["image"] = self.logo
+                #self.labelTutorialImg = tk.Label(self.page2, text=f"matriz_tutorial{self.contImg}_html.png", image=self.logo)
+                #self.labelTutorialImg.configure(image=self.logo)
+                #self.labelTutorialImg["image"] = self.logo
                 #self.labelTutorialImg["text"] = f"matriz_tutorial{self.contImg}_html.png"
                 #self.labelTutorialImg.configure(image=self.logo)
                 #self.labelTutorialImg["image"] = self.logo
-                self.contImg += 1
-                print(self.contImg)
+                #self.contImg += 1
+                #print(self.contImg)
         
         
     
