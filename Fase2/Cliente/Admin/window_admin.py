@@ -46,8 +46,6 @@ class Admin(ttk.Frame):
                 cargarCoorTutorial(tutorial["x"], tutorial["y"])
                 #print(tutorial["x"], tutorial["y"])
 
-            #getTutorial() todo nice
-
             # En este punto se tendria que haber cargado toda la informacion del user
             # ahora a insertar los datos de la API
             self.fillTreeViewUsers()

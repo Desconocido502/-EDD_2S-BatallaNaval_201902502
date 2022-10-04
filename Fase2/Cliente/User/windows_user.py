@@ -1,12 +1,14 @@
 from cmath import exp
 from email.mime import image
-from textwrap import fill
+from tkinter.font import BOLD
 import tkinter as tk
 from tkinter import ttk, messagebox
+import os
 import util.generic as utl
 from ScrollableFrame.ScrollableFrame import ScrollableFrame
-from Controlador.ControlarData import getSkins, buySKinBarco, getUser
+from Controlador.ControlarData import getSkins, buySKinBarco, getUser, getTutorial
 from PIL import ImageTk, Image
+from EDD.matriz import matriz
 
 
 class User():
@@ -16,6 +18,9 @@ class User():
         self.main_window.title("Notebook")
         self.main_window.resizable(0, 0)
         self.main_window.geometry("1100x650")
+
+        self.contImg = 1
+        self.limitImg = 0
 
         self.notebook = ttk.Notebook(self.main_window)
         self.notebook.pack(fill='both', expand='yes')
@@ -88,9 +93,70 @@ class User():
         self.loadSkins()
 
         self.page2 = ttk.Frame(self.notebook)
-        self.notebook.add(self.page2, text="About")
+        self.notebook.add(self.page2, text="Tutorial")
+
+        self.labelTutorial = ttk.Label(self.page2, text="Tutorial")
+        self.labelTutorial.config(font=("Verdana", 14))
+        self.labelTutorial.place(x=15, y=15)
+
+        logo = utl.leer_imagen("./EDDimg/matrizDispersa.png", (550, 550))
+        self.labelTutorialImg = tk.Label(self.page2, text="matrizDispersa.png")
+        self.labelTutorialImg.config(image=logo, font=("Verdana", 14))
+        self.labelTutorialImg.place(x=275, y=70)
+        
+        self.iniciarTutorial = tk.Button(self.page2, text="Iniciar Tutorial", font=('Times', 15, BOLD), bg='Black', bd=0, fg="#fff", pady=5, command=self.loadTutorial) #, command=self.item_selected
+        self.iniciarTutorial.place(x=900, y=15)
+
+        self.siguienteImg = tk.Button(self.page2, text="Siguiente img", font=('Times', 15, BOLD), bg='Black', bd=0, fg="#fff", pady=5, command=self.mostrarTutorial) #, command=self.item_selected
+        self.siguienteImg.place(x=900, y=60)
+
 
         self.main_window.mainloop()
+    
+    def mostrarTutorial(self):
+        #matriz_tutorial39_html.png
+        #print(self.labelTutorialImg["text"])
+        if("matrizDispersa.png" == self.labelTutorialImg["text"]):
+            messagebox.showwarning(message="No se puede avanzar, inicie el tutorial", title="Observacion")
+        else:
+            if(self.contImg == self.limitImg):
+                messagebox.showinfo(message="ULtima imagen disponible", title="Fin tutorial")
+            else:
+                self.logo = utl.leer_imagen(f"./EDDimg/matriz_tutorial{self.contImg}_html.png", (550, 550))
+                #print(self.logo)
+                self.labelTutorialImg = tk.Label(self.page2, text=f"matriz_tutorial{self.contImg}_html.png", image=self.logo)
+                self.labelTutorialImg.configure(image=self.logo)
+                self.labelTutorialImg["image"] = self.logo
+                #self.labelTutorialImg["text"] = f"matriz_tutorial{self.contImg}_html.png"
+                #self.labelTutorialImg.configure(image=self.logo)
+                #self.labelTutorialImg["image"] = self.logo
+                self.contImg += 1
+                print(self.contImg)
+        
+        
+    
+    def loadTutorial(self):
+        data = getTutorial()
+        tamanyoMatriz = data.pop(0)
+        matrizTutorial = matriz(int(tamanyoMatriz["AnchoX"]))
+        nombre = "tutorial"
+        cont = 1
+        self.limitImg = len(data)
+        #print(self.limitImg)
+        #se cargan las imagenes a mostrar
+        for d in data:
+            matrizTutorial.MarcarDisparo(int(d["AnchoX"]), int(d['AltoY']))
+            matrizTutorial.printMatrixO(nombre+str(cont))
+            #print(int(d["AnchoX"]), int(d['AltoY']), cont)
+            cont += 1
+        self.image2 = utl.leer_imagen("./EDDimg/matriz_tutorial{}_html.png".format(str(self.contImg)), (550, 550))
+        self.labelTutorialImg["text"] = "matriz_tutorial{}_html.png".format(str(self.contImg))
+        self.labelTutorialImg.configure(image=self.image2)
+        self.labelTutorialImg["image"] = self.image2
+        self.contImg += 1
+
+        
+        
 
     def loadSkins(self):
 

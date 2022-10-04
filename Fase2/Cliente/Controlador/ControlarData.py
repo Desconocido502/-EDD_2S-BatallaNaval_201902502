@@ -1,7 +1,6 @@
-
-from pickle import NONE
 import requests
 import json
+import os
 
 base_url = "http://localhost:5000"
 
@@ -84,8 +83,8 @@ def cargarCoorTutorial(x, y):
 def getTutorial():
     res = requests.get(f"{base_url}/tutorial")
     data = res.json()  # Convertimos la respuesta en dict
-    print(data)
-    #return data
+    #print(data)
+    return data
 
 def buySKinBarco(categoria, id, userName):
     newCoord = {"categoria": categoria, "id": id, "userName": userName}

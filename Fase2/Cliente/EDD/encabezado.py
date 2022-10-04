@@ -1,20 +1,25 @@
-from nodos import Nodo, NodoEncabezado
+class NodoEncabezado:
+    def __init__(self,id):
+        self.id = id
+        self.next = None
+        self.prev = None
+        self.accesoNodo = None
 
 class ListaEncabezado:
     def __init__(self,primero=None):
         self.primero = primero
     
-    def setEncabezado(self,nuevo):
+    def setEncabezado(self,nuevo:NodoEncabezado):
         if self.primero == None:
             self.primero = nuevo
         
         elif nuevo.id < self.primero.id:
             nuevo.next = self.primero
-            self.primero.anterior = nuevo
+            self.primero.prev = nuevo
             self.primero = nuevo
 
         else:
-            actual = self.primero
+            actual:NodoEncabezado = self.primero
             while actual.next != None:
                 if nuevo.id< actual.next.id:
                     nuevo.next = actual.next
@@ -29,7 +34,7 @@ class ListaEncabezado:
                 nuevo.anterior = actual
 
     def getEncabezado(self,id):
-        actual = self.primero
+        actual:NodoEncabezado = self.primero
         while actual!=None:
             if actual.id == id:
                 return actual

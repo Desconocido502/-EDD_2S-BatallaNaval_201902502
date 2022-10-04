@@ -87,7 +87,7 @@ int main(int argc, char const *argv[])
     CROW_ROUTE(app, "/")
     ([]
     {
-        crow::json::wvalue x({{"status", "OK!"},{"otro", 12}});
+        crow::json::wvalue x({{"status", "OK!"},{"numero", 12}});
         return x; 
     });
 
@@ -318,7 +318,7 @@ int main(int argc, char const *argv[])
 		std::vector<crow::json::wvalue> temp = tutorial.to_vector();
 		crow::json::wvalue final = std::move(temp);
 		return crow::response(std::move(final));
-     }); 
+     });
 
     // AQUI ABAJO NO SE TOCA, TODA RUTA SE COLOCA ENCIMA DE ESTE MENSAJE
 

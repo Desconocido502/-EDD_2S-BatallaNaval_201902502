@@ -1,9 +1,63 @@
 #from pprint import pprint
 import random
-from nodos import Nodo,NodoEncabezado
-from encabezado import ListaEncabezado
 import os
 import webbrowser
+
+
+class Nodo:
+    def __init__(self,fila, columna, estado,barco):
+        self.fila = fila
+        self.columna = columna
+        self.estado = estado
+        self.barco = barco
+        self.right = None
+        self.left = None
+        self.up = None
+        self.down = None
+
+class NodoEncabezado:
+    def __init__(self,id):
+        self.id = id
+        self.next = None
+        self.prev = None
+        self.accesoNodo = None
+
+class ListaEncabezado:
+    def __init__(self,primero=None):
+        self.primero = primero
+    
+    def setEncabezado(self,nuevo:NodoEncabezado):
+        if self.primero == None:
+            self.primero = nuevo
+        
+        elif nuevo.id < self.primero.id:
+            nuevo.next = self.primero
+            self.primero.prev = nuevo
+            self.primero = nuevo
+
+        else:
+            actual:NodoEncabezado = self.primero
+            while actual.next != None:
+                if nuevo.id< actual.next.id:
+                    nuevo.next = actual.next
+                    actual.next.prev = nuevo
+                    nuevo.prev = actual
+                    actual.next = nuevo
+                    break
+                actual = actual.next
+
+            if actual.next == None:
+                actual.next = nuevo
+                nuevo.anterior = actual
+
+    def getEncabezado(self,id):
+        actual:NodoEncabezado = self.primero
+        while actual!=None:
+            if actual.id == id:
+                return actual
+            actual = actual.next
+
+        return None
 
 P = 1
 S = 2
@@ -278,7 +332,7 @@ class matriz:
                 eColumna = eColumna.next    
             return False
 
-    def printMatrixO(self):
+    def printMatrixO(self, nombre):
         contenido = ""
         cadena = ""
         contenido += """digraph html {
@@ -331,13 +385,13 @@ abc [shape = none, margin = 0, label=<
             #print("")        
         cadena += "</TABLE>>];\n}"
         contenido += cadena
-        dotX = "matriz_{}_html.dot".format("Z")
+        dotX = "./EDDimg/matriz_{}_html.dot".format("Z")
         file = open(dotX, "w")
         file.write(contenido)
         file.close()
-        result = "matriz_{}_html.png".format("Z")
+        result = "./EDDimg/matriz_{}_html.png".format(nombre)
         os.system("dot -Tpng " + dotX + " -o " + result)
-        webbrowser.open(result)
+        #webbrowser.open(result)
 
     def graficarNeato(self):
         ltsColores = ['P','S','D','B']
@@ -533,10 +587,10 @@ fontsize="25pt"
             elif tipo=="B": 
                 return "\"#008080\""
 
-matrix = matriz(20)
-matrix.Agregarbarcos()
-matrix.MarcarDisparo(7,3)
-matrix.MarcarDisparo(1,5)
-matrix.graficar()
+#matrix = matriz(20)
+#matrix.Agregarbarcos()
+#matrix.MarcarDisparo(7,3)
+#matrix.MarcarDisparo(1,5)
+#matrix.graficar()
 #matrix.graficarNeato()
 #matrix.printMatrixO()
