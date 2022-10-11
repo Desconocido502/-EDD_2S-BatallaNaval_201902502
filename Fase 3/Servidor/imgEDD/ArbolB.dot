@@ -1,0 +1,11 @@
+digraph g {
+ node [shape = record,height=.1];
+"Nodo4f63af4c-20cf-6303-d2d6-95d4c04e3e5f"[label="<P0>|Nick: Folagor,\n password: alfal475,\n monedas: 700,\n edad: 29|<P1>|Nick: Pikachu,\n password: beliz5a4,\n monedas: 59,\n edad: 18|<P2>"];
+"Nodo88c3db01-b1bb-57a3-922c-6f724cb6959c"[label="<P0>|Nick: Carlos,\n password: edd123,\n monedas: 550,\n edad: 22|<P1>"];
+"Nodo4f63af4c-20cf-6303-d2d6-95d4c04e3e5f":P0 -> "Nodo88c3db01-b1bb-57a3-922c-6f724cb6959c";
+"Nodo58d8a33e-e0ac-4437-70ea-11dcf99490d0"[label="<P0>|Nick: Goku,\n password: agga516r,\n monedas: 56,\n edad: 20|<P1>|Nick: Homero,\n password: agfa84aafg8,\n monedas: 86,\n edad: 45|<P2>"];
+"Nodo4f63af4c-20cf-6303-d2d6-95d4c04e3e5f":P1 -> "Nodo58d8a33e-e0ac-4437-70ea-11dcf99490d0";
+"Nodod9468431-269b-e99e-3962-238f68884b3b"[label="<P0>|Nick: Planton,\n password: cam78dad,\n monedas: 50,\n edad: 20|<P1>"];
+"Nodo4f63af4c-20cf-6303-d2d6-95d4c04e3e5f":P2 -> "Nodod9468431-269b-e99e-3962-238f68884b3b";
+
+}

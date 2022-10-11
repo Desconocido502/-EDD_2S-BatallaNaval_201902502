@@ -1,0 +1,12 @@
+digraph G { 
+rankdir=TB; 
+label="Folagor"
+fontname="Arial Black"
+fontsize="25pt"
+node[color="blue",style="rounded,filled",fillcolor=lightgray, shape=record, fontname="Arial"];
+"nodofafa-12gfsa"[label ="<C0>|Id: fafa-12gfsa,\n nombre: La delicada dama,\n precio: 60|<C1> "]; 
+"nodofada-47fafa"[label ="Id: fada-47fafa,\n nombre: La Perla Negra,\n precio: 75"]; 
+"nodofafa-12gfsa":C0->"nodofada-47fafa"
+"nodofafa-14gfsa"[label ="Id: fafa-14gfsa,\n nombre: El viajero del alba,\n precio: 50"]; 
+"nodofafa-12gfsa":C1->"nodofafa-14gfsa"
+} 

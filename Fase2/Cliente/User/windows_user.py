@@ -1,5 +1,5 @@
 from cmath import exp
-from email.mime import image
+from pathlib import Path
 from tkinter.font import BOLD
 import tkinter as tk
 from tkinter import ttk, messagebox
@@ -110,6 +110,11 @@ class User():
         self.siguienteImg = tk.Button(self.page2, text="Siguiente img", font=('Times', 15, BOLD), bg='Black', bd=0, fg="#fff", pady=5, command=self.mostrarTutorial) #, command=self.item_selected
         self.siguienteImg.place(x=900, y=60)
 
+        self.image_folder_path = "./EDDimg"
+        self.image_file_extensions = {'.jpg', '.png'}
+        self.images_filenames = []
+        self.images = []
+
 
         self.main_window.mainloop()
     
@@ -120,17 +125,19 @@ class User():
             messagebox.showwarning(message="No se puede avanzar, inicie el tutorial", title="Observacion")
         else:
             if(self.contImg == self.limitImg):
-                messagebox.showinfo(message="ULtima imagen disponible", title="Fin tutorial")
+                messagebox.showinfo(message="Ultima imagen disponible", title="Fin tutorial")
             else:
                 self.contImg += 1
-                if (os.path.exists('./EDDimg/matriz_tutorial'+str(self.contImg)+".png")==True):
-                    self.logo = utl.leer_imagen(f"./EDDimg/matriz_tutorial{self.contImg}_html.png", (550, 550))
-                    self.labelTutorialImg.configure(image=self.logo)
-                    self.labelTutorialImg["image"] = self.logo
-                else:
-                    pass
-
-
+                #print(self.images_filenames[0])
+                image_file_path = Path(f"EDDimg/matriz_tutorial{self.contImg}_html.png")
+                #print(image_file_path in self.images_filenames)
+                if (image_file_path in self.images_filenames):
+                    print(image_file_path)
+                    img = Image.open(image_file_path).resize((550,550))
+                    img = ImageTk.PhotoImage(img)
+                    #self.labelTutorialImg = tk.Label(self.page2, text=image_file_path, image=img)
+                    self.labelTutorialImg.configure(image=img)
+                    self.images.append(img)
 
                 #self.logo = utl.leer_imagen(f"./EDDimg/matriz_tutorial{self.contImg}_html.png", (550, 550))
                 #print(self.logo)
@@ -149,6 +156,7 @@ class User():
         data = getTutorial()
         tamanyoMatriz = data.pop(0)
         matrizTutorial = matriz(int(tamanyoMatriz["AnchoX"]))
+        matrizTutorial.Agregarbarcos()
         nombre = "tutorial"
         cont = 1
         self.limitImg = len(data)
@@ -164,6 +172,11 @@ class User():
         self.labelTutorialImg.configure(image=self.image2)
         self.labelTutorialImg["image"] = self.image2
         self.contImg += 1
+
+        self.images_filenames.clear()
+        for filepath in Path(self.image_folder_path).iterdir():
+            if(filepath.suffix in self.image_file_extensions):
+                self.images_filenames.append(filepath)
 
         
         

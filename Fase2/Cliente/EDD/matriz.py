@@ -541,7 +541,7 @@ fontsize="25pt"
             eColumna = eColumna.next 
         #print(Nodos)
         eFila = self.filas.primero
-
+        
         while eFila != None:
             actual = eFila.accesoNodo
             cont = 0

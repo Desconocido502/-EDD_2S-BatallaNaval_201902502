@@ -1,0 +1,21 @@
+digraph G { 
+rankdir=TB; 
+node [shape = record, color=black , style=filled, fillcolor=gray93];
+"nodoa989148c-65c2-4a53-a09c-05dc5288b53d"[label ="<C0>|Id: a989148c-65c2-4a53-a09c-05dc5288b53d,\n nombre: Lepus townsendii,\n precio: 92|<C1> "]; 
+"nodo3f0e30e5-565b-48f6-b877-a4a27ab14a4f"[label ="<C0>|Id: 3f0e30e5-565b-48f6-b877-a4a27ab14a4f,\n nombre: Colobus guerza,\n precio: 8817|<C1> "]; 
+"nodo2bae79d6-9054-42e3-96c8-135f1e546aab"[label ="<C0>|Id: 2bae79d6-9054-42e3-96c8-135f1e546aab,\n nombre: Macropus rufus,\n precio: 8340|<C1> "]; 
+"nodo2f591fc3-c533-4d92-a676-29fd30633510"[label ="Id: 2f591fc3-c533-4d92-a676-29fd30633510,\n nombre: Bubalus arnee,\n precio: 95808"]; 
+"nodo2bae79d6-9054-42e3-96c8-135f1e546aab":C1->"nodo2f591fc3-c533-4d92-a676-29fd30633510"
+"nodo3f0e30e5-565b-48f6-b877-a4a27ab14a4f":C0->"nodo2bae79d6-9054-42e3-96c8-135f1e546aab"
+"nodo6ae94616-45e2-498f-8a40-e54b678e09ce"[label ="<C0>|Id: 6ae94616-45e2-498f-8a40-e54b678e09ce,\n nombre: Lycosa godeffroyi,\n precio: 8|<C1> "]; 
+"nodo730607bb-59d5-4c7a-92ec-8e25ec213c74"[label ="Id: 730607bb-59d5-4c7a-92ec-8e25ec213c74,\n nombre: Hystrix cristata,\n precio: 7294"]; 
+"nodo6ae94616-45e2-498f-8a40-e54b678e09ce":C1->"nodo730607bb-59d5-4c7a-92ec-8e25ec213c74"
+"nodo3f0e30e5-565b-48f6-b877-a4a27ab14a4f":C1->"nodo6ae94616-45e2-498f-8a40-e54b678e09ce"
+"nodoa989148c-65c2-4a53-a09c-05dc5288b53d":C0->"nodo3f0e30e5-565b-48f6-b877-a4a27ab14a4f"
+"nodoc3d9d91b-da3e-4f03-aa93-0fbec920be75"[label ="<C0>|Id: c3d9d91b-da3e-4f03-aa93-0fbec920be75,\n nombre: Lemur catta,\n precio: 13211|<C1> "]; 
+"nodob1f8da3b-c87b-46bf-80a6-2bcf8af22d35"[label ="Id: b1f8da3b-c87b-46bf-80a6-2bcf8af22d35,\n nombre: Crax sp.,\n precio: 998"]; 
+"nodoc3d9d91b-da3e-4f03-aa93-0fbec920be75":C0->"nodob1f8da3b-c87b-46bf-80a6-2bcf8af22d35"
+"nodoef134d34-d904-47e2-8198-9a6eae0bc759"[label ="Id: ef134d34-d904-47e2-8198-9a6eae0bc759,\n nombre: Manouria emys,\n precio: 158"]; 
+"nodoc3d9d91b-da3e-4f03-aa93-0fbec920be75":C1->"nodoef134d34-d904-47e2-8198-9a6eae0bc759"
+"nodoa989148c-65c2-4a53-a09c-05dc5288b53d":C1->"nodoc3d9d91b-da3e-4f03-aa93-0fbec920be75"
+} 
