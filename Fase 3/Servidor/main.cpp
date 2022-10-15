@@ -51,7 +51,7 @@ void cargarDatos(DoublyLinkedListCircularUser &lts)
     {
         if (!lts.searchUserForNick(string(usuario.at("nick"))))
         {
-            lts.insertAtEnd(usuario.at("nick"), SHA256::cifrar(usuario.at("password")), stoi(usuario.at("monedas").get<string>()), stoi(usuario.at("edad").get<string>()));
+            lts.insertAtEnd(usuario.at("id"), usuario.at("nick"), SHA256::cifrar(usuario.at("password")), stoi(usuario.at("monedas").get<string>()), stoi(usuario.at("edad").get<string>()));
         }
     }
     lts.sort();
@@ -70,7 +70,7 @@ int main(int argc, char const *argv[])
     arbolUsers.root = nullptr;
     arbolUsers.MinDeg = 2;
 
-    arbolUsers.insert("EDD", ltsUsers.insertAtEnd("EDD", SHA256::cifrar("edd123"), 50, 25));
+    arbolUsers.insert("EDD", ltsUsers.insertAtEnd(-10,"EDD", SHA256::cifrar("edd123"), 50, 25));
 
     //---------------Lista de listas de barcos------------------
     LinkedListCategoria ltsBarcos;
@@ -173,12 +173,13 @@ int main(int argc, char const *argv[])
             auto x = crow::json::load(req.body);
 			if (!x) return crow::response(400);
 
+            int id = x["id"].i();
 			string nick=x["nick"].s();
 			string pass=x["password"].s();
 			int monedas=x["monedas"].i();
 			int edad=x["edad"].i();
             if (!ltsUsers.searchUserForNick(nick)){
-                arbolUsers.insert(nick, ltsUsers.insertAtEnd(nick,SHA256::cifrar(pass),monedas,edad));
+                arbolUsers.insert(nick, ltsUsers.insertAtEnd(id, nick,SHA256::cifrar(pass),monedas,edad));
             }
 			return crow::response(200);
         });

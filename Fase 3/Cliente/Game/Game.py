@@ -10,28 +10,26 @@ class Game(ttk.Frame):
 
     #--------Cargar Datos iniciales de la partida--------------------------------------------------------
     def InitializeData(self):
-        matrizJugador = matriz(self.tamTabla) #Matriz para el jugador
-        matrizMaquina = matriz(self.tamTabla) #Matriz para la maquina
+        self.matrizJugador = matriz(self.tamTabla) #Matriz para el jugador
+        self.matrizMaquina = matriz(self.tamTabla) #Matriz para la maquina
             
         #-------Se agregan los barcos aleatoriamente a cada matriz-----------
-        matrizJugador.Agregarbarcos()
-        matrizMaquina.Agregarbarcos()
+        self.matrizJugador.Agregarbarcos()
+        self.matrizMaquina.Agregarbarcos()
 
-        matrizJugador.printMatrixO("Jugador_0")
-        matrizMaquina.printMatrixShadow("Maquina_0")
+        self.matrizJugador.printMatrixO("Jugador_0")
+        self.matrizMaquina.printMatrixO("MaquinaV_0")
+        #self.matrizMaquina.printMatrixShadow("Maquina_0")
 
-        #img = Image.open("./EDDimg/matriz_Jugador_0_html.png").resize((675,590))
-        #img = ImageTk.PhotoImage(img)
-        #self.labelImg = tk.Label(self.tableroPrincipal, bg="#f0f3f4", text="prueba", image=img)
-        #self.labelImg.configure(image=img)
-        #self.labelImg.place(x=55,y=15,relwidth=0.85, relheight=0.85)
-
-        #img2 = Image.open("./EDDimg/matriz_Maquina_0_html.png").resize((420,350))
-        #img2 = ImageTk.PhotoImage(img2)
-        #self.labelImgSec = tk.Label(self.tableroSecundario, bg="#f0f3f4", text="prueba2", image=img2)
-        #self.labelImgSec.configure(image=img2)
-        #self.labelImgSec.place(x=10,y=10,relwidth=0.95, relheight=0.50)
-
+    def atacar(self):
+        coordX = int(self.posX.get())
+        coordY = int(self.posY.get())
+        self.matrizMaquina.MarcarDisparo(coordX,coordY)
+        self.matrizMaquina.printMatrixShadow("Maquina_0")
+        img2 = Image.open("./EDDimg/matriz_Maquina_0_html.png").resize((420,350))
+        img2 = ImageTk.PhotoImage(img2)
+        self.labelImgSec.configure(image=img2)
+        self.labelImgSec.image = img2
 
     def __init__(self, tamTabla, user):  # Se traen los datos del usuario
         self.userData = user
@@ -72,7 +70,7 @@ class Game(ttk.Frame):
         self.posY = tk.Entry(self.tableroPrincipal, width=5,font=('Times', 15), bg="#5b2c6f", fg="white")
         self.posY.place(x=210, y=660)
 
-        self.ButtonAtacar = tk.Button(self.tableroPrincipal, text="ATACAR", foreground="white", background="#212f3c", font=('Times', 15,BOLD)) #, command=self.DatosJXM
+        self.ButtonAtacar = tk.Button(self.tableroPrincipal, text="ATACAR", foreground="white", background="#212f3c", font=('Times', 15,BOLD), command=self.atacar) #, command=self.DatosJXM
         self.ButtonAtacar.place(x=290, y=625)
 
         #-------------------------Fin Widgets Tablero principal---------------------------------------------

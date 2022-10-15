@@ -17,7 +17,7 @@ public:
     NodoUsuario* sig;
     NodoUsuario* ant;
     NodoUsuario();
-    NodoUsuario(string, string, int, int);
+    NodoUsuario(int, string, string, int, int);
     string mostrarDatos();
     User* getUsuario();
 
@@ -30,8 +30,8 @@ NodoUsuario::NodoUsuario(){
     this->ant = NULL;
 }
 
-NodoUsuario::NodoUsuario(string nick, string password, int money, int age){
-    this->user = new User(nick, password, money, age);
+NodoUsuario::NodoUsuario(int id, string nick, string password, int money, int age){
+    this->user = new User(id, nick, password, money, age);
     this->sig = NULL;
     this->ant = NULL;
 }

@@ -38,8 +38,8 @@ def getUser(nick):
         return data
 
 #*Carga un user
-def cargarUser(nick, password, money, age):
-    newUser = {"nick": nick, "password": password, "monedas": money ,"edad": age}
+def cargarUser(id, nick, password, money, age):
+    newUser = {"id": id,"nick": nick, "password": password, "monedas": money ,"edad": age}
     res = requests.post(f"{base_url}/guardar_usuario", json=newUser)
 
 

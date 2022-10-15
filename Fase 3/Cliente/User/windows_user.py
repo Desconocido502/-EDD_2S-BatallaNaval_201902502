@@ -2,12 +2,13 @@ from cmath import exp
 from pathlib import Path
 from tkinter.font import BOLD
 import tkinter as tk
-from tkinter import ttk, messagebox
+from tkinter import PhotoImage, ttk, messagebox
 import util.generic as utl
 from ScrollableFrame.ScrollableFrame import ScrollableFrame
 from Controlador.ControlarData import getSkins, buySKinBarco, getUser, getTutorial
 from PIL import ImageTk, Image
 from EDD.matriz import matriz
+from Game.CarritoCompra import CarritoCompra
 
 
 class User():
@@ -42,11 +43,27 @@ class User():
         self.labelTienda.config(font=("Verdana", 14))
         self.labelTienda.place(x=500, y=15)
 
+        imgCarritoCompra = Image.open("./img/carritoCompra.jpg")
+        imgCarritoCompra = imgCarritoCompra.resize((30, 30))
+        imgCarritoCompra = ImageTk.PhotoImage(imgCarritoCompra)
+        self.buttonCarritoCompra = tk.Button(self.page1, text="0", image=imgCarritoCompra, background="red", command=self.comprar)
+        self.buttonCarritoCompra.place(x=15, y=10)
+
+        self.contadorComprasL = tk.Label(self.page1, text="0", foreground="white", background="red", font=("Verdana", 15))
+        self.contadorComprasL.place(x=50, y=13)
+
+        self.contadorCompras = 0
+        self.ltsDatosHashTable = []
+
+        self.totalLabel = tk.Label(self.page1, text="Total:", foreground="white", background="red", font=("Verdana", 15))
+        self.totalLabel.place(x=75, y=13)
+        self.totalCompra = tk.Label(self.page1, text="0", foreground="white", background="red", font=("Verdana", 15))
+        self.totalCompra.place(x=135, y=13)
+
         self.frameRoot = tk.Frame(self.page1)
         self.frameRoot.pack(side="left")
 
-        self.canvas = tk.Canvas(
-            self.frameRoot, borderwidth=0, background="#ff0")
+        self.canvas = tk.Canvas(self.frameRoot, borderwidth=0, background="#ff0")
 
         self.frameskins = tk.Frame(self.canvas, bg="lightblue")
         self.frameskins.config(width=1100, height=500)
@@ -54,14 +71,12 @@ class User():
         self.frameskins.pack(expand=1)
 
         # scrollbar
-        self.scrolly = tk.Scrollbar(
-            self.frameRoot, orient="vertical", command=self.canvas.yview)
+        self.scrolly = tk.Scrollbar(self.frameRoot, orient="vertical", command=self.canvas.yview)
         self.canvas.configure(yscrollcommand=self.scrolly.set)
         self.scrolly.pack(side="right", fill="y")
         self.canvas.config(width=1100, height=500)
         self.canvas.pack(side="left", fill="both", expand=True)
-        self.canvas.create_window(
-            (4, 4), window=self.frameskins, anchor="sw", tags="self.frameskins")
+        self.canvas.create_window((4, 4), window=self.frameskins, anchor="sw", tags="self.frameskins")
         self.frameRoot.bind("<Configure>", self.onFrameConfigure)
         # self.populate()
         #self.scrolly.place(x=950, y=0)
@@ -116,6 +131,10 @@ class User():
 
 
         self.main_window.mainloop()
+
+    def comprar(self):
+        self.main_window.destroy()
+        CarritoCompra(self.ltsDatosHashTable)
     
     def mostrarTutorial(self):
         #matriz_tutorial39_html.png
@@ -212,7 +231,7 @@ class User():
                 #canvitas.grid(row=1, column=col)
                 #canvitas.create_image(0,0, image=self.img, anchor="nw")
                 tk.Label(frameAux.frame, text=barco["precio"], font=("Verdana", 14)).grid(row=2, column=col) #Label que muestra el precio
-                tk.Button(frameAux.frame, text="Comprar", borderwidth="1", relief="solid", command=lambda e=[skin["categoria"], str(barco["id"]), self.userData["nick"]]:self.itemSelected(e)).grid(row=3, column=col)
+                tk.Button(frameAux.frame, text="Comprar", borderwidth="1", relief="solid", command=lambda e=[skin["categoria"], str(barco["id"]), self.userData["nick"], barco["nombre"], barco["precio"]]:self.itemSelected(e)).grid(row=3, column=col)
                 col += 1
                 #print("id: ", barco["id"])
                 #print("nombre: " , barco["nombre"])
@@ -254,8 +273,22 @@ class User():
 
     def itemSelected(self, button_press_data):
         #print(button_press_data)
-                            #   "categoria"            "id"                   "nick"
-        res = buySKinBarco(button_press_data[0], button_press_data[1], button_press_data[2])
+        """Se cambia este metodo directo a usar un carrito de compras"""
+        categoryShip = button_press_data[0] #Categoria del barco
+        idShip = button_press_data[1] #Id del barco
+        nameUser = button_press_data[2] #Nombre del usuario
+        nameShip = button_press_data[3] #Nombre del barco
+        priceShip = button_press_data[4] #Precio del barco
+        self.totalCompra.configure(text=str(int(self.totalCompra.cget("text"))+int(priceShip)))
+        self.contadorCompras += 1
+        self.contadorComprasL.configure(text=str(self.contadorCompras))
+        #print(categoryShip, idShip, nameShip, priceShip, nameUser, self.userData["id"])
+        dataRow = (categoryShip, idShip, nameShip, priceShip, nameUser, self.userData["id"])
+        self.ltsDatosHashTable.append(dataRow)
+
+        """
+                        #  "categoria"    "id"    "nick"
+        res = buySKinBarco(categoryShip, idShip, nameUser)
         
         if(res.status_code == 400):
             messagebox.showerror(message="NO tiene el credito suficiente para comprar la skin!", title="Error!!!")
@@ -269,7 +302,8 @@ class User():
             else:
                 print(user)
                 self.userMoney.configure(text=user["monedas"] + " Tokens Disponibles")
-                messagebox.showinfo(message="Compra realizada correctamente!!!", title="Compra Nice") 
+                messagebox.showinfo(message="Compra realizada correctamente!!!", title="Compra Nice")
+        """ 
         
         
         

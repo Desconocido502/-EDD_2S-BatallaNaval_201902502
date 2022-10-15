@@ -84,7 +84,7 @@ public:
         }
         Contenedor aux;
         aux.setIdUnico(key);
-        aux.setNodoUsuario(new NodoUsuario("","",0,0));
+        aux.setNodoUsuario(new NodoUsuario(-1,"","",0,0));
 
         root->remove(aux);
         if (root->num == 0){

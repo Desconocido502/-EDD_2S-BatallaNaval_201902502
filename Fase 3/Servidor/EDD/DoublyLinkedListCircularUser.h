@@ -24,8 +24,8 @@ private:
 public:
     bool isEmpty();
     int length();
-    void insertAtStart(string, string, int, int);
-    NodoUsuario* insertAtEnd(string, string, int, int);
+    void insertAtStart(int, string, string, int, int);
+    NodoUsuario* insertAtEnd(int, string, string, int, int);
     void deleteAtStart();
     void deleteAtEnd();
     bool deleteNode(string);
@@ -87,8 +87,8 @@ void DoublyLinkedListCircularUser::__joinNodes(){
     }
 }
 
-void DoublyLinkedListCircularUser::insertAtStart(string nick, string password, int money, int age){
-    NodoUsuario* nuevo = new NodoUsuario(nick, password, money, age);
+void DoublyLinkedListCircularUser::insertAtStart(int id, string nick, string password, int money, int age){
+    NodoUsuario* nuevo = new NodoUsuario(id, nick, password, money, age);
     NodoUsuario* aux = new NodoUsuario();
 
     if(this->isEmpty()){
@@ -104,8 +104,8 @@ void DoublyLinkedListCircularUser::insertAtStart(string nick, string password, i
     //delete aux;
 }
 
-NodoUsuario* DoublyLinkedListCircularUser::insertAtEnd(string nick, string password, int money, int age){
-    NodoUsuario* nuevo = new NodoUsuario(nick, password, money, age);
+NodoUsuario* DoublyLinkedListCircularUser::insertAtEnd(int id, string nick, string password, int money, int age){
+    NodoUsuario* nuevo = new NodoUsuario(id, nick, password, money, age);
     //cout<<"\n-------------------"<<endl;
     //cout<<nuevo<<"| "<<nick<<endl;
     NodoUsuario* aux = new NodoUsuario();

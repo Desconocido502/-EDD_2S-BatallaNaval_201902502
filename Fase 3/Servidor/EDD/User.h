@@ -14,6 +14,7 @@ using namespace std;
 
 class User{
 private:
+    int id;
     string nick;
     string password;
     int money;
@@ -21,7 +22,8 @@ private:
 public:
     ListaPilaMov* listaPilaMovimientos;
     AVL avl; //Arbol avl para los productos
-    User(string nick, string password, int money, int age){
+    User(int id, string nick, string password, int money, int age){
+        this->id = id;
         this->nick = nick;
         this->password = password;
         this->money = money;
@@ -31,6 +33,7 @@ public:
     }
 
     User(){ //Constructor vacio
+        this->id = -1;
         this->nick = "";
         this->password = "";
         this->money = 0;
@@ -58,6 +61,10 @@ public:
         return "Nick: " + this->nick + ",\\n password: " + this->password + ",\\n monedas: " + to_string(this->money) + ",\\n edad: " + to_string(this->age);
     }
 
+    void setId(int id){
+        this->id = id;
+    }
+
     void setNick(string nick){
         this->nick = nick;
     }
@@ -81,6 +88,10 @@ public:
     int getMoney(){
         return this->money;
     }
+
+    int getId(){
+        return this->id;
+    }
     
     void setAge(int age){
         this->age = age;
@@ -96,7 +107,7 @@ public:
     
 
     crow::json::wvalue to_map(){
-        crow::json::wvalue datosUser = {{"nick", this->nick}, {"monedas", to_string(this->money)}, {"edad", to_string(this->age)}};
+        crow::json::wvalue datosUser = {{"id", this->id},{"nick", this->nick}, {"monedas", to_string(this->money)}, {"edad", to_string(this->age)}};
         return datosUser;
     }
 };

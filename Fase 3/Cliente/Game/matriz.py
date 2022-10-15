@@ -58,16 +58,22 @@ class ListaEncabezado:
 
         return None
 
-P = 1
-S = 2
-D = 3
-B = 4
-contador = 0
+#P = 1
+#S = 2
+#D = 3
+#B = 4
+#contador = 0
 class matriz:
     def __init__(self, tamano):
         self.tamano = tamano
         self.filas = ListaEncabezado()
         self.columnas = ListaEncabezado()
+
+        self.contador = 0
+        self.P = 1
+        self.S = 2
+        self.D = 3
+        self.B = 4
     
     def insertar(self,fila,columna,estado,barco):
         nuevo = Nodo(fila,columna,estado,barco)
@@ -169,18 +175,18 @@ class matriz:
             print('---------FIN----------')
 
     def Agregarbarcos(self): #dir representa la dirección del barco 0 = Vertical 1 = horizotal
-        global contador,P,D,S,B
-        if  contador==0:
+        #global contador,P,D,S,B
+        if  self.contador==0:
             cantidad = int((((self.tamano-1)/10)+1))
-            print(cantidad)      
-            contador = contador+1   
-            P = P*cantidad 
-            S = S*cantidad 
-            D = D*cantidad 
-            B = B*cantidad 
+            #print(cantidad)      
+            self.contador = self.contador+1   
+            self.P = self.P*cantidad 
+            self.S = self.S*cantidad 
+            self.D = self.D*cantidad 
+            self.B = self.B*cantidad 
             self.Agregarbarcos()
         else : 
-            while P!=0:
+            while self.P!=0:
                 dir = random.randint(0,1)
                 x = random.randint(1,self.tamano-4)
                 y = random.randint(1,self.tamano-4)
@@ -197,9 +203,9 @@ class matriz:
                         self.insertar(y,x+2,"L","P")
                         self.insertar(y,x+3,"L","P")
                         print("Agregado un portaviones")                        
-                    P = P-1
+                    self.P = self.P-1
                 else: self.Agregarbarcos()
-            while S!=0:
+            while self.S!=0:
                 dir = random.randint(0,1)
                 x = random.randint(1,self.tamano-3)
                 y = random.randint(1,self.tamano-3)
@@ -214,9 +220,9 @@ class matriz:
                         self.insertar(y,x+1,"L","S")
                         self.insertar(y,x+2,"L","S")
                         print("Agregado un submarino")                       
-                    S = S-1
+                    self.S = self.S-1
                 else: self.Agregarbarcos()
-            while D!=0:
+            while self.D!=0:
                 dir = random.randint(0,1)
                 x = random.randint(1,self.tamano-2)
                 y = random.randint(1,self.tamano-2)
@@ -229,9 +235,9 @@ class matriz:
                         self.insertar(y,x,"L","D")
                         self.insertar(y,x+1,"L","D")
                         print("Agregado un Destructor")                       
-                    D = D-1
+                    self.D = self.D-1
                 else: self.Agregarbarcos()
-            while B!=0:
+            while self.B!=0:
                 dir = random.randint(0,1)
                 x = random.randint(1,self.tamano)
                 y = random.randint(1,self.tamano)
@@ -242,7 +248,7 @@ class matriz:
                     else:
                         self.insertar(y,x,"L","B")
                         print("Agregado un Buque")                       
-                    B = B-1
+                    self.B = self.B-1
                 else: self.Agregarbarcos()                    
 
     def Haybarco(self,x,y,dir,tipo):

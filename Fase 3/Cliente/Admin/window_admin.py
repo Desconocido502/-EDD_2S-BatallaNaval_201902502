@@ -31,7 +31,7 @@ class Admin(ttk.Frame):
 
             # print(contenido['usuarios'])
             for user in contenido['usuarios']:
-                cargarUser(user["nick"], user['password'],
+                cargarUser(user["id"],user["nick"], user['password'],
                            user['monedas'], user["edad"])
                 #print("nick:", user['nick'])
 
@@ -124,25 +124,20 @@ class Admin(ttk.Frame):
         self.main_window.resizable(0, 0)
 
         # framep
-        framep = tk.Frame(self.main_window, bd=0, width=300,
-                          relief=tk.SOLID, padx=10, pady=10, bg='#3a7ff6')
+        framep = tk.Frame(self.main_window, bd=0, width=300,relief=tk.SOLID, padx=10, pady=10, bg='#3a7ff6')
         framep.pack(side="left", expand=tk.YES, fill=tk.BOTH)
 
         # Creación de la vista de árbol.
-        self.treeview = ttk.Treeview(
-            framep, columns=("password", "money", "age"))
+        self.treeview = ttk.Treeview(framep, columns=("password", "money", "age"))
 
         # Agregamos dos scrollbars
 
-        self.vsb = ttk.Scrollbar(
-            framep, orient="vertical", command=self.treeview.yview)
+        self.vsb = ttk.Scrollbar(framep, orient="vertical", command=self.treeview.yview)
         self.vsb.pack(side='right', fill='y')
-        self.hsb = ttk.Scrollbar(
-            framep, orient="horizontal", command=self.treeview.xview)
+        self.hsb = ttk.Scrollbar(framep, orient="horizontal", command=self.treeview.xview)
         self.hsb.pack(side='bottom', fill='x')
 
-        self.treeview.configure(
-            xscrollcommand=self.hsb.set, yscrollcommand=self.vsb.set)
+        self.treeview.configure(xscrollcommand=self.hsb.set, yscrollcommand=self.vsb.set)
 
         self.treeview.heading("#0", text="Nick")
         self.treeview.heading("password", text="Password")
