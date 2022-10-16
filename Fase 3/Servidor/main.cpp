@@ -62,7 +62,7 @@ void cargarDatos(DoublyLinkedListCircularUser &lts)
 
 int main(int argc, char const *argv[])
 {
-    cout << "Inicio del proyecto fase 2" << endl;
+    cout << "Inicio del proyecto fase 3" << endl;
     DoublyLinkedListCircularUser ltsUsers;
     
     //-------------Arbol de usuarios-------------
@@ -278,7 +278,7 @@ int main(int argc, char const *argv[])
                     usuario->user->addBoat(barco_a_comprar);
                     bool isBoatRepeat = usuario->user->avl.repetido;
                     //Si el valor de isBoatRepeat es true no se puede comprar por que ya se ha comprado antes
-                    cout<<isBoatRepeat<<endl;
+                    //cout<<isBoatRepeat<<endl;
                     if(isBoatRepeat){
                         usuario->user->avl.repetido = false;
                         return crow::response(404);
@@ -295,7 +295,30 @@ int main(int argc, char const *argv[])
             }
 			return crow::response(200);
         }); 
-        
+
+    //Se compran las skins al mayoreo
+    CROW_ROUTE(app, "/skins/buy_boats")
+        .methods("PUT"_method)([&ltsUsers, &ltsBarcos](const crow::request &req){
+            auto x = crow::json::load(req.body);
+			if (!x) return crow::response(400);
+            //cout<<x<<endl;
+            auto ltsSkins = x["ltsSkins"];
+            int newCredit = x["newCredit"].i();
+    
+            //cout<<ltsSkins<<endl;
+            string userName = ltsSkins[0]["userName"].s();
+            NodoUsuario* usuario = ltsUsers.searchUser2(userName);
+            usuario->user->setId(newCredit);
+            cout<<usuario->user->getId()<<endl;
+            for(auto data : ltsSkins){
+                string categoria = data["categoria"].s();
+                string id = data["id"].s();  
+                //cout<<categoria<<","<<id<<","<<data["userName"].s()<<endl;
+                NodoBarco* barco_a_comprar = ltsBarcos.buyArticle2(categoria, id);
+                usuario->user->addBoat(barco_a_comprar);
+            }
+			return crow::response(200);
+        }); 
         
      //-------------------------------TUTORIAL------------------------------------
 

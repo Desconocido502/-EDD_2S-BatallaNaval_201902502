@@ -12,8 +12,9 @@ from Game.CarritoCompra import CarritoCompra
 
 
 class User():
-    def __init__(self, user): #Se traen los datos del usuario
+    def __init__(self, user, dataPrice=None): #Se traen los datos del usuario
         self.userData = user
+        self.dataPrice = dataPrice
         self.main_window = tk.Tk()
         self.main_window.title("Notebook")
         self.main_window.resizable(0, 0)
@@ -35,7 +36,7 @@ class User():
         self.userName.config(foreground="blue", background="green", font=("Verdana", 14))
         self.userName.place(x=980, y=10)
 
-        self.userMoney = ttk.Label(self.page1, text=self.userData["monedas"] + " Tokens Disponibles")
+        self.userMoney = tk.Label(self.page1, text=self.userData["monedas"] + " Tokens Disponibles")
         self.userMoney.config(foreground="blue", background="green", font=("Verdana", 14))
         self.userMoney.place(x=730, y=10)
 
@@ -133,9 +134,33 @@ class User():
         self.main_window.mainloop()
 
     def comprar(self):
-        self.main_window.destroy()
-        CarritoCompra(self.ltsDatosHashTable)
+        #self.main_window.destroy()
+        CarritoCompra(self.userData, self.ltsDatosHashTable, self.updateData)
     
+    def updateData(self, priceShip, idShip):
+        total = 0
+        for x in self.ltsDatosHashTable:
+            total += int(x[3])
+        print(total, priceShip)
+        if(total == priceShip):
+            #print("hola")
+            self.ltsDatosHashTable = []
+            self.totalCompra.configure(text=str(0))
+            self.contadorComprasL.configure(text=str(0))
+            self.userData = getUser(self.userData["nick"])
+            print(self.userData["monedas"])
+            self.userMoney.configure(text=str(int(self.userData["monedas"]) - priceShip) + " Tokens Disponibles")
+        else:
+            #Este es para cuando se elimina un dato de la vista del arbol y de todo
+            print("hola2")
+            #Se actualiza el contador y se actualiza el total de compra
+            self.totalCompra.configure(text=str(int(self.totalCompra.cget("text"))-int(priceShip)))
+            self.contadorCompras -= 1
+            self.contadorComprasL.configure(text=str(self.contadorCompras))
+            posicion = [indice for indice, dato in enumerate(self.ltsDatosHashTable) if dato[1] == idShip]
+            del self.ltsDatosHashTable[posicion[0]]
+            #print(self.userData["monedas"])
+
     def mostrarTutorial(self):
         #matriz_tutorial39_html.png
         #print(self.labelTutorialImg["text"])
@@ -156,18 +181,6 @@ class User():
                     #self.labelTutorialImg = tk.Label(self.page2, text=image_file_path, image=img)
                     self.labelTutorialImg.configure(image=img)
                     self.images.append(img)
-
-                #self.logo = utl.leer_imagen(f"./EDDimg/matriz_tutorial{self.contImg}_html.png", (550, 550))
-                #print(self.logo)
-                #self.labelTutorialImg = tk.Label(self.page2, text=f"matriz_tutorial{self.contImg}_html.png", image=self.logo)
-                #self.labelTutorialImg.configure(image=self.logo)
-                #self.labelTutorialImg["image"] = self.logo
-                #self.labelTutorialImg["text"] = f"matriz_tutorial{self.contImg}_html.png"
-                #self.labelTutorialImg.configure(image=self.logo)
-                #self.labelTutorialImg["image"] = self.logo
-                #self.contImg += 1
-                #print(self.contImg)
-        
         
     
     def loadTutorial(self):
@@ -251,17 +264,6 @@ class User():
             print(img)
             tk.Label(parent, bg='#3a7ff6', image=img).grid(row=1, column=col)
             col += 1
-        
-
-    # Populates a frame with a grid of labes of given text and same bg as frame
-
-    def lots_of_labels(self, parent, text, dim):
-        for row in range(dim[0]):
-            for col in range(dim[1]):
-                tk.Grid.columnconfigure(parent, col, weight=1)
-                tk.Grid.rowconfigure(parent, row, weight=1)
-                tk.Label(parent, fg='black', text=text,
-                         bg=parent.cget('bg')).grid(row=row, column=col)
 
     def populate(self):
         '''Put in some fake data'''
@@ -325,35 +327,3 @@ class User():
         self.main_window.destroy()
         from Login.Login import Login
         Login()
-
-
-#User()
-        """
-        skins = getSkins()#Solo para ver como impreme los valores en consola
-            for skin in skins:
-                print("categoria:" ,skin["categoria"])
-                print("ltsBarcos:")
-                for barco in skin["ltsBarcos"]:
-                    print("id: ", barco["id"])
-                    print("nombre: " , barco["nombre"])
-                    print("precio: ", barco["precio"])
-                    print("src: ", barco["src"])
-                    print("-----------------")
-        for i, product in ltsProducts:
-                self.frames[i] = ScrollableFrame(self.frameskins, direction="horizontal", width=1082, height=250).grid(row=i, column=0)
-                tk.Label(self.frames[i], text=product[0], font=("Verdana", 14)).grid(row=0, column=0)
-
-
-
-
-
-
-
-
-
-
-                 bg = ImageTk.PhotoImage(file = "Your_img.png")
-        canvitas = tk.Canvas(self.frameskins, width=100, height=100)
-        canvitas.pack(fill="both", expand=True)
-        canvitas.create_image(0,0, image="efafa", anchor="nw")
-        """

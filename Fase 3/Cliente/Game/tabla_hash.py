@@ -1,4 +1,5 @@
-import os
+from os import system
+import sys
 
 class HashTable():
     def __init__(self, m, min, max):
@@ -57,7 +58,7 @@ class HashTable():
         for x in range(0, len(self.tabla)):
             if(self.tabla[x] != None):
                 dato_a_encontrar = self.tabla[x]
-                if(dato_a_encontrar[0] == self.toAscii(key)):
+                if(dato_a_encontrar[0] == key):
                     dic = f"{dato_a_encontrar[0]}: {dato_a_encontrar[1]}"
                     return dic
         return dic #No se encontro el dato a buscar dentro del hash table
@@ -65,18 +66,25 @@ class HashTable():
     def eliminar(self, key):
         for x in range(0, len(self.tabla)):
             if(self.tabla[x] != None):
-                if(self.tabla[x][0] == self.toAscii(key)):
+                print(self.tabla[x][0], key)
+                if(self.tabla[x][0] == key):
+                    #print("Eliminado")
                     self.tabla[x] = None
                     self.elementos -= 1
                     return True
         return False
     
-    def drawHashTable(self):
+    def cleanHashTable(self):
+        for x in range(0, len(self.tabla)):
+            self.tabla[x] = None
+    
+    def drawHashTable(self, nombre):
         contenido = ""
         cadena = ""
         contenido += """digraph html {
-node [fontname="Helvetica,Arial,sans-serif", fontcolor="white"]
-abc [shape = none, margin = 0, label=<
+node [fontname="Helvetica,Arial,sans-serif", fontcolor="white"]"""
+        contenido += f"\nlabel=\"{nombre}\"\n"
+        contenido += """abc [shape = none, margin = 0, label=<
 <TABLE BORDER = "1" CELLBORDER = "1" CELLSPACING="0" CELLPADDING="10">\n"""
         cadena += "<TR>\n\t<TD BGCOLOR=\"FireBrick\">Indice</TD>\n\t<TD BGCOLOR=\"FireBrick\">Id</TD>\n\t<TD BGCOLOR=\"FireBrick\">Nombre</TD>\n</TR>\n"
         for x in range(0, self.m):
@@ -85,12 +93,14 @@ abc [shape = none, margin = 0, label=<
                 cadena += f"<TR>\n\t<TD BGCOLOR=\"#273746\">{x}</TD>\n\t<TD BGCOLOR=\"#273746\">{dato_a_encontrar[0]}</TD>\n\t<TD BGCOLOR=\"#273746\">{dato_a_encontrar[1]}</TD>\n</TR>\n"
         cadena += "</TABLE>>];\n}"
         contenido += cadena
-        dotX = "HashTable_{}_html.dot".format("Z")
+        dotX = "./EDDimg/HashTable_{}_html.dot".format("Base")
         file = open(dotX, "w")
         file.write(contenido)
         file.close()
-        result = "HashTable_{}_html.png".format("Z")
-        os.system("dot -Tpng " + dotX + " -o " + result)
+        result = "./EDDimg/HashTable_{}_html.png".format(nombre)
+        system("dot -Tpng " + dotX + " -o " + result)
+        commando = "xdg-open ./EDDimg/HashTable_{}_html.png".format(nombre)
+        system(commando)
         #print(contenido)
 
     def printHashTable(self):

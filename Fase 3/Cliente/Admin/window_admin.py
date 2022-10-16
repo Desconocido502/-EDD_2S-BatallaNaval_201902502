@@ -94,7 +94,7 @@ class Admin(ttk.Frame):
                 if (res == 200):  # Si el codigo es 200 fue eliminado correctamente el usuario de la edd
                     # se obtiene el item seleccionado
                     select_item = self.treeview.selection()[0]
-                    # Pa borrarlo en la tabla
+                    # Para borrarlo en la tabla
                     self.treeview.delete(select_item)
                 else:
                     text = "No se encontro el usuario a eliminar"

@@ -92,6 +92,11 @@ def buySKinBarco(categoria, id, userName):
     res = requests.put(f"{base_url}/skins/buy_boat", json=newCoord)
     return res
 
+def buySKinsBarco(lts, newCredit):
+    data = {"ltsSkins": lts, "newCredit": newCredit}
+    res = requests.put(f"{base_url}/skins/buy_boats", json=data)
+    return res
+
 def draw_avl_tree(nick):
     res = requests.get(f"{base_url}/usuarios/graficarArbolAvl", json={"nick":nick})
     return res.status_code

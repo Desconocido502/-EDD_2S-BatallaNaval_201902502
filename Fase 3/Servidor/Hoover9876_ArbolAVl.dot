@@ -1,0 +1,18 @@
+digraph G { 
+rankdir=TB; 
+label="Hoover9876"
+fontname="Arial Black"
+fontsize="25pt"
+node[color="blue",style="rounded,filled",fillcolor=lightgray, shape=record, fontname="Arial"];
+"nodo708"[label ="<C0>|Id: 708,\n nombre: Oneil,\n precio: 36|<C1> "]; 
+"nodo392"[label ="<C0>|Id: 392,\n nombre: Fox,\n precio: 35|<C1> "]; 
+"nodo350"[label ="Id: 350,\n nombre: Mccarthy,\n precio: 36"]; 
+"nodo392":C0->"nodo350"
+"nodo570"[label ="Id: 570,\n nombre: Goodwin,\n precio: 33"]; 
+"nodo392":C1->"nodo570"
+"nodo708":C0->"nodo392"
+"nodo759"[label ="<C0>|Id: 759,\n nombre: Orr,\n precio: 32|<C1> "]; 
+"nodo830"[label ="Id: 830,\n nombre: Walls,\n precio: 33"]; 
+"nodo759":C1->"nodo830"
+"nodo708":C1->"nodo759"
+} 
