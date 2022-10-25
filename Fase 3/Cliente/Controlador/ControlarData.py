@@ -100,3 +100,10 @@ def buySKinsBarco(lts, newCredit):
 def draw_avl_tree(nick):
     res = requests.get(f"{base_url}/usuarios/graficarArbolAvl", json={"nick":nick})
     return res.status_code
+
+def updateDataUser(nick, id, edad, monedas, _from, privatekey):
+    user = {"nick": nick, "id": id, "edad": edad, "monedas": monedas, "from": _from, "privatekey": privatekey}
+    res = requests.put(f"{base_url}/usuarios/updateData", json=user)
+    #print(res)
+    data = res.json()  # Convertimos la respuesta en dict
+    return data

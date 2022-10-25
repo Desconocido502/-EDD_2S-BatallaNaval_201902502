@@ -230,6 +230,24 @@ int main(int argc, char const *argv[])
         }
         return crow::response(400);
     });
+
+    CROW_ROUTE(app, "/usuarios/updateData")
+     .methods("PUT"_method)([&ltsUsers](const crow::request &req)
+    { 
+        auto x = crow::json::load(req.body);
+		if (!x) return crow::response(400);
+        
+		string nick=x["nick"].s();
+        NodoUsuario* userTmp = ltsUsers.searchUser2(nick);
+        userTmp->user->setId(x["id"].i());
+        userTmp->user->setAge(x["edad"].i());
+        userTmp->user->setMoney(x["monedas"].i());
+        userTmp->user->setFrom(x["from"].s());
+        userTmp->user->setPrivateKey(x["privatekey"].s());
+        crow::json::wvalue temp = userTmp->user->to_map();
+        crow::json::wvalue final = std::move(temp);
+        return crow::response(std::move(final));
+    });
     
     CROW_ROUTE(app, "/skins")
     ([&ltsBarcos]()
@@ -288,6 +306,7 @@ int main(int argc, char const *argv[])
                     }
                     //credito = credito - precioBarco;
                     //cout<<"nuevo credito: "<<credito<<endl;
+                    cout<<usuario->user->getMoney()<<endl;
                     return crow::response(200);
                 }
             }else{

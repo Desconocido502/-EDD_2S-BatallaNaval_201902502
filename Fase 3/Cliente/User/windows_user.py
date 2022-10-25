@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import PhotoImage, ttk, messagebox
 import util.generic as utl
 from ScrollableFrame.ScrollableFrame import ScrollableFrame
-from Controlador.ControlarData import getSkins, buySKinBarco, getUser, getTutorial
+from Controlador.ControlarData import getSkins, buySKinBarco, getUser, getTutorial, updateDataUser
 from PIL import ImageTk, Image
 from EDD.matriz import matriz
 from Game.CarritoCompra import CarritoCompra
@@ -141,18 +141,20 @@ class User():
         total = 0
         for x in self.ltsDatosHashTable:
             total += int(x[3])
-        print(total, priceShip)
+        #print(total, priceShip)
         if(total == priceShip):
             #print("hola")
             self.ltsDatosHashTable = []
             self.totalCompra.configure(text=str(0))
             self.contadorComprasL.configure(text=str(0))
-            self.userData = getUser(self.userData["nick"])
-            print(self.userData["monedas"])
-            self.userMoney.configure(text=str(int(self.userData["monedas"]) - priceShip) + " Tokens Disponibles")
+            creditoNuevo = int(self.userData["monedas"]) - total
+            self.userData = updateDataUser(self.userData["nick"], self.userData["id"], self.userData["edad"], creditoNuevo, "_", "_")
+            #self.userData = getUser(self.userData["nick"])
+            print(self.userData)
+            self.userMoney.configure(text=str(self.userData["monedas"]) + " Tokens Disponibles")
         else:
             #Este es para cuando se elimina un dato de la vista del arbol y de todo
-            print("hola2")
+            #print("hola2")
             #Se actualiza el contador y se actualiza el total de compra
             self.totalCompra.configure(text=str(int(self.totalCompra.cget("text"))-int(priceShip)))
             self.contadorCompras -= 1
@@ -181,7 +183,6 @@ class User():
                     #self.labelTutorialImg = tk.Label(self.page2, text=image_file_path, image=img)
                     self.labelTutorialImg.configure(image=img)
                     self.images.append(img)
-        
     
     def loadTutorial(self):
         data = getTutorial()

@@ -19,6 +19,8 @@ private:
     string password;
     int money;
     int age;
+    string from;
+    string privatekey;
 public:
     ListaPilaMov* listaPilaMovimientos;
     AVL avl; //Arbol avl para los productos
@@ -29,7 +31,8 @@ public:
         this->money = money;
         this->age = age;
         this->listaPilaMovimientos = new ListaPilaMov();
-        
+        this->from = "_";
+        this->privatekey = "_";
     }
 
     User(){ //Constructor vacio
@@ -104,10 +107,25 @@ public:
     void addBoat(NodoBarco* barcoComprado){
         avl.add(barcoComprado);
     }
+
+    void setFrom(string from){
+        this->from = from;
+    }
+
+    void setPrivateKey(string privatekey){
+        this->privatekey = privatekey;
+    }
     
+    string getFrom(){
+        return this->from;
+    }
+
+    string getPrivateKey(string privatekey){
+        return this->privatekey;
+    }
 
     crow::json::wvalue to_map(){
-        crow::json::wvalue datosUser = {{"id", this->id},{"nick", this->nick}, {"monedas", to_string(this->money)}, {"edad", to_string(this->age)}};
+        crow::json::wvalue datosUser = {{"id", this->id},{"nick", this->nick}, {"monedas", to_string(this->money)}, {"edad", to_string(this->age)}, {"from", this->from},  {"privatekey", this->privatekey}};
         return datosUser;
     }
 };

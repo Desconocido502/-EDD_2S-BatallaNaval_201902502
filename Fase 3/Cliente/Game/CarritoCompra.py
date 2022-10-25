@@ -1,9 +1,11 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
-from tkinter import filedialog as fd
 from tkinter.font import BOLD
-from Controlador.ControlarData import buySKinsBarco, getUser
+from Controlador.ControlarData import buySKinsBarco, getUser, updateDataUser
+from Game.Wallet import Wallet
 from Game.tabla_hash import HashTable
+from eth_account import Account
+import secrets
 
 class CarritoCompra(ttk.Frame):
     def __init__(self, user, productBuy, updateData):
@@ -25,7 +27,6 @@ class CarritoCompra(ttk.Frame):
         self.treeview = ttk.Treeview(framep, columns=("id", "nombre"))
 
         # Agregamos dos scrollbars
-
         self.vsb = ttk.Scrollbar(framep, orient="vertical", command=self.treeview.yview)
         self.vsb.pack(side='right', fill='y')
         self.hsb = ttk.Scrollbar(framep, orient="horizontal", command=self.treeview.xview)
@@ -77,20 +78,20 @@ class CarritoCompra(ttk.Frame):
         self.treeview.insert("", tk.END, iid=row[1], text=row[0], values=(row[1], row[2]))
 
     def item_selected(self):
-            select_item = self.treeview.selection()[0]
-            posicion = [indice for indice, dato in enumerate(self.productBuy) if dato[1] == select_item]
-            #print(posicion[0])
-            x = self.productBuy[posicion[0]]
-            #print(x)
-            self.tablaHash.eliminar(f"{str(x[5])}{str(x[2])}")
-            self.tablaHash.printHashTable()
-            self.updateData(int(x[3]), x[1])
-            self.changeDataForLabel()
-            # Para borrarlo en la tabla
-            self.treeview.delete(select_item)
-            #print(select_item)
-            #print(self.productBuy)
-            #del self.productBuy[posicion[0]]
+        select_item = self.treeview.selection()[0]
+        posicion = [indice for indice, dato in enumerate(self.productBuy) if dato[1] == select_item]
+        #print(posicion[0])
+        x = self.productBuy[posicion[0]]
+        #print(x)
+        self.tablaHash.eliminar(f"{str(x[5])}{str(x[2])}")
+        self.tablaHash.printHashTable()
+        self.updateData(int(x[3]), x[1])
+        self.changeDataForLabel()
+        # Para borrarlo en la tabla
+        self.treeview.delete(select_item)
+        #print(select_item)
+        #print(self.productBuy)
+        #del self.productBuy[posicion[0]]
 
     def changeDataForLabel(self):
         total = 0
@@ -123,6 +124,20 @@ class CarritoCompra(ttk.Frame):
             texto = "Usted no cuenta con el credito necesario para comprar todas las skins!!!"
             messagebox.showwarning(message=texto, title="Credito Insuficiente")
         else:
+            _from = self.dataUser["from"]
+            if(_from == '_'):
+                priv = secrets.token_hex(32)
+                priv_key = "0x" + priv
+                acct = Account.from_key(priv_key)
+                self.dataUser = updateDataUser(self.dataUser["nick"], self.dataUser["id"], self.dataUser["edad"], self.dataUser["monedas"], acct.address, priv_key)
+                texto = "Se ha creado su wallet, a continuacion se le da su llave privada (no la comparta con nadie)" + "\n" + priv_key
+                messagebox.showwarning(message=texto, title="Wallet")
+            dataSkinsBuy = []
+            for x in self.productBuy:
+                dataSkinsBuy.append({"SKIN": x[2], "VALUE": x[3]})
+            datos = {"FROM": self.dataUser["from"], "data": dataSkinsBuy}
+            Wallet(self.dataUser, datos, (total))
+            
             creditoNuevo = credito - total
             ltsSkins = []
             #newCoord = {"categoria": categoria, "id": id, "userName": userName}
@@ -133,9 +148,11 @@ class CarritoCompra(ttk.Frame):
             res = buySKinsBarco(ltsSkins, creditoNuevo)
             if(res.status_code == 200):
                 self.dataUser = getUser(self.dataUser["nick"])
+                #print(self.dataUser)
                 self.cancelarCompra()#limpia todo
                 messagebox.showinfo(message="Skins agregadas a su usuario", title="Skins agregadas")
 
 
 
 #CarritoCompra("1")
+#0xb4d6382d0224c0ae597b63552d1d96df83bdc1135aa2dce68ccbc6973bed3d96
