@@ -1,0 +1,28 @@
+{
+    "index": "0",
+    "timestamp": "25-10-2022::17:05:23",
+    "nonce": "16502",
+    "data": {
+        "FROM": "0xb02275af4cED829E5e896A6093Bcb0558cCF04e7",
+        "SKINS": {
+            "FROM": "0xb02275af4cED829E5e896A6093Bcb0558cCF04e7",
+            "data": [
+                {
+                    "SKIN": "Fox",
+                    "VALUE": 35
+                },
+                {
+                    "SKIN": "Goodwin",
+                    "VALUE": 33
+                },
+                {
+                    "SKIN": "Montoya",
+                    "VALUE": 24
+                }
+            ]
+        }
+    },
+    "hash": "0000d92342df58f456eb24211813c5e43688e693330078f8d48f9645aef6a64a",
+    "previoushash": "0000",
+    "merkle_root": "364e676d1ce18f6a0b22d4776aae03af1c61c60d4d3c1a17cfcfad1f8e86607f"
+}

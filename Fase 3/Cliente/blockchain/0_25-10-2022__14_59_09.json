@@ -1,0 +1,24 @@
+{
+    "index": "0",
+    "timestamp": "25-10-2022::14:59:09",
+    "nonce": "21726",
+    "data": {
+        "FROM": "0x2C86884FcB9a8Ed94Be350f7995c9D15c8CD3De2",
+        "SKINS": {
+            "FROM": "0x2C86884FcB9a8Ed94Be350f7995c9D15c8CD3De2",
+            "data": [
+                {
+                    "SKIN": "Oneil",
+                    "VALUE": 36
+                },
+                {
+                    "SKIN": "Walls",
+                    "VALUE": 33
+                }
+            ]
+        }
+    },
+    "hash": "0000e129ecab72de96e444de599332eacbadd822b0414efd9cbccc1ee088aa6b",
+    "previoushash": "0000",
+    "merkle_root": "2d94169228e5fd17a4a6f4db0c822cab20c8d946909d6998d72363304f46fc8d"
+}

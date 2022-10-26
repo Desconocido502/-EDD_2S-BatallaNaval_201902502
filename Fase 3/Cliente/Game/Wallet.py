@@ -1,8 +1,9 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import simpledialog
+from tkinter import messagebox
+from Controlador.ControlarData import insertarNuevoBloque
 import json
-from Game.Blockchain import Blockchain
 
 class Wallet(ttk.Frame):
     def __init__(self, dataUser, dataSkins, total):
@@ -46,9 +47,15 @@ class Wallet(ttk.Frame):
     
     def confirmarCompra(self):
         privatekeyEntry = simpledialog.askstring("clave privada", "Ingresa la clave privada")
-        _from = self.dataUser["from"]
-        print(privatekeyEntry == self.dataUser["privatekey"])
-        blockchain = Blockchain()
+        if(privatekeyEntry == self.dataUser["privatekey"]):
+
+            _from = self.dataUser["from"]
+            insertarNuevoBloque(_from, self.dataSkins)
+        else:
+            txt = "Error con la clave privada, ingrese la clave correcta"
+            messagebox.showinfo(message=txt, title="Error private key")
+        #print(privatekeyEntry == self.dataUser["privatekey"])
+        self.main_window.destroy()
         
 
 """ data = {
@@ -62,4 +69,4 @@ class Wallet(ttk.Frame):
         ]
     } """
 #Wallet("1",'2',data)
-#0xb4d6382d0224c0ae597b63552d1d96df83bdc1135aa2dce68ccbc6973bed3d96
+#0x4aa1b577efd055b95f5d69ab4b16000d46a933a0efb35ef8d222c8fabf6ac479

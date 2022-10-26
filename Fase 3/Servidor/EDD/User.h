@@ -57,7 +57,7 @@ public:
     }
 
     void mostrarDatos(){
-        cout<<"Nick: "<<this->nick<<", password: "<<this->password<<", money: "<<this->money<<", age: "<<this->age<<endl;
+        cout<<"Nick: "<<this->nick<<", password: "<<this->password<<", money: "<<this->money<<", age: "<<this->age<<", from: "<<this->from<<", private key: "<<this->privatekey<<endl;
     }
 
     string mostrarDatos2(){

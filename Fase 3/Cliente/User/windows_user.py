@@ -148,9 +148,9 @@ class User():
             self.totalCompra.configure(text=str(0))
             self.contadorComprasL.configure(text=str(0))
             creditoNuevo = int(self.userData["monedas"]) - total
-            self.userData = updateDataUser(self.userData["nick"], self.userData["id"], self.userData["edad"], creditoNuevo, "_", "_")
+            self.userData = updateDataUser(self.userData["nick"], self.userData["id"], self.userData["edad"], creditoNuevo, self.userData["from"], self.userData["privatekey"])
             #self.userData = getUser(self.userData["nick"])
-            print(self.userData)
+            #print(self.userData)
             self.userMoney.configure(text=str(self.userData["monedas"]) + " Tokens Disponibles")
         else:
             #Este es para cuando se elimina un dato de la vista del arbol y de todo
@@ -177,7 +177,7 @@ class User():
                 image_file_path = Path(f"EDDimg/matriz_tutorial{self.contImg}_html.png")
                 #print(image_file_path in self.images_filenames)
                 if (image_file_path in self.images_filenames):
-                    print(image_file_path)
+                    #print(image_file_path)
                     img = Image.open(image_file_path).resize((550,550))
                     img = ImageTk.PhotoImage(img)
                     #self.labelTutorialImg = tk.Label(self.page2, text=image_file_path, image=img)

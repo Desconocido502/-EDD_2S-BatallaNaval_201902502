@@ -1,0 +1,24 @@
+{
+    "index": "0",
+    "timestamp": "25-10-2022::14:15:21",
+    "nonce": "90706",
+    "data": {
+        "FROM": "0xBB95C484ECFdAcb77935Bc830b7591b57bA4f69c",
+        "SKINS": {
+            "FROM": "0xBB95C484ECFdAcb77935Bc830b7591b57bA4f69c",
+            "data": [
+                {
+                    "SKIN": "Fitzpatrick",
+                    "VALUE": 27
+                },
+                {
+                    "SKIN": "Johnson",
+                    "VALUE": 35
+                }
+            ]
+        }
+    },
+    "hash": "00000e77a01a872b2d9e670432e0b1c0f314acaa153a8d8eaf15bc0bf6666cb7",
+    "previoushash": "0000",
+    "merkle_root": "8b0e72c6131837b725f40de24fbe10993a23c25a8f2c2996a824f823d1aed262"
+}

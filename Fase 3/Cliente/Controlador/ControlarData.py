@@ -1,9 +1,22 @@
+from EDD.Blockchain import Blockchain
 import requests
-import json
-import os
 
+blockChain = None
 base_url = "http://localhost:5000"
 
+def iniciarBlockchain():
+    global blockChain
+    blockChain = Blockchain()
+
+def insertarNuevoBloque(_from, skins):
+    #0x814903a33ccc2abd53fb773e79f8c8a9858b8d225b1def548124427d3e1ee68e
+    global blockChain
+    #print(_from, skins)
+    blockChain.insertBlock(_from, skins)
+
+def cambiarDificultadBloque(difficulty_target_cont):
+    global blockChain
+    blockChain.difficulty_target = "0" * difficulty_target_cont
 
 def verificarLogueo(name, password):
     dataUser = {"nick": name, "password": password}

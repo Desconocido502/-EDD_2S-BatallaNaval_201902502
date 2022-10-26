@@ -1,6 +1,6 @@
 import hashlib
-from time import time
-from Block import *
+from EDD.Block import Block, Data
+from os import system
 
 class Blockchain:
     difficulty_target = "0000"
@@ -13,13 +13,13 @@ class Blockchain:
     def isEmpty(self):
         return self.head == None
     
-    def insertBlock(self, _from, skins, difficulty_target):
+    def insertBlock(self, _from, skins):
         data =  Data(_from, skins)
         #print(data.skins)
         if(self.isEmpty()):
             previoushash = '0000'
             #nonce = self.proof_of_work(previoushash)
-            new_block = Block(self.count, data, difficulty_target, previoushash)
+            new_block = Block(self.count, data, self.difficulty_target, previoushash)
             self.head = self.tail = new_block
             #Se crea el bloque en json y se almacena en la carpeta de blockchain
             self.createJSONBlock(new_block)
@@ -27,7 +27,7 @@ class Blockchain:
             aux = self.tail
             previoushash = aux.hash
             #nonce = self.proof_of_work(aux.nonce)
-            new_block = Block(self.count, data, difficulty_target, previoushash)
+            new_block = Block(self.count, data, self.difficulty_target, previoushash)
             self.tail = aux.next = new_block
             self.tail.back = aux
             #Se crea el bloque en json y se almacena en la carpeta de blockchain
@@ -91,7 +91,7 @@ class Blockchain:
     
     def createJSONBlock(self, bloque:Block):
         timestamp:str = bloque.timestamp.replace(":","_")
-        file = open(f"./blockchain/{bloque.index}_{timestamp}.json", "w")
+        file = open(f"blockchain/{bloque.index}_{timestamp}.json", "w")
         file.write(bloque.blockInfo())
         file.close()
     

@@ -129,6 +129,7 @@ int main(int argc, char const *argv[])
                 return crow::response(400);
             string nick=x["nick"].s();
             NodoUsuario* userTmp = ltsUsers.searchUser2(nick);
+            userTmp->user->mostrarDatos();
             crow::json::wvalue temp = userTmp->user->to_map();
             crow::json::wvalue final = std::move(temp);
             return crow::response(std::move(final)); 

@@ -3,8 +3,9 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter import filedialog as fd
 from tkinter.font import BOLD
-from Controlador.ControlarData import getUsersOrderedAST, getUsersOrderedDST, cargarUser, cargarSkinBarco, getUsers, drawTree, deleteUser, cargarCoorTutorial, draw_avl_tree             
+from Controlador.ControlarData import getUsersOrderedAST, getUsersOrderedDST, cargarUser, cargarSkinBarco, getUsers, drawTree, deleteUser, cargarCoorTutorial, draw_avl_tree, cambiarDificultadBloque            
 import json
+from tkinter import simpledialog
 
 
 class Admin(ttk.Frame):
@@ -107,6 +108,10 @@ class Admin(ttk.Frame):
         self.main_window.destroy()
         from Login.Login import Login
         Login()
+
+    def cambiar(self):
+        value = simpledialog.askstring("Cambiar Dificultad", "Ingrese un numero entero: ")
+        cambiarDificultadBloque(int(value))
         
 
     def CleanTreeView(self):
@@ -187,5 +192,9 @@ class Admin(ttk.Frame):
         self.salirLogin = tk.Button(self.main_window, text="Salir", font=(
             'Times', 15, BOLD), bg='#666a88', bd=0, fg="#fff", pady=30, command=self.salir)
         self.salirLogin.pack(fill=tk.BOTH)
+
+        self.cambiarDificultad = tk.Button(self.main_window, text="Cambiar Dificultad BlockChain", font=(
+            'Times', 15, BOLD), bg='#666a88', bd=0, fg="#fff", pady=30, command=self.cambiar)
+        self.cambiarDificultad.pack(fill=tk.BOTH)
 
         self.main_window.mainloop()

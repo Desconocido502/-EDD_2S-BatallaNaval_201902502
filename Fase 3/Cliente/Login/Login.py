@@ -7,6 +7,7 @@ from Controlador.ControlarData import verificarLogueo
 #*Importamos la ventana que sige luego del login
 from Admin.window_admin import Admin
 from User.windows_user import User
+from Controlador.ControlarData import iniciarBlockchain
 class Login():
     
     def verificar(self):
@@ -78,4 +79,7 @@ class Login():
         inicio.pack(fill=tk.X, padx=20,pady=20)        
         inicio.bind("<Return>", (lambda event: self.verificar()))
         #end frame_form_fill
+
+        iniciarBlockchain()
+
         self.ventana.mainloop()

@@ -1,6 +1,6 @@
 from datetime import datetime
 import hashlib
-from merkle import *
+from EDD.merkle import MerkleTree
 import json
 
 class Data:
@@ -37,8 +37,9 @@ class Block:
 
     def calcMerkleRoot(self)-> str:
         elems = []
-        for x in self.data.skins:
-            elems.append(x["SKIN"]+x["VALUE"])
+        for x in self.data.skins['data']:
+            #print(x)
+            elems.append(x["SKIN"]+str(x["VALUE"]))
         self.mtEDD = MerkleTree(elems)
         #mt.graficar(mt.getRootHash())
         return self.mtEDD.getRootHash()

@@ -115,6 +115,9 @@ class CarritoCompra(ttk.Frame):
     def crearGraficoHashTable(self):
         self.tablaHash.drawHashTable(self.dataUser["nick"])
     
+    def llamarWallet(self, dataUser, datos, total):
+        Wallet(dataUser, datos, total)
+    
     def pagarSkins(self):
         credito = int(self.dataUser["monedas"])
         total = 0
@@ -124,20 +127,10 @@ class CarritoCompra(ttk.Frame):
             texto = "Usted no cuenta con el credito necesario para comprar todas las skins!!!"
             messagebox.showwarning(message=texto, title="Credito Insuficiente")
         else:
-            _from = self.dataUser["from"]
-            if(_from == '_'):
-                priv = secrets.token_hex(32)
-                priv_key = "0x" + priv
-                acct = Account.from_key(priv_key)
-                self.dataUser = updateDataUser(self.dataUser["nick"], self.dataUser["id"], self.dataUser["edad"], self.dataUser["monedas"], acct.address, priv_key)
-                texto = "Se ha creado su wallet, a continuacion se le da su llave privada (no la comparta con nadie)" + "\n" + priv_key
-                messagebox.showwarning(message=texto, title="Wallet")
             dataSkinsBuy = []
             for x in self.productBuy:
                 dataSkinsBuy.append({"SKIN": x[2], "VALUE": x[3]})
             datos = {"FROM": self.dataUser["from"], "data": dataSkinsBuy}
-            Wallet(self.dataUser, datos, (total))
-            
             creditoNuevo = credito - total
             ltsSkins = []
             #newCoord = {"categoria": categoria, "id": id, "userName": userName}
@@ -147,12 +140,22 @@ class CarritoCompra(ttk.Frame):
             #print(ltsSkins, creditoNuevo)
             res = buySKinsBarco(ltsSkins, creditoNuevo)
             if(res.status_code == 200):
-                self.dataUser = getUser(self.dataUser["nick"])
+                self.dataUser = getUser(self.dataUser["nick"]) 
+                #updateDataUser(self.dataUser["nick"], self.dataUser["id"], self.dataUser["edad"], creditoNuevo, self.dataUser["from"], self.dataUser["privatekey"])
                 #print(self.dataUser)
                 self.cancelarCompra()#limpia todo
+                _from = self.dataUser["from"]
+                if(_from == '_'):
+                    priv = secrets.token_hex(32)
+                    priv_key = "0x" + priv
+                    acct = Account.from_key(priv_key)
+                    self.dataUser = updateDataUser(self.dataUser["nick"], self.dataUser["id"], self.dataUser["edad"], self.dataUser["monedas"], acct.address, priv_key)
+                    texto = "Se ha creado su wallet, a continuacion se le da su llave privada (no la comparta con nadie)" + "\n" + priv_key
+                    messagebox.showwarning(message=texto, title="Wallet")
                 messagebox.showinfo(message="Skins agregadas a su usuario", title="Skins agregadas")
+                self.llamarWallet(self.dataUser, datos, total)
 
 
 
 #CarritoCompra("1")
-#0xb4d6382d0224c0ae597b63552d1d96df83bdc1135aa2dce68ccbc6973bed3d96
+#0xa623b48bf3d33c9ba6a2702ff4b421434e2c185e099fde90516647fb96641e04
