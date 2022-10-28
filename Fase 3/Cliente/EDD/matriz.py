@@ -555,6 +555,92 @@ abc [shape = none, margin = 0, label=<
                 return "\"Gray\"" 
             elif tipo=="B": 
                 return "\"#008080\""
+    
+    def ComprobarBarcos(self,x,y): #Revisar retorna x,y,dir
+        global Barcos_restantes,tamanot
+        if dob.revisar(x,y) == 1:
+            Barcos_restantes = Barcos_restantes-1
+            print("Barcos restantes = " + str(Barcos_restantes))
+            if Barcos_restantes == 16:
+                print("Fin de la partida")
+                self.ListaAdyacencia(tamanot)
+
+    def Disparar(self,tamano):
+        print("Ingrese su tiro en x")
+        tirox = int(input())
+        print("Ingrese su tiro en y")
+        tiroy = int(input())
+        self.MarcarDisparo(tiroy,tirox,tamano) #Tirox y tiroy estan cambiados porque cometí un error y ahora estos siempre tienen que ir alrevés acá 
+    
+    def BarcosDestruidos(self):
+        dob.Destruidos()
+
+    def ListaAdyacencia(self,tamano):
+        nodosc = ""
+        nodos = ""
+        i = 1
+        eColumna = self.columnas.primero
+        while eColumna != None:
+            actual = eColumna.accesoNodo
+            nodosc+= "\t\t\t n"+str(i)
+            nodos+= "\t\t\t n"+str(i)+"[label =\""+str(i)+"\"]\n"
+            while(actual != None):
+                #print(actual.columna,",",actual.fila,'        ',actual.estado)
+                if actual.estado =="H":
+                    nodosc+="->"+"n"+str(actual.fila)+"_"+str(actual.columna)
+                    nodos+="\t\t\t n"+str(actual.fila)+"_"+str(actual.columna)+"[label =\""+str(actual.fila)+"\"]\n"
+                if actual.down == None:
+                    nodosc+="[color = \"#172A3A\"];\n"
+                actual = actual.down
+            
+            
+            i=i+1
+            eColumna = eColumna.next
+        if i<tamano+1:
+            while i< tamano+1:
+                nodosc+="n"+str(i)+"\n"
+                nodos+="n"+str(i)+"[label =\""+str(i)+"\"]"+"\n"
+                i=i+1
+        encabezado="""
+        digraph G {
+            rankdir=LR
+            compound = true;
+            labelloc="t";
+            bgcolor = "#508991";
+            fontcolor = Black;
+            color = "#004346"
+
+        subgraph cluster_0 {
+            node [style=filled,shape=note,fillcolor="#74b3ce",color = "#172A3A"];
+            label = "Lista de adyacencia"
+        """
+        print(encabezado+"\n"+nodos+"\n"+nodosc+"\n } \n }") #Copiar el metodo para generar la imagen
+        
+    def Grafo(self,tamano):
+
+        grafo = ""
+        i = 1
+        eColumna = self.columnas.primero
+        while eColumna != None:
+            actual = eColumna.accesoNodo
+            grafo+="\t"+str(i)+"\n"
+            while(actual != None):
+                #print(actual.columna,",",actual.fila,'        ',actual.estado)
+                
+                if actual.estado =="H":
+                    grafo+="\t"+str(i)+"->"+str(actual.fila)+"\n"
+                    #print(str(actual.fila) +","+str(actual.columna))
+                    #print(str(actual.fila)) #+","+str(actual.columna))
+                actual = actual.down
+            
+            i=i+1
+            eColumna = eColumna.next
+        if i<tamano+1:
+            while i< tamano+1:
+                grafo+="\t"+str(i)+"\n"
+
+                i=i+1
+        print(grafo)
 
 #matrix = matriz(20)
 #matrix.Agregarbarcos()

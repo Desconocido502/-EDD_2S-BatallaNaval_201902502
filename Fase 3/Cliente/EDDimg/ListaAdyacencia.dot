@@ -1,0 +1,92 @@
+
+        digraph G {
+            rankdir=LR
+            compound = true;
+            labelloc="t";
+            bgcolor = "#508991";
+            fontcolor = Black;
+            color = "#004346"
+
+        subgraph cluster_0 {
+            node [style=filled,shape=note,fillcolor="#74b3ce",color = "#172A3A"];
+            label = "Lista de adyacencia"
+        
+			 n1[label ="1"]
+			 n3_1[label ="3"]
+			 n5_1[label ="5"]
+			 n7_1[label ="7"]
+			 n2[label ="2"]
+			 n3_2[label ="3"]
+			 n5_2[label ="5"]
+			 n6_2[label ="6"]
+			 n3[label ="3"]
+			 n8_3[label ="8"]
+			 n9_3[label ="9"]
+			 n10_3[label ="10"]
+			 n11_3[label ="11"]
+			 n4[label ="4"]
+			 n6_4[label ="6"]
+			 n7_4[label ="7"]
+			 n8_4[label ="8"]
+			 n9_4[label ="9"]
+			 n5[label ="5"]
+			 n2_5[label ="2"]
+			 n3_5[label ="3"]
+			 n15_5[label ="15"]
+			 n6[label ="6"]
+			 n8_6[label ="8"]
+			 n10_6[label ="10"]
+			 n11_6[label ="11"]
+			 n12_6[label ="12"]
+			 n7[label ="7"]
+			 n2_7[label ="2"]
+			 n5_7[label ="5"]
+			 n8[label ="8"]
+			 n2_8[label ="2"]
+			 n4_8[label ="4"]
+			 n5_8[label ="5"]
+			 n10_8[label ="10"]
+			 n9[label ="9"]
+			 n2_9[label ="2"]
+			 n3_9[label ="3"]
+			 n4_9[label ="4"]
+			 n5_9[label ="5"]
+			 n9_9[label ="9"]
+			 n10_9[label ="10"]
+			 n10[label ="10"]
+			 n2_10[label ="2"]
+			 n10_10[label ="10"]
+			 n11_10[label ="11"]
+			 n12_10[label ="12"]
+			 n11[label ="11"]
+			 n4_11[label ="4"]
+			 n5_11[label ="5"]
+			 n6_11[label ="6"]
+			 n12[label ="12"]
+			 n7_12[label ="7"]
+			 n8_12[label ="8"]
+			 n13[label ="13"]
+			 n8_13[label ="8"]
+			 n14[label ="14"]
+			 n6_14[label ="6"]
+			 n8_14[label ="8"]
+n15[label ="15"]
+
+			 n1->n3_1->n5_1->n7_1[color = "#172A3A"];
+			 n2->n3_2->n5_2->n6_2[color = "#172A3A"];
+			 n3->n8_3->n9_3->n10_3->n11_3[color = "#172A3A"];
+			 n4->n6_4->n7_4->n8_4->n9_4[color = "#172A3A"];
+			 n5->n2_5->n3_5->n15_5[color = "#172A3A"];
+			 n6->n8_6->n10_6->n11_6->n12_6[color = "#172A3A"];
+			 n7->n2_7->n5_7[color = "#172A3A"];
+			 n8->n2_8->n4_8->n5_8->n10_8[color = "#172A3A"];
+			 n9->n2_9->n3_9->n4_9->n5_9->n9_9->n10_9[color = "#172A3A"];
+			 n10->n2_10->n10_10->n11_10->n12_10[color = "#172A3A"];
+			 n11->n4_11->n5_11->n6_11[color = "#172A3A"];
+			 n12->n7_12->n8_12[color = "#172A3A"];
+			 n13->n8_13[color = "#172A3A"];
+			 n14->n6_14->n8_14[color = "#172A3A"];
+n15
+
+ } 
+ }

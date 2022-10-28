@@ -1,17 +1,20 @@
-from cmath import exp
 from pathlib import Path
+from telnetlib import GA
 from tkinter.font import BOLD
 import tkinter as tk
-from tkinter import PhotoImage, ttk, messagebox
+from tkinter import ttk, messagebox, simpledialog
 import util.generic as utl
 from ScrollableFrame.ScrollableFrame import ScrollableFrame
 from Controlador.ControlarData import getSkins, buySKinBarco, getUser, getTutorial, updateDataUser
 from PIL import ImageTk, Image
 from EDD.matriz import matriz
 from Game.CarritoCompra import CarritoCompra
+from Game.Game import Game
+from Game.ventanaPrueba import ventanaPrueba
 
 
 class User():
+
     def __init__(self, user, dataPrice=None): #Se traen los datos del usuario
         self.userData = user
         self.dataPrice = dataPrice
@@ -82,26 +85,12 @@ class User():
         # self.populate()
         #self.scrolly.place(x=950, y=0)
 
-        self.nuevaPartida = ttk.Button(self.page1, text="Nueva partida")
+        self.nuevaPartida = ttk.Button(self.page1, text="Nueva partida", command=self.newGame)
         self.nuevaPartida.place(x=10, y=580)
 
         self.salir = ttk.Button(self.page1, text="Salir", command=self.regresar)
         self.salir.place(x=1000, y=580)
 
-
-        """
-        self.frameCategoria1 = ScrollableFrame(
-        self.frameskins, direction='horizontal', width=1082, height=250)
-        self.frameCategoria1.grid(row=0, column=0, sticky="nsew")
-
-        self.frameCategoria2 = ScrollableFrame(
-            self.frameskins, direction='horizontal', width=1082, height=250)
-        self.frameCategoria2.grid(row=1, column=0, sticky=tk.N+tk.E+tk.S+tk.W)
-
-        self.lots_of_labels(self.frameCategoria1.frame,
-                            "blue horizontal", (5, 20))
-        """
-        
         self.frames = []
         self.photos=[] #*Almacena las rutas de las imagenes
 
@@ -210,7 +199,11 @@ class User():
             if(filepath.suffix in self.image_file_extensions):
                 self.images_filenames.append(filepath)
 
-        
+    def newGame(self):
+        #ventanaPrueba()
+        usuarioInvitado = simpledialog.askstring("nombre invitado", "Ingresa el nombre del usuario invitado")
+        tamTabla = simpledialog.askstring("Tamaño del tablero", "Ingresa el tamañano del tablero a jugar")
+        Game(int(tamTabla), self.userData, usuarioInvitado)
         
 
     def loadSkins(self):

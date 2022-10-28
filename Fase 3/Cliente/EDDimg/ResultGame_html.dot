@@ -1,0 +1,34 @@
+
+digraph html {
+  node [fontname="Helvetica,Arial,sans-serif", fontcolor="white"]
+  abc [shape = none, margin = 0, label=<
+<TABLE BORDER = "1" CELLBORDER = "1" CELLSPACING="0" CELLPADDING="10" style='rounded'>
+<TR>
+	<TD BGCOLOR="DarkSlateGray">Jugadores</TD>
+	<TD BGCOLOR="DarkSlateGray">P</TD>
+	<TD BGCOLOR="DarkSlateGray">S</TD>
+	<TD BGCOLOR="DarkSlateGray">D</TD>
+	<TD BGCOLOR="DarkSlateGray">B</TD>
+	<TD BGCOLOR="DarkSlateGray">Total</TD>
+</TR>
+
+<TR>
+    <TD BGCOLOR="#008000">Hoover9876</TD>
+    <TD BGCOLOR="#008000">1</TD>
+    <TD BGCOLOR="#008000">4</TD>
+    <TD BGCOLOR="#008000">6</TD>
+    <TD BGCOLOR="#008000">8</TD>
+    <TD BGCOLOR="#008000">19</TD>
+</TR>
+
+<TR>
+    <TD BGCOLOR="Crimson">Junior</TD>
+    <TD BGCOLOR="Crimson">2</TD>
+    <TD BGCOLOR="Crimson">2</TD>
+    <TD BGCOLOR="Crimson">3</TD>
+    <TD BGCOLOR="Crimson">7</TD>
+    <TD BGCOLOR="Crimson">14</TD>
+</TR>
+</TABLE>>];
+
+}

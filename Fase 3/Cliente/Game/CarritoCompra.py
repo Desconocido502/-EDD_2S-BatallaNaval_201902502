@@ -66,7 +66,7 @@ class CarritoCompra(ttk.Frame):
         for data in datas:
             #print(f"{str(data[5])}{data[2]}", data[2])
             #print(categoryShip, idShip, nameShip, priceShip, nameUser, self.userData["id"])
-            self.tablaHash.agregar(f"{str(data[5])}{str(data[2])}", data[2])
+            self.tablaHash.agregar(f"{str(data[5])}{str(data[1])}", data[2])
 
         #Se cargan los datos al tree view
         for data in datas:

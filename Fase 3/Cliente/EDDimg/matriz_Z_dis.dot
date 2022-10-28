@@ -1,0 +1,240 @@
+digraph G { 
+  subgraph cluster_0 { 
+       node[shape=box fontname="Arial" fillcolor = "LightSteelBlue" style = filled ] 
+         label = "Matriz dispersa" 
+         bgcolor = "Plum" 
+         raiz[label = "0,0"] 
+ edge[style = "bold" color="#1e8449"]
+F1[label="1",group = 1]
+C1[label="1",group = 2]
+F2[label="2",group = 1]
+C2[label="2",group = 3]
+F3[label="3",group = 1]
+C3[label="3",group = 4]
+F4[label="4",group = 1]
+C4[label="4",group = 5]
+F5[label="5",group = 1]
+C5[label="5",group = 6]
+F6[label="6",group = 1]
+C6[label="6",group = 7]
+F7[label="7",group = 1]
+C7[label="7",group = 8]
+F8[label="8",group = 1]
+C8[label="8",group = 9]
+F9[label="9",group = 1]
+C9[label="9",group = 10]
+F10[label="10",group = 1]
+C10[label="10",group = 11]
+F11[label="11",group = 1]
+C11[label="11",group = 12]
+F12[label="12",group = 1]
+C12[label="12",group = 13]
+F13[label="13",group = 1]
+C13[label="13",group = 14]
+F14[label="14",group = 1]
+C14[label="14",group = 15]
+F15[label="15",group = 1]
+C15[label="15",group = 16]
+F16[label="16",group = 1]
+C16[label="16",group = 17]
+F17[label="17",group = 1]
+C17[label="17",group = 18]
+F18[label="18",group = 1]
+C18[label="18",group = 19]
+F19[label="19",group = 1]
+C19[label="19",group = 20]
+F20[label="20",group = 1]
+C20[label="20",group = 21]
+F1->F2
+F1->F2 [dir=back]
+C1->C2
+C1->C2 [dir=back]
+F2->F3
+F2->F3 [dir=back]
+C2->C3
+C2->C3 [dir=back]
+F3->F4
+F3->F4 [dir=back]
+C3->C4
+C3->C4 [dir=back]
+F4->F5
+F4->F5 [dir=back]
+C4->C5
+C4->C5 [dir=back]
+F5->F6
+F5->F6 [dir=back]
+C5->C6
+C5->C6 [dir=back]
+F6->F7
+F6->F7 [dir=back]
+C6->C7
+C6->C7 [dir=back]
+F7->F8
+F7->F8 [dir=back]
+C7->C8
+C7->C8 [dir=back]
+F8->F9
+F8->F9 [dir=back]
+C8->C9
+C8->C9 [dir=back]
+F9->F10
+F9->F10 [dir=back]
+C9->C10
+C9->C10 [dir=back]
+F10->F11
+F10->F11 [dir=back]
+C10->C11
+C10->C11 [dir=back]
+F11->F12
+F11->F12 [dir=back]
+C11->C12
+C11->C12 [dir=back]
+F12->F13
+F12->F13 [dir=back]
+C12->C13
+C12->C13 [dir=back]
+F13->F14
+F13->F14 [dir=back]
+C13->C14
+C13->C14 [dir=back]
+F14->F15
+F14->F15 [dir=back]
+C14->C15
+C14->C15 [dir=back]
+F15->F16
+F15->F16 [dir=back]
+C15->C16
+C15->C16 [dir=back]
+F16->F17
+F16->F17 [dir=back]
+C16->C17
+C16->C17 [dir=back]
+F17->F18
+F17->F18 [dir=back]
+C17->C18
+C17->C18 [dir=back]
+F18->F19
+F18->F19 [dir=back]
+C18->C19
+C18->C19 [dir=back]
+F19->F20
+F19->F20 [dir=back]
+C19->C20
+C19->C20 [dir=back]
+raiz->F1 
+raiz->C1 {rank=same;raiz;C1;C2;C3;C4;C5;C6;C7;C8;C9;C10;C11;C12;C13;C14;C15;C16;C17;C18;C19;C20}
+{rank=same;F1;N1_4;N1_5;N1_14}
+{rank=same;F2;N2_5;N2_14}
+{rank=same;F3;N3_1;N3_8}
+{rank=same;F4;N4_4;N4_8;N4_16;N4_17;N4_18}
+{rank=same;F5;N5_5}
+{rank=same;F6;N6_5;N6_9;N6_13}
+{rank=same;F7;N7_5;N7_13;N7_15}
+{rank=same;F8;N8_13}
+{rank=same;F9;N9_4;N9_11;N9_14}
+{rank=same;F10;N10_4;N10_14}
+{rank=same;F11;N11_14;N11_18;N11_19}
+{rank=same;F12;N12_1;N12_14}
+{rank=same;F14;N14_7;N14_8;N14_9;N14_10}
+{rank=same;F16;N16_8;N16_12}
+{rank=same;F17;N17_1;N17_2;N17_8;N17_10;N17_12}
+{rank=same;F18;N18_12}
+{rank=same;F20;N20_18}
+N1_4[label="1,4(D)",group = 5,fillcolor="Gray"]
+N1_5[label="1,5(D)",group = 6,fillcolor="Gray"]
+N1_14[label="1,14(D)",group = 15,fillcolor="Gray"]
+N2_5[label="2,5(X)",group = 6,fillcolor="Red"]
+N2_14[label="2,14(D)",group = 15,fillcolor="Gray"]
+N3_1[label="3,1(X)",group = 2,fillcolor="Red"]
+N3_8[label="3,8(D)",group = 9,fillcolor="Gray"]
+N4_4[label="4,4(B)",group = 5,fillcolor="Red"]
+N4_8[label="4,8(D)",group = 9,fillcolor="Gray"]
+N4_16[label="4,16(S)",group = 17,fillcolor="Navy"]
+N4_17[label="4,17(S)",group = 18,fillcolor="Navy"]
+N4_18[label="4,18(S)",group = 19,fillcolor="Navy"]
+N5_5[label="5,5(S)",group = 6,fillcolor="Navy"]
+N6_5[label="6,5(S)",group = 6,fillcolor="Navy"]
+N6_9[label="6,9(B)",group = 10,fillcolor="Red"]
+N6_13[label="6,13(S)",group = 14,fillcolor="Navy"]
+N7_5[label="7,5(S)",group = 6,fillcolor="Navy"]
+N7_13[label="7,13(S)",group = 14,fillcolor="Navy"]
+N7_15[label="7,15(B)",group = 16,fillcolor="#008080"]
+N8_13[label="8,13(S)",group = 14,fillcolor="Navy"]
+N9_4[label="9,4(D)",group = 5,fillcolor="Gray"]
+N9_11[label="9,11(B)",group = 12,fillcolor="#008080"]
+N9_14[label="9,14(P)",group = 15,fillcolor="Maroon"]
+N10_4[label="10,4(D)",group = 5,fillcolor="Gray"]
+N10_14[label="10,14(P)",group = 15,fillcolor="Maroon"]
+N11_14[label="11,14(P)",group = 15,fillcolor="Maroon"]
+N11_18[label="11,18(D)",group = 19,fillcolor="Gray"]
+N11_19[label="11,19(D)",group = 20,fillcolor="Gray"]
+N12_1[label="12,1(B)",group = 2,fillcolor="Red"]
+N12_14[label="12,14(P)",group = 15,fillcolor="Maroon"]
+N14_7[label="14,7(P)",group = 8,fillcolor="Maroon"]
+N14_8[label="14,8(P)",group = 9,fillcolor="Maroon"]
+N14_9[label="14,9(P)",group = 10,fillcolor="Maroon"]
+N14_10[label="14,10(P)",group = 11,fillcolor="Maroon"]
+N16_8[label="16,8(D)",group = 9,fillcolor="Gray"]
+N16_12[label="16,12(S)",group = 13,fillcolor="Navy"]
+N17_1[label="17,1(X)",group = 2,fillcolor="Red"]
+N17_2[label="17,2(B)",group = 3,fillcolor="Red"]
+N17_8[label="17,8(D)",group = 9,fillcolor="Gray"]
+N17_10[label="17,10(B)",group = 11,fillcolor="#008080"]
+N17_12[label="17,12(S)",group = 13,fillcolor="Navy"]
+N18_12[label="18,12(S)",group = 13,fillcolor="Navy"]
+N20_18[label="20,18(B)",group = 19,fillcolor="#008080"]
+F1->N1_4->N1_5->N1_14
+F2->N2_5->N2_14
+F3->N3_1->N3_8
+F4->N4_4->N4_8->N4_16->N4_17->N4_18
+F5->N5_5
+F6->N6_5->N6_9->N6_13
+F7->N7_5->N7_13->N7_15
+F8->N8_13
+F9->N9_4->N9_11->N9_14
+F10->N10_4->N10_14
+F11->N11_14->N11_18->N11_19
+F12->N12_1->N12_14
+F14->N14_7->N14_8->N14_9->N14_10
+F16->N16_8->N16_12
+F17->N17_1->N17_2->N17_8->N17_10->N17_12
+F18->N18_12
+F20->N20_18
+F1->N1_4->N1_5->N1_14[dir=back]
+F2->N2_5->N2_14[dir=back]
+F3->N3_1->N3_8[dir=back]
+F4->N4_4->N4_8->N4_16->N4_17->N4_18[dir=back]
+F5->N5_5[dir=back]
+F6->N6_5->N6_9->N6_13[dir=back]
+F7->N7_5->N7_13->N7_15[dir=back]
+F8->N8_13[dir=back]
+F9->N9_4->N9_11->N9_14[dir=back]
+F10->N10_4->N10_14[dir=back]
+F11->N11_14->N11_18->N11_19[dir=back]
+F12->N12_1->N12_14[dir=back]
+F14->N14_7->N14_8->N14_9->N14_10[dir=back]
+F16->N16_8->N16_12[dir=back]
+F17->N17_1->N17_2->N17_8->N17_10->N17_12[dir=back]
+F18->N18_12[dir=back]
+F20->N20_18[dir=back]
+edge [dir = both]
+C1->N3_1->N12_1->N17_1
+C2->N17_2
+C4->N1_4->N4_4->N9_4->N10_4
+C5->N1_5->N2_5->N5_5->N6_5->N7_5
+C7->N14_7
+C8->N3_8->N4_8->N14_8->N16_8->N17_8
+C9->N6_9->N14_9
+C10->N14_10->N17_10
+C11->N9_11
+C12->N16_12->N17_12->N18_12
+C13->N6_13->N7_13->N8_13
+C14->N1_14->N2_14->N9_14->N10_14->N11_14->N12_14
+C15->N7_15
+C16->N4_16
+C17->N4_17
+C18->N4_18->N11_18->N20_18
+C19->N11_19
+
+}
+}

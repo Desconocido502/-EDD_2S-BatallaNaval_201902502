@@ -1,4 +1,3 @@
-#from pprint import pprint
 import random
 import os
 
@@ -63,8 +62,146 @@ class ListaEncabezado:
 #D = 3
 #B = 4
 #contador = 0
+
+class nodo_barco():
+
+    def __init__(self,tipo,estado,posx1,posx2,posx3,posx4,posy1,posy2,posy3,posy4,dir,vida) :
+
+
+        self.tipo =tipo 
+        self.estado = estado
+        self.posx1 = posx1
+        self.posx2 = posx2
+        self.posx3 = posx3
+        self.posx4 = posx4
+        self.posy1 = posy1
+        self.posy2 = posy2
+        self.posy3 = posy3
+        self.posy4 = posy4
+        self.dir = dir
+        self.vida = vida
+        self.siguiente = None
+        self.anterior = None
+class doble():
+    def __init__(self):
+        self.primero = None
+        self.ultimo = None
+
+    def vacia(self):
+        return self.primero == None
+
+    def agregar(self,tipo,estado,posx1,posx2,posx3,posx4,posy1,posy2,posy3,posy4,dir,vida):
+        
+        if self.vacia():
+            
+            self.primero = self.ultimo = nodo_barco(tipo,estado,posx1,posx2,posx3,posx4,posy1,posy2,posy3,posy4,dir,vida)
+        else:
+            aux = self.ultimo
+            self.ultimo = aux.siguiente = nodo_barco(tipo,estado,posx1,posx2,posx3,posx4,posy1,posy2,posy3,posy4,dir,vida)
+            #self.ultimo = aux.siguiente
+    
+    def revisar(self,x,y):
+        aux = self.primero
+        i = 0
+        while aux is not None:
+            i = i+1
+
+            if x == aux.posx1 and y == aux.posy1:
+                aux.vida = aux.vida-1
+                print(aux.vida)
+                if aux.vida == 0:
+                    return 1
+                else:
+                    return 0
+            elif x == aux.posx1 and y == aux.posy2:
+                aux.vida = aux.vida-1
+                print(aux.vida)
+                if aux.vida == 0:
+                    return 1
+                else:
+                    return 0
+            elif x == aux.posx1 and y == aux.posy3:
+                aux.vida = aux.vida-1
+                print(aux.vida)
+                if aux.vida == 0:
+                    return 1
+                else:
+                    return 0
+            elif x == aux.posx1 and y == aux.posy4:
+                aux.vida = aux.vida-1
+                print(aux.vida)
+                if aux.vida == 0:
+                    return 1
+                else:
+                    return 0
+            elif x == aux.posx1 and y == aux.posy1:
+                aux.vida = aux.vida-1
+                print(aux.vida)
+                if aux.vida == 0:
+                    return 1
+                else:
+                    return 0
+            elif x == aux.posx2 and y == aux.posy1:
+                aux.vida = aux.vida-1
+                print(aux.vida)
+                if aux.vida == 0:
+                    return 1
+                else:
+                    return 0
+            elif x == aux.posx3 and y == aux.posy1:
+                aux.vida = aux.vida-1
+                print(aux.vida)
+                if aux.vida == 0:
+                    return 1
+                else:
+                    return 0
+            elif x == aux.posx4 and y == aux.posy1:
+                aux.vida = aux.vida-1
+                print(aux.vida)
+                if aux.vida == 0:
+                    return 1
+                else:
+                    return 0
+            else:
+                pass
+
+            aux = aux.siguiente
+
+    def Destruidos(self):
+        aux = self.primero
+        tipoBarcosDestruidos = {"P":0,"S":0,"D":0,"B":0,"total":0}
+        while aux is not None:
+            if aux.vida == 0:
+                #print("Destruido barco de tipo: " + aux.tipo)
+                tipoBarcosDestruidos["total"] += 1
+                if(aux.tipo == "P"):
+                    tipoBarcosDestruidos["P"] += 1
+                elif(aux.tipo == "S"):
+                    tipoBarcosDestruidos["S"] += 1
+                elif(aux.tipo == "D"):
+                    tipoBarcosDestruidos["D"] += 1
+                elif(aux.tipo == "B"):
+                    tipoBarcosDestruidos["B"] += 1
+            aux = aux.siguiente
+        return tipoBarcosDestruidos
+
+    def getin(self,x,y):
+        tmp = self.primero
+        while tmp is not None:
+            if tmp.x == x and tmp.y == y:
+                return tmp
+            tmp = tmp.siguiente
+        return None
+
+
 class matriz:
     def __init__(self, tamano):
+        self.contar = 0
+        self.Barcos_restantes = 0
+        self.tamanot = 0
+        self.dob = doble()
+        self.totalBarcosInicio = 0
+
         self.tamano = tamano
         self.filas = ListaEncabezado()
         self.columnas = ListaEncabezado()
@@ -76,10 +213,10 @@ class matriz:
         self.B = 4
     
     def insertar(self,fila,columna,estado,barco):
-        nuevo = Nodo(fila,columna,estado,barco)
+        nuevo:Nodo = Nodo(fila,columna,estado,barco)
 
-        eFila = self.filas.getEncabezado(fila)
-        if eFila ==None:
+        eFila:NodoEncabezado = self.filas.getEncabezado(fila)
+        if eFila == None:
             eFila = NodoEncabezado(fila)
             eFila.accesoNodo = nuevo
             self.filas.setEncabezado(eFila)
@@ -91,7 +228,7 @@ class matriz:
                 eFila.accesoNodo = nuevo
             
             else:
-                actual = eFila.accesoNodo
+                actual:Nodo = eFila.accesoNodo
                 while actual.right != None:
                     if nuevo.columna < actual.right.columna:
                         nuevo.right = actual.right
@@ -131,35 +268,9 @@ class matriz:
                     actual.down = nuevo
                     nuevo.up = actual
 
-    def mostrarFilas(self):
-        eFila = self.filas.primero
-        print('--------FILAS---------')
-        while eFila != None:
-            actual = eFila.accesoNodo
-            print('\n Fila ',actual.fila)
-            print('Columna      Valor')
-            
-            while actual !=None:
-                print(actual.columna,'          ',actual.estado)
-                actual = actual.right
-
-            eFila = eFila.next
-        print('---------FIN----------')
-
-    def mostrarColumnas(self):
-        eColumna = self.columnas.primero
-
-        while eColumna != None:
-            actual = eColumna.accesoNodo
-            print('\n Columna ',actual.columna)
-            print('Fila      Valor')
-            while(actual != None):
-                print(actual.columna,",",actual.fila,'        ',actual.barco)
-                actual = actual.down
-            eColumna = eColumna.next
-        print('---------FIN----------')
-
     def MarcarDisparo(self,x,y):
+        if ((x <= 0 or x > self.tamano) or (y <= 0 or y > self.tamano)):
+            return "ts" #tamaño superado
         if self.buscar(x,y)==False:
             self.insertar(y,x,"H","X")
         else:
@@ -170,9 +281,12 @@ class matriz:
                     if actual.columna==x and actual.fila==y:
                       actual.estado = "H"
                       print("Disparo registrado en: ("+str(x)+","+str(y)+")",actual.estado)
+                      return self.ComprobarBarcos(x,y)
                     actual = actual.down
                 eColumna = eColumna.next
             print('---------FIN----------')
+        return False
+        #self.graficar(nombre="MTD")
 
     def Agregarbarcos(self): #dir representa la dirección del barco 0 = Vertical 1 = horizotal
         #global contador,P,D,S,B
@@ -196,13 +310,17 @@ class matriz:
                         self.insertar(y+1,x,"L","P")
                         self.insertar(y+2,x,"L","P")
                         self.insertar(y+3,x,"L","P")
+                        self.dob.agregar("P","Vivo",x,0,0,0,y,y+1,y+2,y+3,0,4)
                         print("Agregado un portaviones")
+                        self.Barcos_restantes += 1
                     else:
                         self.insertar(y,x,"L","P")
                         self.insertar(y,x+1,"L","P")
                         self.insertar(y,x+2,"L","P")
                         self.insertar(y,x+3,"L","P")
-                        print("Agregado un portaviones")                        
+                        self.dob.agregar("P","Vivo",x,x+1,x+2,x+3,y,0,0,0,1,4)
+                        print("Agregado un portaviones")
+                        self.Barcos_restantes += 1                        
                     self.P = self.P-1
                 else: self.Agregarbarcos()
             while self.S!=0:
@@ -214,12 +332,16 @@ class matriz:
                         self.insertar(y,x,"L","S")
                         self.insertar(y+1,x,"L","S")
                         self.insertar(y+2,x,"L","S")
+                        self.dob.agregar("S","Vivo",x,0,0,0,y,y+1,y+2,0,0,3)
                         print("Agregado un submarino")     
+                        self.Barcos_restantes += 1
                     else:
                         self.insertar(y,x,"L","S")
                         self.insertar(y,x+1,"L","S")
                         self.insertar(y,x+2,"L","S")
-                        print("Agregado un submarino")                       
+                        self.dob.agregar("S","Vivo",x,x+1,x+2,0,y,0,0,0,1,3)
+                        print("Agregado un submarino")
+                        self.Barcos_restantes +=1                            
                     self.S = self.S-1
                 else: self.Agregarbarcos()
             while self.D!=0:
@@ -230,11 +352,15 @@ class matriz:
                     if dir==0:
                         self.insertar(y,x,"L","D")
                         self.insertar(y+1,x,"L","D")
-                        print("Agregado un Destructor")     
+                        self.dob.agregar("D","Vivo",x,0,0,0,y,y+1,0,0,0,2)
+                        print("Agregado un Destructor")
+                        self.Barcos_restantes +=1    
                     else:
                         self.insertar(y,x,"L","D")
                         self.insertar(y,x+1,"L","D")
-                        print("Agregado un Destructor")                       
+                        self.dob.agregar("D","Vivo",x,x+1,0,0,y,0,0,0,1,2)
+                        print("Agregado un Destructor")
+                        self.Barcos_restantes +=1                      
                     self.D = self.D-1
                 else: self.Agregarbarcos()
             while self.B!=0:
@@ -244,10 +370,14 @@ class matriz:
                 if self.Haybarco(x,y,dir,"B")==False:
                     if dir==0:
                         self.insertar(y,x,"L","B")
-                        print("Agregado un Buque")     
+                        self.dob.agregar("B","Vivo",x,0,0,0,y,0,0,0,0,1)
+                        print("Agregado un Buque")
+                        self.Barcos_restantes +=1   
                     else:
                         self.insertar(y,x,"L","B")
-                        print("Agregado un Buque")                       
+                        self.dob.agregar("B","Vivo",x,0,0,0,y,0,0,0,0,1)
+                        print("Agregado un Buque")
+                        self.Barcos_restantes +=1              
                     self.B = self.B-1
                 else: self.Agregarbarcos()                    
 
@@ -364,9 +494,9 @@ abc [shape = none, margin = 0, label=<
 
 
         #Para columnas
-        eColumna = self.columnas.primero
+        eColumna:NodoEncabezado = self.columnas.primero
         while eColumna != None:
-            actual = eColumna.accesoNodo
+            actual:Nodo = eColumna.accesoNodo
             while(actual != None):
                 #if(actual.columna > self.tamano and actual.fila > self.tamano):
                 matrizs[actual.columna-1][actual.fila-1] = [actual.columna ,actual.fila, actual.barco, actual.estado]
@@ -466,7 +596,7 @@ abc [shape = none, margin = 0, label=<
 
 
     def graficar(self, nombre):
-        
+        self.contar += 1
         raiz = "raiz->F1 \nraiz->C1 "
         rCol ="{rank=same;raiz;"
         rF = ""
@@ -487,11 +617,11 @@ abc [shape = none, margin = 0, label=<
         Dir1 = ""
         Dir2 = ""
         Dir3 = ""
-        Dir4 = ""
+        #Dir4 = ""
         Nodos =""
 
         while eColumna != None:
-            actual = eColumna.accesoNodo
+            actual:Nodo = eColumna.accesoNodo
             cont = 0
             while(actual != None):
                 while cont!=1:
@@ -524,16 +654,16 @@ abc [shape = none, margin = 0, label=<
                 while cont!=1:
                     cont = cont+1
                     Dir3+="C"+str(actual.fila)+"->"
-                    Dir4+="C"+str(actual.fila)+"->"
+                    #Dir4+="C"+str(actual.fila)+"->"
                 if (actual.right==None):
                     Dir3+=("N"+str(actual.columna)+"_"+str(actual.fila)+"")
-                    Dir4+=("N"+str(actual.columna)+"_"+str(actual.fila)+"[dir=back]")
+                    #Dir4+=("N"+str(actual.columna)+"_"+str(actual.fila)+"[dir=back]")
                 else:
                     Dir3+=("N"+str(actual.columna)+"_"+str(actual.fila)+"->")
-                    Dir4+=("N"+str(actual.columna)+"_"+str(actual.fila)+"->")
+                    #Dir4+=("N"+str(actual.columna)+"_"+str(actual.fila)+"->")
                 actual = actual.right
             Dir3+="\n"
-            Dir4+="\n"
+            #Dir4+="\n"
             eFila = eFila.next
         #print(Dir3)
         #node[shape=box width=0.7 height=0.7 fontname="Arial"  style=filled fillcolor="white" fontcolor="white"]
@@ -545,7 +675,7 @@ abc [shape = none, margin = 0, label=<
         file = open(dotX, "w")
         file.write(dot)
         file.close()
-        result = "./EDDimg/matriz_{}_dis.png".format(nombre)
+        result = "./EDDimg/matriz_{}_dis{}.png".format(nombre, self.contar)
         os.system("dot -Tpng " + dotX + " -o " + result)
         #webbrowser.open(result)
 
@@ -562,10 +692,103 @@ abc [shape = none, margin = 0, label=<
             elif tipo=="B": 
                 return "\"#008080\""
 
-#matrix = matriz(20)
-#matrix.Agregarbarcos()
-#matrix.MarcarDisparo(7,3)
-#matrix.MarcarDisparo(1,5)
-#matrix.graficar()
-#matrix.graficarNeato()
-#matrix.printMatrixO()
+    def ComprobarBarcos(self,x,y): #Revisar retorna x,y,dir
+        #global Barcos_restantes,tamanot
+        if self.dob.revisar(x,y) == 1:
+            self.Barcos_restantes = self.Barcos_restantes-1
+            print("Barcos restantes = " + str(self.Barcos_restantes))
+            if self.Barcos_restantes == 0:
+                print("Fin de la partida")
+                return True
+                self.ListaAdyacencia()
+                self.Grafo()
+            else:
+                return False
+    
+    def BarcosDestruidos(self):
+        return self.dob.Destruidos()
+
+    def ListaAdyacencia(self):
+        nodosc = ""
+        nodos = ""
+        i = 1
+        eColumna:NodoEncabezado = self.columnas.primero
+        while eColumna != None:
+            actual:Nodo = eColumna.accesoNodo
+            nodosc+= "\t\t\t n"+str(i)
+            nodos+= "\t\t\t n"+str(i)+"[label =\""+str(i)+"\"]\n"
+            while(actual != None):
+                #print(actual.columna,",",actual.fila,'        ',actual.estado)
+                if actual.estado =="H":
+                    nodosc+="->"+"n"+str(actual.fila)+"_"+str(actual.columna)
+                    nodos+="\t\t\t n"+str(actual.fila)+"_"+str(actual.columna)+"[label =\""+str(actual.fila)+"\"]\n"
+                if actual.down == None:
+                    nodosc+="[color = \"#172A3A\"];\n"
+                actual = actual.down
+            
+            
+            i=i+1
+            eColumna = eColumna.next
+        if i<self.tamano+1:
+            while i< self.tamano+1:
+                nodosc+="n"+str(i)+"\n"
+                nodos+="n"+str(i)+"[label =\""+str(i)+"\"]"+"\n"
+                i=i+1
+        encabezado="""
+        digraph G {
+            rankdir=LR
+            compound = true;
+            labelloc="t";
+            bgcolor = "#508991";
+            fontcolor = Black;
+            color = "#004346"
+
+        subgraph cluster_0 {
+            node [style=filled,shape=note,fillcolor="#74b3ce",color = "#172A3A"];
+            label = "Lista de adyacencia"
+        """
+        dot = encabezado+"\n"+nodos+"\n"+nodosc+"\n } \n }" #Copiar el metodo para generar la imagen
+        dotX = "./EDDimg/ListaAdyacencia.dot"
+        file = open(dotX, "w")
+        file.write(dot)
+        file.close()
+        result = "./EDDimg/ListaAdyacencia.png"
+        os.system("dot -Tpng " + dotX + " -o " + result)
+
+        
+    def Grafo(self):
+        grafo = """
+digraph G {
+node [fontcolor="white", color=white , style=filled, fillcolor=Crimson]
+bgcolor = "#508912";
+label="Grafo";
+"""
+        i = 1
+        eColumna:NodoEncabezado = self.columnas.primero
+        while eColumna != None:
+            actual:Nodo = eColumna.accesoNodo
+            grafo+="\t"+str(i)+"\n"
+            while(actual != None):
+                #print(actual.columna,",",actual.fila,'        ',actual.estado)
+                
+                if actual.estado =="H":
+                    grafo+="\t"+str(i)+"->"+str(actual.fila)+"\n"
+                    #print(str(actual.fila) +","+str(actual.columna))
+                    #print(str(actual.fila)) #+","+str(actual.columna))
+                actual = actual.down
+            
+            i=i+1
+            eColumna = eColumna.next
+        if i<self.tamano+1:
+            while i< self.tamano+1:
+                grafo+="\t"+str(i)+"\n"
+
+                i=i+1
+        grafo += "\n}"
+        #print(grafo)
+        dotX = "./EDDimg/Grafo.dot"
+        file = open(dotX, "w")
+        file.write(grafo)
+        file.close()
+        result = "./EDDimg/Grafo.png"
+        os.system("dot -Tpng " + dotX + " -o " + result)

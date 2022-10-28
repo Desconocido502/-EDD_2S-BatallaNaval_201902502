@@ -9,19 +9,9 @@ abc [shape = none, margin = 0, label=<
 	<TD BGCOLOR="FireBrick">Nombre</TD>
 </TR>
 <TR>
-	<TD BGCOLOR="#273746">1</TD>
-	<TD BGCOLOR="#273746">31Walls</TD>
-	<TD BGCOLOR="#273746">Walls</TD>
-</TR>
-<TR>
-	<TD BGCOLOR="#273746">3</TD>
-	<TD BGCOLOR="#273746">31Orr</TD>
-	<TD BGCOLOR="#273746">Orr</TD>
-</TR>
-<TR>
-	<TD BGCOLOR="#273746">5</TD>
-	<TD BGCOLOR="#273746">31Oneil</TD>
-	<TD BGCOLOR="#273746">Oneil</TD>
+	<TD BGCOLOR="#273746">8</TD>
+	<TD BGCOLOR="#273746">31Goodwin</TD>
+	<TD BGCOLOR="#273746">Goodwin</TD>
 </TR>
 </TABLE>>];
 }
