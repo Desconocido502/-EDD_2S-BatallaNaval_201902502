@@ -1,17 +1,14 @@
 from pathlib import Path
-from telnetlib import GA
 from tkinter.font import BOLD
 import tkinter as tk
 from tkinter import ttk, messagebox, simpledialog
 import util.generic as utl
 from ScrollableFrame.ScrollableFrame import ScrollableFrame
-from Controlador.ControlarData import getSkins, buySKinBarco, getUser, getTutorial, updateDataUser
+from Controlador.ControlarData import getSkins, getTutorial, updateDataUser
 from PIL import ImageTk, Image
 from EDD.matriz import matriz
 from Game.CarritoCompra import CarritoCompra
 from Game.Game import Game
-from Game.ventanaPrueba import ventanaPrueba
-
 
 class User():
 

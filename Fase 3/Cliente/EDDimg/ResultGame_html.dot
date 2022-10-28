@@ -14,20 +14,20 @@ digraph html {
 
 <TR>
     <TD BGCOLOR="#008000">Hoover9876</TD>
-    <TD BGCOLOR="#008000">1</TD>
+    <TD BGCOLOR="#008000">2</TD>
     <TD BGCOLOR="#008000">4</TD>
     <TD BGCOLOR="#008000">6</TD>
     <TD BGCOLOR="#008000">8</TD>
-    <TD BGCOLOR="#008000">19</TD>
+    <TD BGCOLOR="#008000">20</TD>
 </TR>
 
 <TR>
     <TD BGCOLOR="Crimson">Junior</TD>
-    <TD BGCOLOR="Crimson">2</TD>
-    <TD BGCOLOR="Crimson">2</TD>
-    <TD BGCOLOR="Crimson">3</TD>
-    <TD BGCOLOR="Crimson">7</TD>
-    <TD BGCOLOR="Crimson">14</TD>
+    <TD BGCOLOR="Crimson">0</TD>
+    <TD BGCOLOR="Crimson">0</TD>
+    <TD BGCOLOR="Crimson">0</TD>
+    <TD BGCOLOR="Crimson">0</TD>
+    <TD BGCOLOR="Crimson">0</TD>
 </TR>
 </TABLE>>];
 

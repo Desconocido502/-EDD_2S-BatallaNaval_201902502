@@ -6,7 +6,7 @@ from tkinter.font import BOLD
 from PIL import ImageTk, Image
 from Game.matriz import matriz
 from os import system
-
+from Game.Resultados import Resultados
 
 class Game(ttk.Frame):
 
@@ -64,6 +64,8 @@ class Game(ttk.Frame):
                     self.matrizJugador1.Grafo()
                 
                 messagebox.showinfo(message=txt, title="Fin partida")
+                self.main_window.destroy()
+                Resultados(int(self.tamTabla), self.userData, self.invitado)
 
     
     def atacarEnemigo2(self):
@@ -105,6 +107,8 @@ class Game(ttk.Frame):
                     self.matrizJugador1.Grafo()
 
                 messagebox.showinfo(message=txt, title="Fin partida")
+                self.main_window.destroy()
+                Resultados(int(self.tamTabla), self.userData, self.invitado)
 
     def createTableResultGame(self, ganador:dict, perdedor:dict):
         contenido = """
