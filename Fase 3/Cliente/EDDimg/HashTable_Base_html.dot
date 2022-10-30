@@ -9,9 +9,14 @@ abc [shape = none, margin = 0, label=<
 	<TD BGCOLOR="FireBrick">Nombre</TD>
 </TR>
 <TR>
-	<TD BGCOLOR="#273746">8</TD>
-	<TD BGCOLOR="#273746">31Goodwin</TD>
+	<TD BGCOLOR="#273746">4</TD>
+	<TD BGCOLOR="#273746">5735570</TD>
 	<TD BGCOLOR="#273746">Goodwin</TD>
+</TR>
+<TR>
+	<TD BGCOLOR="#273746">6</TD>
+	<TD BGCOLOR="#273746">5735716</TD>
+	<TD BGCOLOR="#273746">Dorsey</TD>
 </TR>
 </TABLE>>];
 }

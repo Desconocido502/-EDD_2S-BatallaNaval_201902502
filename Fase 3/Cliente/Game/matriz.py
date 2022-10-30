@@ -721,7 +721,7 @@ abc [shape = none, margin = 0, label=<
                 #print(actual.columna,",",actual.fila,'        ',actual.estado)
                 if actual.estado =="H":
                     nodosc+="->"+"n"+str(actual.fila)+"_"+str(actual.columna)
-                    nodos+="\t\t\t n"+str(actual.fila)+"_"+str(actual.columna)+"[label =\""+str(actual.fila)+"\"]\n"
+                    nodos+="\t\t\t n"+str(actual.fila)+"_"+str(actual.columna)+"[label =\""+str(actual.fila)+"\" fontcolor=white]\n"
                 if actual.down == None:
                     nodosc+="[color = \"#172A3A\"];\n"
                 actual = actual.down
@@ -739,12 +739,12 @@ abc [shape = none, margin = 0, label=<
             rankdir=LR
             compound = true;
             labelloc="t";
-            bgcolor = "#508991";
-            fontcolor = Black;
-            color = "#004346"
+            bgcolor = "#34495E";
+            fontcolor = white;
+            color = "#ffffff"
 
         subgraph cluster_0 {
-            node [style=filled,shape=note,fillcolor="#74b3ce",color = "#172A3A"];
+            node [style=filled,shape=note,fillcolor="#2E4053",color = "#F4D03F" fontcolor=white];
             label = "Lista de adyacencia"
         """
         dot = encabezado+"\n"+nodos+"\n"+nodosc+"\n } \n }" #Copiar el metodo para generar la imagen
@@ -767,7 +767,7 @@ label="Grafo";
         eColumna:NodoEncabezado = self.columnas.primero
         while eColumna != None:
             actual:Nodo = eColumna.accesoNodo
-            grafo+="\t"+str(i)+"\n"
+            #grafo+="\t"+str(i)+"\n"
             while(actual != None):
                 #print(actual.columna,",",actual.fila,'        ',actual.estado)
                 
@@ -779,11 +779,12 @@ label="Grafo";
             
             i=i+1
             eColumna = eColumna.next
+        """     
         if i<self.tamano+1:
             while i< self.tamano+1:
                 grafo+="\t"+str(i)+"\n"
 
-                i=i+1
+                i=i+1 """
         grafo += "\n}"
         #print(grafo)
         dotX = "./EDDimg/Grafo.dot"

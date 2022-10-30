@@ -83,7 +83,7 @@ class CarritoCompra(ttk.Frame):
         #print(posicion[0])
         x = self.productBuy[posicion[0]]
         #print(x)
-        self.tablaHash.eliminar(f"{str(x[5])}{str(x[2])}")
+        self.tablaHash.eliminar(f"{str(x[5])}{str(x[1])}")
         self.tablaHash.printHashTable()
         self.updateData(int(x[3]), x[1])
         self.changeDataForLabel()
