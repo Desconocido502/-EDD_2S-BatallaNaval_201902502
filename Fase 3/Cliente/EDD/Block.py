@@ -28,9 +28,9 @@ class Block:
         self.data: Data = data
         self.nonce = 0
         self.previoushash = previoushash
+        self.mtEDD = None #Se toma la referencia en memoria del arbol merkle
         self.merkleroot = self.calcMerkleRoot()
         self.hash = self.calcBlockhash()
-        self.mtEDD = None #Se toma la referencia en memoria del arbol merkle
 
         self.next = None
         self.back = None
@@ -42,6 +42,7 @@ class Block:
             elems.append(x["SKIN"]+str(x["VALUE"]))
         self.mtEDD = MerkleTree(elems)
         #mt.graficar(mt.getRootHash())
+        self.mtEDD.graficar(str(self.index))
         return self.mtEDD.getRootHash()
 
     def calcBlockhash(self):

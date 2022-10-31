@@ -50,7 +50,7 @@ class MerkleTree:
             self.__printTreeRec(node.right)
     
     def graficar(self, nombre):
-        print(self.__values)
+        #print(self.__values)
         cadena = ""
         cadena += "digraph G { \n"
         cadena += "rankdir=TB; \n"

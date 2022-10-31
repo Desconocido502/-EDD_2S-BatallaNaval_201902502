@@ -1,0 +1,24 @@
+{
+    "index": "0",
+    "timestamp": "30-10-2022::18:08:15",
+    "nonce": "22147",
+    "data": {
+        "FROM": "0xF1573b129f7669d8688e0fD29473499d858dDDB7",
+        "SKINS": {
+            "FROM": "0xF1573b129f7669d8688e0fD29473499d858dDDB7",
+            "data": [
+                {
+                    "SKIN": "Fox",
+                    "VALUE": 35
+                },
+                {
+                    "SKIN": "Bird",
+                    "VALUE": 31
+                }
+            ]
+        }
+    },
+    "hash": "0000c6d366bd307f4f42751054ed6cf0b92c650b05022da7a95c627487227349",
+    "previoushash": "0000",
+    "merkle_root": "400bd7d131d7d2a9f2a69955629ef044aaf5818cf3be5554b0d51f62a3c0a9b4"
+}
